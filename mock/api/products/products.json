@@ -1,0 +1,26 @@
+[
+    {
+        "id": "1", 
+        "image": "../../assets/battlefield.jpg", 
+        "title": "Battlefield 1", 
+        "price": "49.99$"
+    },
+    {
+        "id": "2", 
+        "image": "../../assets/gta.jpg", 
+        "title": "Grand Theft Auto V", 
+        "price": "39.99$"
+    },
+    {   
+        "id": "3", 
+        "image": "../../assets/csgo.jpg", 
+        "title": "Counter-Strike: Global Offensive", 
+        "price": "9.99$"
+    },
+    {
+        "id": 4, 
+        "image": "../../assets/pubg.jpg", 
+        "title": "PLAYERUNKNOWN'S BATTLEGROUNDS", 
+        "price": "19.99$"}
+    
+]

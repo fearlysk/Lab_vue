@@ -1,0 +1,14 @@
+.submit_btn {
+    background-color: $lightgreen;
+    border: 1px solid $graybg;
+    padding: 3px 4px;
+    text-align: center;
+    width: 12%;
+    height: 50px;
+    transition: 0.4s; 
+}
+.submit_btn:hover {
+  transform: scale(1.1);
+  transition: 0.4s; 
+  cursor: pointer;
+}

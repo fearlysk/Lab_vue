@@ -1,0 +1,95 @@
+.alert_message_wrapper {
+    width: 580px;
+    height: 250px;
+    margin: 0 auto;
+    border: 1px solid $graybg;
+    box-shadow: 2px 2px 6px black;
+    border-radius: 9px;
+    font-family: 'Open Sans';
+}
+.alert_message_header {
+    background-color: $lightgreen;
+    display: flex;
+    justify-content: space-between;
+    height: 50px;
+    border-top-left-radius: 9px;
+    border-top-right-radius: 9px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+.alert_message_headline, .alert_message_exit {
+    margin: 5px 20px;
+}
+.alert_message_exit_btn {
+    margin-top: 5px;
+    padding: 5px 15px;
+    background-color: white;
+    outline: none;
+    border: none;
+    border-radius: 3px; 
+    transition: 0.3s;
+    cursor: pointer;
+}
+.alert_message_exit_btn:hover {
+    color: $white;
+    background-color: $crimson;
+    transition: 0.3s;
+}
+.alert_message_body {
+    padding: 15px;
+    height: 120px;
+    background-color: snow;
+}
+.alert_message_options {
+    display: flex;
+    justify-content: flex-end;
+}
+.alert_message_option_accept, .alert_message_option_decline {
+    margin: 0 3%;
+    padding: 0px;
+    height: 20px;
+}
+.alert_message_option_accept p {
+    margin: 0;
+}
+.alert_message_option_decline p {
+    margin: 0;
+}
+.alert_message_option_accept {
+    transition: 0.3s;
+    border: 2px solid $lightgreen;
+    margin: 0 15px;
+    padding: 10px 45px;
+    text-align: center;
+    box-sizing: content-box;
+    border-radius: 4px;
+}
+.alert_message_option_decline {
+    transition: 0.3s;
+    border: 2px solid $crimson;  
+    margin: 0 15px;
+    padding: 10px 45px;
+    text-align: center;
+    box-sizing: content-box;
+    border-radius: 4px;
+}
+@media screen and (max-width: 900px) {
+    .alert_message_option_accept {
+        padding: 5px 25px;
+    }
+    .alert_message_option_decline {
+        padding: 5px 25px;
+    }
+}
+.alert_message_option_accept:hover {
+    cursor: pointer;
+    transition: 0.3s;
+    background-color: $lightgreen;
+    color: $white;
+}
+.alert_message_option_decline:hover {
+    cursor: pointer;
+    transition: 0.3s;
+    background-color: $crimson;
+    color: $white;
+}

@@ -1,0 +1,16 @@
+/* Registration start */
+
+.registration_form_wrapper {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    width: 360px;
+    border: 2px solid $lightgreen;
+    padding: 10px;
+    border-radius: 4px;
+}
+.registration_form_submit {
+    width: 100%;
+}
+
+/* Registration end */
