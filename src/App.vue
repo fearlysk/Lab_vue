@@ -1,8 +1,12 @@
 <template>
-  <div>
-     <Header />
-       <router-view />
-     <Footer />
+  <div class="wrapper">
+    <div class="content">
+      <Header />
+      <router-view />
+    </div>
+    <div class="footer">
+      <Footer />
+    </div>
   </div>
 </template>
 
@@ -20,5 +24,12 @@ export default {
 </script>
 
 <style lang="scss">
-
+@import '../styles.scss';
+* {
+  margin: 0;
+  padding: 0;
+}
+.content {
+  min-height: calc(100vh - 100px);
+}
 </style>

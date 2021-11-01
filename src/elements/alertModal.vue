@@ -47,6 +47,60 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../styles.scss';
-@import 'alertModal.scss';
+.alert_modal {
+    background-color: #393838;
+    height: 70px;
+    width: 70%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 3px;
+    color: #fff2f2;
+    z-index: 4;
+    position: relative;
+}
+.alert_modal > div {
+    margin-left: 30px;
+}
+.alert_modal_btns {
+    display: flex;
+    justify-content: space-evenly;
+}
+.alert_modal_btns > div {
+    margin: 0 25px;
+    padding: 6px 12px;
+    border-radius: 3px;
+}
+.cancel_btn {
+    background-color: crimson;
+    color: #fff2f2;
+    transition: 0.4s;
+}
+.cancel_btn:hover {
+    transform: scale(1.1);
+    transition: 0.4s;
+    cursor: pointer;
+}
+.accept_btn {
+    background-color: rgb(75,221,75);
+    color: #fff2f2;
+    transition: 0.4s;
+}
+.accept_btn:hover {
+    transform: scale(1.1);
+    transition: 0.4s;
+    cursor: pointer;
+}
+.alert_modal_error {
+    background-color: #df3939;
+}
+.alert_modal_info {
+    background-color: #f7e13e;
+}
+.alert_modal_success {
+    background-color: lawngreen;
+}
+.inactive {
+    display: none;
+}
 </style>

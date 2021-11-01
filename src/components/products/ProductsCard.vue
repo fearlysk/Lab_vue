@@ -1,9 +1,7 @@
 <template>
   <div class="product_card_wrapper">
         <div class="product_card">
-            <router-link :to="`/products/${id}`">
-             <img height="240" width="248" :src="image" alt="Image Not Found" />
-            </router-link>
+            <img height="240" width="248" :src="image" alt="Image Not Found" />
             <hr>
             <p>Название: {{ title }}</p>
             <p>Цена: {{ price }}</p>
@@ -24,6 +22,16 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../styles.scss';
-@import 'ProductsCard.scss';
+.product_card_wrapper {
+    margin: 15px 25px;
+}
+.product_card {
+    background-color: #393838;
+    width: 250px;
+    color: #fff2f2;
+    height: 400px;
+    border: 1px solid black;
+    text-align: center;
+    padding: 0;
+}
 </style>

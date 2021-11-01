@@ -11,6 +11,10 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../styles.scss';
-@import 'footer.scss';
+.footer {
+    background-color: #222222;
+    height: 100px;
+    text-align: center;
+    color: white;
+}
 </style>

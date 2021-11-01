@@ -1,6 +1,6 @@
 <template>
     <div class="registration_form_wrapper">
-        <form action="#" method="POST">
+        <form>
             <input-text />
             <input-password />
         <input type="submit" class="registration_form_submit" value="Submit" />
@@ -22,6 +22,16 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../styles.scss';
-@import 'users.scss';
+.registration_form_wrapper {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    width: 360px;
+    border: 2px solid rgb(75,221,75);
+    padding: 10px;
+    border-radius: 4px;
+}
+.registration_form_submit {
+    width: 100%;
+}
 </style>

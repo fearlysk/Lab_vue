@@ -1,26 +1,32 @@
-[
-    {
-        "id": "1", 
-        "image": "../../assets/battlefield.jpg", 
-        "title": "Battlefield 1", 
-        "price": "49.99$"
-    },
-    {
-        "id": "2", 
-        "image": "../../assets/gta.jpg", 
-        "title": "Grand Theft Auto V", 
-        "price": "39.99$"
-    },
-    {   
-        "id": "3", 
-        "image": "../../assets/csgo.jpg", 
-        "title": "Counter-Strike: Global Offensive", 
-        "price": "9.99$"
-    },
-    {
-        "id": 4, 
-        "image": "../../assets/pubg.jpg", 
-        "title": "PLAYERUNKNOWN'S BATTLEGROUNDS", 
-        "price": "19.99$"}
-    
-]
+{   
+   "products": [
+        {
+            "id": 1, 
+            "image": "https://upload.wikimedia.org/wikipedia/ru/9/98/Battlefield_1.jpg", 
+            "title": "Battlefield 1", 
+            "price": "49.99$",
+            "description": "Battlefield 1 (also known as BF1) is the fifteenth installment in the Battlefield Series developed by DICE and published by EA. The game is set during World War I. It marks the first installment exclusive to eighth-generation consoles and was released worldwide on October 21, 2016."
+        },
+        {
+            "id": 2, 
+            "image": "https://upload.wikimedia.org/wikipedia/ru/c/c8/GTAV_Official_Cover_Art.jpg", 
+            "title": "Grand Theft Auto V", 
+            "price": "39.99$",
+            "description": "Grand Theft Auto V is a 2013 action-adventure game developed by Rockstar North and published by Rockstar Games. It is the seventh main entry in the Grand Theft Auto series, following 2008's Grand Theft Auto IV, and the fifteenth instalment overall."
+        },
+        {   
+            "id": 3, 
+            "image": "https://gamestracker.org/_ld/155/15582.jpg", 
+            "title": "Counter-Strike: Global Offensive", 
+            "price": "9.99$",
+            "description": "Counter-Strike: Global Offensive (CS:GO) is a multiplayer first-person shooter developed by Valve and Hidden Path Entertainment. It is the fourth game in the Counter-Strike series."
+        },
+        {
+            "id": 4, 
+            "image": "https://upload.wikimedia.org/wikipedia/ru/c/c9/%D0%9B%D0%BE%D0%B3%D0%BE%D1%82%D0%B8%D0%BF_%D0%B8%D0%B3%D1%80%D1%8B_PlayerUnknown%27s_Battlegrounds.jpg", 
+            "title": "PLAYERUNKNOWN'S BATTLEGROUNDS", 
+            "price": "19.99$",
+            "description": "PlayerUnknown's Battlegrounds (also known as PUBG: Battlegrounds) is an online multiplayer battle royale game developed and published by PUBG Corporation, a subsidiary of Bluehole. The game is based on previous mods that were created by Brendan 'PlayerUnknown' Greene for other games, inspired by the 2000 Japanese film Battle Royale, and expanded into a standalone game under Greene's creative direction. "
+        }
+    ]
+}

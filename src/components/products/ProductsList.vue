@@ -3,11 +3,16 @@
       <h1 style="text-align: center">Товары</h1>
          <div class="products_list">
             <div v-for="product in products" :key="product.id">
+              <router-link :to="{name: 'ProductsCardPage',
+              params: {id: product.id, title: product.title, description: product.description}}">
                 <products-card
                     :id="product.id"
                     :image="product.image"
                     :title="product.title"
-                    :price="product.price" />
+                    :price="product.price"
+                    :description="product.description"
+                />
+              </router-link>
             </div>
          </div>
     </div>
@@ -19,21 +24,14 @@ import ProductsCard from './ProductsCard.vue';
 export default {
   data() {
     return {
-      products: [
-        {
-          id: 1, image: require('../../assets/battlefield.jpg'), title: 'Battlefield 1', price: '49.99$'
-        },
-        {
-          id: 2, image: require('../../assets/gta.jpg'), title: 'Grand Theft Auto V', price: '39.99$'
-        },
-        {
-          id: 3, image: require('../../assets/csgo.jpg'), title: 'Counter-Strike: Global Offensive', price: '9.99$'
-        },
-        {
-          id: 4, image: require('../../assets/pubg.jpg'), title: "PLAYERUNKNOWN'S BATTLEGROUNDS", price: '19.99$'
-        }
-      ]
+      products: []
     }
+  },
+  mounted() {
+    fetch('http://localhost:3000/products')
+      .then((res) => res.json())
+      .then((data) => { this.products = data })
+      .catch((err) => console.log(err.message))
   },
   components: {
     ProductsCard
@@ -42,6 +40,10 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../styles.scss';
-@import 'ProductsList.scss';
+.products_list {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+}
 </style>

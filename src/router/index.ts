@@ -36,7 +36,8 @@ const routes = [
   {
     path: '/products/:id',
     name: 'ProductsCardPage',
-    component: ProductsCardPage
+    component: ProductsCardPage,
+    props: true
   },
   {
     path: '/:pathMatch(.*)*',

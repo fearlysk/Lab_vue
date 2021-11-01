@@ -1,25 +1,25 @@
 <template>
-<div>
-  <div class="sep"><h1>Elements</h1></div>
-    <button-submit><p>Submit</p></button-submit>
-         <br>
-    <alert-modal />
-         <br>
-    <input-text />
-         <br>
-    <input-password />
+  <div>
+    <div class="sep"><h1>Elements</h1></div>
+      <button-submit><p>Submit</p></button-submit>
         <br>
-      <rating />
+      <alert-modal />
         <br>
-        <hr>
-   <div class="sep"><h1>Registration</h1></div>
-      <registration />
-        <br>
-      <message-modal />
-        <br>
-      <alert-message />
-        <br>
-</div>
+      <input-text />
+           <br>
+      <input-password />
+          <br>
+        <rating />
+          <br>
+          <hr>
+     <div class="sep"><h1>Registration</h1></div>
+       <registration />
+          <br>
+        <message-modal />
+          <br>
+        <alert-message />
+          <br>
+  </div>
 </template>
 
 <script>
@@ -48,7 +48,6 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../styles.scss';
 .sep {
   margin: 10px 0;
   text-align: center;

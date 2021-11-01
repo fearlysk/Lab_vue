@@ -2,14 +2,14 @@
   <div class="input_text">
     <h3>Enter Your Name:</h3>
       <div v-bind:class="{ invalid_msg_input: isValid}" class="valid_msg_input">
-        <h6>Имя</h6>
-          <div style="display: flex">
-          <input type="text" @onchange="validatename" v-model="name"
-           placeholder="Ваше имя" name="name" required>
-          <button @click="removetext()" v-if="name != ''" class="remove_text">x</button>
+        <h6 class="valid_msg_input-name">Имя</h6>
+          <div class="valid_msg_input-form">
+             <input type="text" @onchange="validatename" v-model="name"
+              placeholder="Ваше имя" name="name" required>
+             <button @click="removetext()" v-if="name != ''" class="remove_text">x</button>
           </div>
         </div>
-       <p v-bind:class="{invalid_msg: isValid}" class="valid_msg" v-if="msg.name">{{msg.name}}</p>
+       <p :class="{invalid_msg: isValid}" class="valid_msg" v-if="msg.name">{{msg.name}}</p>
        <p class="invalid_msg" v-else>Enter a name</p>
   </div>
 </template>
@@ -52,6 +52,52 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../styles.scss';
-@import 'inputText.scss';
+.input_text {
+  border: 2px solid #393838;
+  width: 300px;
+  padding: 20px;
+}
+.input_text .valid_msg_input {
+  margin-top: 10px;
+  padding: 0;
+}
+.input_text .valid_msg_input .valid_msg_input-name {
+  margin: 6px 0px 0px 6px;
+}
+input[type=text] {
+  background-color: #f2f2f2;
+  height: 30px;
+  width: 190px;
+  border-radius: 3px;
+  border: 0px;
+  padding: 5px 15px;
+  box-shadow: 4px 4px 10px rgba(0,0,0,0.06);
+  outline: none;
+}
+.invalid_msg {
+  color: #df3939 !important;
+}
+.valid_msg {
+  color: rgb(75,221,75);
+}
+.invalid_msg_input {
+  border: 2px solid #df3939 !important;
+  width: 230px !important;
+  border-radius: 4px;
+}
+.valid_msg_input {
+  border: 2px solid rgb(75,221,75);
+  width: 230px;
+  border-radius: 4px;
+}
+.valid_msg_input-form {
+  display: flex;
+}
+.valid_msg {
+  color: rgb(75,221,75);
+}
+.remove_text {
+  outline: none;
+  border: none;
+}
 </style>

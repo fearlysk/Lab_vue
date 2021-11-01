@@ -60,6 +60,26 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../styles.scss';
-@import 'inputPassword.scss';
+.input_password {
+    border: 2px solid #393838;
+    width: 300px;
+    padding: 20px;
+}
+.input_password > div {
+    margin-top: 10px;
+    padding: 0;
+}
+.input_password > div > h6 {
+    margin: 6px 0px 0px 6px;
+}
+input[type=password], input[type=text] {
+    background-color: #f3f3f3;
+    height: 30px;
+    width: 210px;
+    border-radius: 3px;
+    border: 0px;
+    padding: 5px 15px;
+    box-shadow: 4px 4px 10px rgba(0,0,0,0.06);
+    outline: none;
+}
 </style>
