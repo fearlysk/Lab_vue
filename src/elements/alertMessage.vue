@@ -1,21 +1,25 @@
 <template>
-    <div class="alert_message_wrapper">
-        <div class="alert_message">
-            <div class="alert_message_header" id="alert_header">
-                <div class="alert_message_headline">
+    <div class="alertmessage__wrapper">
+        <div class="alertmessage">
+            <div class="alertmessage__header">
+                <div class="alertmessage__headline">
                     <h2>{{ headline }}</h2>
                 </div>
-                <div class="alert_message_exit">
-                    <button id="alert_message_close_btn"
-                    class="alert_message_exit_btn">x</button> <!-- Later change to SVG -->
+                <div class="alertmessage__exit">
+                    <button id="alertmessage__closebtn"
+                    class="alertmessage__exitbtn">x</button> <!-- Later change to SVG -->
                 </div>
             </div>
-            <div class="alert_message_body">
+            <div class="alertmessage__body">
                 <p>{{message}}</p>
             </div>
-            <div class="alert_message_options">
-                <div class="alert_message_option_accept"><p>Accept</p></div>
-                <div class="alert_message_option_decline"><p>Decline</p></div>
+            <div class="alertmessage__options">
+                <div class="alertmessage__option-accept">
+                    <p class="alertmessage__option-accept--text">Accept</p>
+                </div>
+                <div class="alertmessage__option-decline">
+                    <p class="alertmessage__option-decline--text">Decline</p>
+                </div>
             </div>
         </div>
     </div>
@@ -35,7 +39,7 @@ export default {
 </script>
 
 <style lang="scss">
-.alert_message_wrapper {
+.alertmessage__wrapper {
     width: 580px;
     height: 250px;
     margin: 0 auto;
@@ -44,7 +48,7 @@ export default {
     border-radius: 9px;
     font-family: 'Open Sans';
 }
-.alert_message_header {
+.alertmessage__header {
     background-color: rgb(75,221,75);
     display: flex;
     justify-content: space-between;
@@ -54,10 +58,10 @@ export default {
     border-bottom-left-radius: 0px;
     border-bottom-right-radius: 0px;
 }
-.alert_message_headline, .alert_message_exit {
+.alertmessage__headline, .alertmessage__exit {
     margin: 5px 20px;
 }
-.alert_message_exit_btn {
+.alertmessage__exitbtn {
     margin-top: 5px;
     padding: 5px 15px;
     background-color: white;
@@ -67,32 +71,32 @@ export default {
     transition: 0.3s;
     cursor: pointer;
 }
-.alert_message_exit_btn:hover {
+.alertmessage__exitbtn:hover {
     color: #fff2f2;
     background-color: #df3939;
     transition: 0.3s;
 }
-.alert_message_body {
+.alertmessage__body {
     padding: 15px;
     height: 120px;
     background-color: snow;
 }
-.alert_message_options {
+.alertmessage__options {
     display: flex;
     justify-content: flex-end;
 }
-.alert_message_option_accept, .alert_message_option_decline {
+.alertmessage__option-accept, .alertmessage__option-decline {
     margin: 0 3%;
     padding: 0px;
     height: 20px;
 }
-.alert_message_option_accept p {
+.alertmessage__option-accept--text {
     margin: 0;
 }
-.alert_message_option_decline p {
+.alertmessage__option-decline--text {
     margin: 0;
 }
-.alert_message_option_accept {
+.alertmessage__option-accept {
     transition: 0.3s;
     border: 2px solid rgb(75,221,75);
     margin: 0 15px;
@@ -101,7 +105,7 @@ export default {
     box-sizing: content-box;
     border-radius: 4px;
 }
-.alert_message_option_decline {
+.alertmessage__option-decline {
     transition: 0.3s;
     border: 2px solid #df3939;
     margin: 0 15px;
@@ -110,23 +114,23 @@ export default {
     box-sizing: content-box;
     border-radius: 4px;
 }
-.alert_message_option_accept:hover {
+.alertmessage__option-accept:hover {
     cursor: pointer;
     transition: 0.3s;
     background-color: rgb(75,221,75);
     color: #fff2f2;
 }
-.alert_message_option_decline:hover {
+.alertmessage__option-decline:hover {
     cursor: pointer;
     transition: 0.3s;
     background-color: #df3939;
     color: #fff2f2;
 }
 @media screen and (max-width: 900px) {
-    .alert_message_option_accept {
+    .alertmessage__option-accept {
         padding: 5px 25px;
     }
-    .alert_message_option_decline {
+    .alertmessage__option-decline {
         padding: 5px 25px;
     }
 }

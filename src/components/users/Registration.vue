@@ -1,9 +1,9 @@
 <template>
-    <div class="registration_form_wrapper">
+    <div class="registration__form-wrapper">
         <form>
             <input-text />
             <input-password />
-        <input type="submit" class="registration_form_submit" value="Submit" />
+        <input type="submit" class="registration__form-submit" value="Submit" />
         </form>
     </div>
 </template>
@@ -22,7 +22,7 @@ export default {
 </script>
 
 <style lang="scss">
-.registration_form_wrapper {
+.registration__form-wrapper {
     display: flex;
     justify-content: center;
     margin: 0 auto;
@@ -31,7 +31,7 @@ export default {
     padding: 10px;
     border-radius: 4px;
 }
-.registration_form_submit {
+.registration__form-submit {
     width: 100%;
 }
 </style>

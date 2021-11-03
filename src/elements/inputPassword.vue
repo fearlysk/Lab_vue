@@ -1,12 +1,13 @@
 <template>
-    <div class="input_password">
+    <div class="input__password">
         <h3>Enter Your Password:</h3>
-            <div>
-                <h6>Пароль</h6>
-              <div style="display: flex">
-                  <input :type="passwordFieldType" v-model="password" placeholder="Ваш пароль"
+            <div class="input__password-content">
+                <h6 class="input__password-headline">Пароль</h6>
+              <div class="input__password-form">
+                  <input class="input__password-input" :type="passwordFieldType"
+                  v-model="password" placeholder="Ваш пароль"
                   required>
-                <div class="toggle_password" @click="switchVisibility"
+                <div class="toggle__password-hide" @click="switchVisibility"
                     v-if="passwordFieldType == 'password'">
                      <svg enable-background="new 0 0 24 24" height="24px" version="1.1"
                      viewBox="0 0 24 24" width="24px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
@@ -18,7 +19,7 @@
                       606,1.342,3,3,3c1.658,0,3-1.395,3-3 C15.018,10.392,13.676,8.997,12.018,9z"
                       fill-rule="evenodd"/></g></g></svg>
                 </div>
-                <div class="toggle_password1" @click="switchVisibility"
+                <div class="toggle__password-show" @click="switchVisibility"
                    v-if="passwordFieldType != 'password'" required>
                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19.604 2.562l-3.346 3.137c-1.27-.
                    428-2.686-.699-4.243-.699-7.569 0-12.015 6.551-12.015
@@ -60,19 +61,22 @@ export default {
 </script>
 
 <style lang="scss">
-.input_password {
+.input__password {
     border: 2px solid #393838;
     width: 300px;
     padding: 20px;
 }
-.input_password > div {
+.input__password-content {
     margin-top: 10px;
     padding: 0;
 }
-.input_password > div > h6 {
+.input__password-headline {
     margin: 6px 0px 0px 6px;
 }
-input[type=password], input[type=text] {
+.input__password-form {
+  display: flex;
+}
+.input__password-input {
     background-color: #f3f3f3;
     height: 30px;
     width: 210px;

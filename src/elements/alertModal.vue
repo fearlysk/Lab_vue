@@ -1,13 +1,13 @@
 <template>
-  <div class="alert_modal"
+  <div class="alert__modal"
     :class="{alert_modal_error: isError,
             alert_modal_info: isInfo,
             alert_modal_success: isSuccess,
             inactive: !isActive}">
-    <div><h3>{{ headline }}</h3></div>
-     <div class="alert_modal_btns">
-        <div @click="closeModal()" class="cancel_btn">Отменить</div>
-        <div @click="closeModal()" class="accept_btn">Принять</div>
+    <div class="alert__modal-headline"><h3>{{ headline }}</h3></div>
+     <div class="alert__modal-btns">
+        <div @click="closeModal()" class="cancel__btn">Отменить</div>
+        <div @click="closeModal()" class="accept__btn">Принять</div>
      </div>
   </div>
 </template>
@@ -47,7 +47,7 @@ export default {
 </script>
 
 <style lang="scss">
-.alert_modal {
+.alert__modal {
     background-color: #393838;
     height: 70px;
     width: 70%;
@@ -59,34 +59,35 @@ export default {
     z-index: 4;
     position: relative;
 }
-.alert_modal > div {
+.alert__modal-headline {
     margin-left: 30px;
 }
-.alert_modal_btns {
+.alert__modal-btns {
     display: flex;
     justify-content: space-evenly;
 }
-.alert_modal_btns > div {
+.cancel__btn {
+    background-color: crimson;
+    color: #fff2f2;
+    transition: 0.4s;
     margin: 0 25px;
     padding: 6px 12px;
     border-radius: 3px;
 }
-.cancel_btn {
-    background-color: crimson;
-    color: #fff2f2;
-    transition: 0.4s;
-}
-.cancel_btn:hover {
+.cancel__btn:hover {
     transform: scale(1.1);
     transition: 0.4s;
     cursor: pointer;
 }
-.accept_btn {
+.accept__btn {
     background-color: rgb(75,221,75);
     color: #fff2f2;
     transition: 0.4s;
+    margin: 0 25px;
+    padding: 6px 12px;
+    border-radius: 3px;
 }
-.accept_btn:hover {
+.accept__btn:hover {
     transform: scale(1.1);
     transition: 0.4s;
     cursor: pointer;

@@ -1,6 +1,6 @@
 <template>
-  <div class="product_card_wrapper">
-        <div class="product_card">
+  <div class="product__card-wrapper">
+        <div class="product__card">
             <img height="240" width="248" :src="image" alt="Image Not Found" />
             <hr>
             <p>Название: {{ title }}</p>
@@ -22,10 +22,10 @@ export default {
 </script>
 
 <style lang="scss">
-.product_card_wrapper {
+.product__card-wrapper {
     margin: 15px 25px;
 }
-.product_card {
+.product__card {
     background-color: #393838;
     width: 250px;
     color: #fff2f2;

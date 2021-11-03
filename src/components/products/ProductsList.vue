@@ -1,7 +1,7 @@
 <template>
     <div>
-      <h1 style="text-align: center">Товары</h1>
-         <div class="products_list">
+      <h1 class="products__list-headline">Товары</h1>
+         <div class="products__list">
             <div v-for="product in products" :key="product.id">
               <router-link :to="{name: 'ProductsCardPage',
               params: {id: product.id, title: product.title, description: product.description}}">
@@ -40,7 +40,10 @@ export default {
 </script>
 
 <style lang="scss">
-.products_list {
+.products__list-headline {
+  text-align: center;
+}
+.products__list {
     display: flex;
     flex-direction: row;
     justify-content: center;

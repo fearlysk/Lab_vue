@@ -1,5 +1,5 @@
 <template>
-  <div class="submit_btn" @click="clicked()">
+  <div class="submit__btn" @click="clicked()">
       <slot></slot>
   </div>
 </template>
@@ -16,18 +16,18 @@ export default {
 </script>
 
 <style lang="scss">
-.submit_btn {
+.submit__btn {
     background-color: rgb(75,221,75);
     border: 1px solid #393838;
     padding: 3px 4px;
     text-align: center;
     width: 12%;
     height: 50px;
-    transition: 0.4s;
+    transition: 0.3s;
 }
-.submit_btn:hover {
+.submit__btn:hover {
   transform: scale(1.1);
-  transition: 0.4s;
+  transition: 0.3s;
   cursor: pointer;
 }
 </style>

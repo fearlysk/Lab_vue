@@ -1,23 +1,23 @@
 <template>
-    <div class="message_modal_wrapper" id="modal">
-        <div class="message_modal">
-            <div class="message_modal_header">
-                <div class="message_modal_headline">
+    <div :class="{hidden: inactive}" class="message__modal-wrapper">
+        <div class="message__modal">
+            <div class="message__modal-header">
+                <div class="message__modal-headline">
                     <h2>Headline</h2>
                 </div>
-                <div class="message_modal_exit">
-                    <button id="close_modal_btn" @click="close_message()"
-                    class="message_modal_exit_btn">x</button> <!-- Later change to SVG -->
+                <div class="message__modal-exit">
+                    <button id="closemodal-btn" @click="close_message()"
+                    class="message__modal-exit--btn">x</button> <!-- Later change to SVG -->
                 </div>
             </div>
-              <div class="message_modal_body">
+              <div class="message__modal-body">
                     <p>{{message}}</p>
                 </div>
-                <div class="message_modal_options">
-                    <div class="message_modal_option_accept" @click="close_message()">
+                <div class="message__modal-options">
+                    <div class="message__modal-option--accept" @click="close_message()">
                       <p>Accept</p>
                     </div>
-                    <div class="message_modal_option_decline" @click="close_message()">
+                    <div class="message__modal-option--decline" @click="close_message()">
                       <p>Decline</p>
                     </div>
                 </div>
@@ -30,26 +30,23 @@ export default {
   name: 'messageModal',
   data() {
     return {
-      message: 'Some message will be displayed here.'
+      message: 'Some message will be displayed here.',
+      inactive: false
     }
   },
   methods: {
-    remove() {
-      const modal = document.getElementById('modal');
-      modal.style.display = 'none';
-    },
     close_message() {
-      const modal = document.getElementById('modal');
-      modal.style.opacity = 0;
-      modal.style.transition = `${0.9}s`;
-      modal.addEventListener('transitionend', () => { this.remove(); });
+      this.inactive = !this.inactive;
     }
   }
 }
 </script>
 
 <style lang="scss">
-.message_modal_wrapper {
+.hidden {
+    display: none;
+}
+.message__modal-wrapper {
     width: 50%;
     height: 300px;
     border: 1px solid black;
@@ -63,17 +60,12 @@ export default {
     left: 15%;
     background-color: snow;
 }
-@media screen and (max-width: 1150px) {
-    .message_modal_wrapper {
-        width: 80%;
-    }
-}
-.message_modal {
+.message__modal {
     border-radius: 9px;
     border: none;
     background-color: snow;
 }
-.message_modal_header {
+.message__modal-header {
     background-color: rgb(75,221,75);
     display: flex;
     justify-content: space-between;
@@ -83,10 +75,10 @@ export default {
     border-bottom-left-radius: 0px;
     border-bottom-right-radius: 0px;
 }
-.message_modal_headline, .message_modal_exit {
+.message__modal-headline, .message__modal-exit {
     margin: 5px 20px;
 }
-.message_modal_exit_btn {
+.message__modal-exit--btn {
     margin-top: 5px;
     padding: 5px 15px;
     background-color: white;
@@ -96,32 +88,32 @@ export default {
     transition: 0.3s;
     cursor: pointer;
 }
-.message_modal_exit_btn:hover {
+.message__modal-exit--btn:hover {
     color: #fff2f2;
     background-color: #df3939;
     transition: 0.3s;
 }
-.message_modal_body {
+.message__modal-body {
     padding: 15px;
     height: 150px;
     background-color: snow;
 }
-.message_modal_options {
+.message__modal-options {
     display: flex;
     justify-content: flex-end;
 }
-.message_modal_option_accept, .message_modal_option_decline {
+.message__modal-option--accept, .message__modal-option--decline {
     margin: 0 3%;
     padding: 0px;
     height: 20px;
 }
-.message_modal_option_accept p {
+.message__modal-option--accept p {
     margin: 0;
 }
-.message_modal_option_decline p {
+.message__modal-option--decline p {
     margin: 0;
 }
-.message_modal_option_accept {
+.message__modal-option--accept {
     transition: 0.3s;
     border: 2px solid rgb(75,221,75);
     margin: 0 15px;
@@ -130,7 +122,7 @@ export default {
     box-sizing: content-box;
     border-radius: 4px;
 }
-.message_modal_option_decline {
+.message__modal-option--decline {
     transition: 0.3s;
     border: 2px solid #df3939;
     margin: 0 15px;
@@ -139,24 +131,29 @@ export default {
     box-sizing: content-box;
     border-radius: 4px;
 }
-@media screen and (max-width: 900px) {
-    .message_modal_option_accept {
-        padding: 5px 25px;
-    }
-    .message_modal_option_decline {
-        padding: 5px 25px;
-    }
-}
-.message_modal_option_accept:hover {
+.message__modal-option--accept:hover {
     cursor: pointer;
     transition: 0.3s;
     background-color: rgb(75,221,75);
     color: #fff2f2;
 }
-.message_modal_option_decline:hover {
+.message__modal-option--decline:hover {
     cursor: pointer;
     transition: 0.3s;
     background-color: #df3939;
     color: #2f2f2f;
+}
+@media screen and (max-width: 1150px) {
+    .message__modal-wrapper {
+        width: 80%;
+    }
+}
+@media screen and (max-width: 900px) {
+    .message__modal-option--accept {
+        padding: 5px 25px;
+    }
+    .message__modal-option--decline {
+        padding: 5px 25px;
+    }
 }
 </style>
