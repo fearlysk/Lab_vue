@@ -23,6 +23,8 @@ export default {
 
 <style lang="scss">
 @import '../styles.scss';
+@import '../colors.scss';
+@import '../fonts.scss';
 * {
   margin: 0;
   padding: 0;

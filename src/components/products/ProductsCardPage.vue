@@ -14,8 +14,7 @@ export default {
   name: 'ProductsCardPage',
   props: {
     title: String,
-    description: String,
-    image: String,
+    description: String
   }
 }
 </script>

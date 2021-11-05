@@ -1,10 +1,13 @@
 <template>
   <div class="product__card-wrapper">
         <div class="product__card">
-            <img height="240" width="248" :src="image" alt="Image Not Found" />
-            <hr>
-            <p>Название: {{ title }}</p>
-            <p>Цена: {{ price }}</p>
+          <router-link :to="{name: 'ProductsCardPage',
+          params: {id: product.id, title: product.title, description: product.description}}">
+          <img class="product__card-img" :src="product.image" alt="Image Not Found" />
+          </router-link>
+          <hr>
+          <p>Название: {{ product.title }}</p>
+          <p>Цена: {{ product.price }}</p>
         </div>
   </div>
 </template>
@@ -13,10 +16,9 @@
 export default {
   name: 'ProductsCard',
   props: {
-    id: Number,
-    image: String,
-    title: String,
-    price: String
+    product: {
+      type: Object
+    }
   }
 }
 </script>
@@ -33,5 +35,9 @@ export default {
     border: 1px solid black;
     text-align: center;
     padding: 0;
+}
+.product__card-img {
+  width: 100%;
+  height: 75%;
 }
 </style>

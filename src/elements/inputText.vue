@@ -1,10 +1,10 @@
 <template>
   <div class="input_text">
     <h3>Enter Your Name:</h3>
-      <div v-bind:class="{ invalid_msg_input: isValid}" class="valid_msg_input">
+      <div :class="{ invalid_msg_input: isValid}" class="valid_msg_input">
         <h6 class="valid_msg_input-name">Имя</h6>
           <div class="valid_msg_input-form">
-             <input type="text" @onchange="validatename" v-model="name"
+             <input type="text" @input="validateName(this.name)" v-model="name"
               placeholder="Ваше имя" name="name" required>
              <button @click="removetext()" v-if="name != ''" class="remove_text">x</button>
           </div>
@@ -22,12 +22,6 @@ export default {
       name: '',
       msg: [],
       isValid: true
-    }
-  },
-  watch: {
-    name(value) {
-      this.name = value;
-      this.validateName(value);
     }
   },
   methods: {

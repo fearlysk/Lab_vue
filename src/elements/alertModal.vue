@@ -1,9 +1,6 @@
 <template>
   <div class="alert__modal"
-    :class="{alert_modal_error: isError,
-            alert_modal_info: isInfo,
-            alert_modal_success: isSuccess,
-            inactive: !isActive}">
+    :class="alertModalType">
     <div class="alert__modal-headline"><h3>{{ headline }}</h3></div>
      <div class="alert__modal-btns">
         <div @click="closeModal()" class="cancel__btn">Отменить</div>
@@ -18,30 +15,21 @@ export default {
   data() {
     return {
       headline: '',
-      isError: false,
-      isInfo: false,
-      isSuccess: true,
-      isActive: true
+      alertModalType: {
+        isError: false,
+        isInfo: false,
+        isSuccess: true,
+        isClosed: false
+      }
     }
   },
   created() {
-    this.checkModalType();
+    this.setHeadline();
   },
   methods: {
     closeModal() {
-      this.isActive = false;
+      this.alertModalType.isClosed = true;
     },
-    checkModalType() {
-      if (this.isError === true && this.isInfo === false && this.isSuccess === false) {
-        this.headline = 'Error'
-      } else if (this.isError === false && this.isInfo === true && this.isSuccess === false) {
-        this.headline = 'Info'
-      } else if (this.isError === false && this.isInfo === false && this.isSuccess === true) {
-        this.headline = 'Success'
-      } else {
-        this.headline = 'Unknown'
-      }
-    }
   }
 }
 </script>
@@ -58,6 +46,33 @@ export default {
     color: #fff2f2;
     z-index: 4;
     position: relative;
+    &.isError {
+      background-color: #df3939;
+    }
+    &.isError::before {
+      content: 'Error';
+      margin-left: 6%;
+      font-size: 1.5rem;
+    }
+    &.isInfo {
+      background-color: #f7e13e;
+    }
+    &.isInfo::before {
+      content: 'Info';
+      margin-left: 6%;
+      font-size: 1.5rem;
+    }
+    &.isSuccess {
+      background-color: rgb(75,221,75);
+    }
+    &.isSuccess::before {
+      content: 'Success';
+      margin-left: 6%;
+      font-size: 1.5rem;
+    }
+    &.isClosed {
+      display: none;
+    }
 }
 .alert__modal-headline {
     margin-left: 30px;

@@ -2,23 +2,23 @@
   <div>
     <div class="sep"><h1>Elements</h1></div>
       <button-submit><p>Submit</p></button-submit>
-        <br>
+      <br>
       <alert-modal />
-        <br>
+      <br>
       <input-text />
-           <br>
+      <br>
       <input-password />
-          <br>
-        <rating />
-          <br>
-          <hr>
-     <div class="sep"><h1>Registration</h1></div>
-       <registration />
-          <br>
-        <message-modal />
-          <br>
-        <alert-message />
-          <br>
+      <br>
+      <rating />
+      <br>
+      <hr>
+    <div class="sep"><h1>Registration</h1></div>
+      <registration />
+      <br>
+      <message-modal />
+      <br>
+      <alert-message />
+      <br>
   </div>
 </template>
 

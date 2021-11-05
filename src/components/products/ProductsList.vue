@@ -2,18 +2,8 @@
     <div>
       <h1 class="products__list-headline">Товары</h1>
          <div class="products__list">
-            <div v-for="product in products" :key="product.id">
-              <router-link :to="{name: 'ProductsCardPage',
-              params: {id: product.id, title: product.title, description: product.description}}">
-                <products-card
-                    :id="product.id"
-                    :image="product.image"
-                    :title="product.title"
-                    :price="product.price"
-                    :description="product.description"
-                />
-              </router-link>
-            </div>
+            <products-card v-for="product in products" :key="product.id"
+            :product="product" />
          </div>
     </div>
 </template>
@@ -24,7 +14,7 @@ import ProductsCard from './ProductsCard.vue';
 export default {
   data() {
     return {
-      products: []
+      products: {}
     }
   },
   mounted() {

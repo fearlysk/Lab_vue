@@ -5,7 +5,7 @@
             <div class="header__nav-item">
                 <a class="header__nav-item--home" href="/">Home</a>
             </div>
-            <div class="header__nav-item" id="header_nav_item_products">
+            <div class="header__nav-item header_nav_item_products">
                 <div class="products__link">
                     <a class="products__link-item header__nav-item--products" href="/products">
                         Products
@@ -98,8 +98,7 @@ export default {
 }
 .header__nav-item--products {
     padding: 0;
-}
-.header__nav-item--products::after {
+    &::after {
     content: '';
     width: 0;
     height: 0;
@@ -108,10 +107,7 @@ export default {
     position: relative;
     top: 16px;
     left: 7px;
-}
-#header__nav-item--products {
-    display: flex;
-    flex-direction: column;
+    }
 }
 .products__link {
     margin-top: 0px;
@@ -136,7 +132,7 @@ export default {
     text-align: left;
     font-size: 15px;
 }
-#header_nav_item_products:hover {
+.header_nav_item_products:hover {
     .products__dropdown-wrapper {
         display: block;
     }
@@ -151,10 +147,6 @@ export default {
     transition: 0.3s;
     background-color: #f7e13e;
 }
-/*.products_dropdown_item:hover > a {
-    color: #393838;
-    transition: 0.3s;
-} */
 .products__dropdown-item:hover .products__dropdown-item--link {
     color: #393838;
     transition: 0.3s;
@@ -165,10 +157,4 @@ export default {
     color: #fff2f2;
     transition: 0.3s;
 }
-/*.products_dropdown_item > a {
-    text-decoration: none;
-    padding: 5px 20px;
-    color: #fff2f2;
-    transition: 0.3s;
-}*/
 </style>
