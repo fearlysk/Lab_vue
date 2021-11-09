@@ -41,7 +41,9 @@ export default {
 .rating_wrapper {
     border: 1px solid black;
     width: 200px;
-    padding: 18px;
+    padding: 12px;
+    margin: 0 auto;
+    border-radius: 6px;
 }
 .rating {
     position: relative;

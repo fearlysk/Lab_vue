@@ -6,6 +6,7 @@ import SignUp from '../views/SignUp.vue';
 import ProductsCardPage from '../components/products/ProductsCardPage.vue'
 import Products from '../views/Products.vue';
 import NotFound from '../views/NotFound.vue';
+import ApiDemoPage from '../pages/ApiDemoPage.vue';
 
 const routes = [
   {
@@ -38,6 +39,11 @@ const routes = [
     name: 'ProductsCardPage',
     component: ProductsCardPage,
     props: true
+  },
+  {
+    path: '/edit',
+    name: 'ApiDemoPage',
+    component: ApiDemoPage
   },
   {
     path: '/:pathMatch(.*)*',

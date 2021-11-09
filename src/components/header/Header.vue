@@ -1,5 +1,10 @@
 <template>
     <div class="header">
+    <div class="registration-modal">
+    <teleport to="#registration-modal">
+      <Registration v-show="showRegModal" @close="showRegModal = false"/>
+    </teleport>
+    </div>
      <h1 class="header__headline">Game Store</h1>
         <div class="header__nav">
             <div class="header__nav-item">
@@ -13,16 +18,7 @@
                 </div>
                 <div class="products__dropdown-wrapper">
                     <ul class="products__dropdown">
-                      <div v-for="product in products" :key="product.id">
-                          <li class="products__dropdown-item">
-                            <router-link class="products__dropdown-item--link"
-                            :to="{name: 'ProductsCardPage',
-                            params: {id: product.id, title: product.title,
-                            description: product.description}}">
-                            {{ product.title }}
-                            </router-link>
-                          </li>
-                      </div>
+                      <li class="products__dropdown-item">Category Placeholder</li>
                     </ul>
                 </div>
             </div>
@@ -30,22 +26,27 @@
                 <a class="header__nav-item--link" href="/about">About</a>
             </div>
             <div class="header__nav-item">
-                <a class="header__nav-item--link" href="/signin">Sign In</a>
+                <a class="header__nav-item--link" @click="showRegModal = !showRegModal">Sign In</a>
             </div>
             <div class="header__nav-item">
-                <a class="header__nav-item--link" href="/signup ">Sign Up</a>
+                <a class="header__nav-item--link">Sign Up</a>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+import Registration from '../users/Registration.vue';
 
 export default {
   name: 'Header',
+  components: {
+    Registration
+  },
   data() {
     return {
-      products: []
+      products: [],
+      showRegModal: false
     }
   },
   mounted() {
@@ -66,6 +67,9 @@ export default {
     align-items: center;
     font-family: 'Open Sans', sans-serif;
     height: 100px;
+}
+.registration-modal {
+    position: absolute;
 }
 .header__headline {
     margin-left: 40px;
@@ -90,6 +94,7 @@ export default {
 .header__nav-item--link{
     text-decoration: none;
     color: #fff2f2;
+    cursor: pointer;
 }
 .header__nav-item:hover {
     border-bottom: 5px solid rgb(75, 221, 75);

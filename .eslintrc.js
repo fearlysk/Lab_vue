@@ -18,7 +18,8 @@ module.exports = {
     'comma-dangle': 0,
     quotes: 'warn',
     'max-classes-per-file': 0,
-    'lines-between-class-members': 0
+    'lines-between-class-members': 0,
+    'class-methods-use-this': 'off'
   },
   overrides: [
     {

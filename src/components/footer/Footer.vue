@@ -13,7 +13,7 @@ export default {
 <style lang="scss">
 .footer {
     background-color: #222222;
-    height: 100px;
+    height: 60px;
     text-align: center;
     color: white;
 }

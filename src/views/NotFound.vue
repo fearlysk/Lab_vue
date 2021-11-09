@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="wrapper">
       <h1>Error!</h1>
       <h2>Page not found!</h2>
       <router-link :to="{name: 'Home'}">Back to Home!</router-link>
@@ -12,6 +12,8 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+.wrapper {
+  color: white;
+}
 </style>

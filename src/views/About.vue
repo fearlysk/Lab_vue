@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="wrapper">
     <div>
         <h1>About</h1>
     </div>
@@ -14,6 +14,8 @@ export default {
 }
 </script>
 
-<style>
-
+<style lang="scss" scoped>
+.wrapper {
+  color: white;
+}
 </style>

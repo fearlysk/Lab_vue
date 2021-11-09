@@ -1,9 +1,13 @@
 <template>
     <div class="registration__form-wrapper">
         <form>
-            <input-text />
-            <input-password />
-        <input type="submit" class="registration__form-submit" value="Submit" />
+          <div class="form__header">
+            <h2>Sign In</h2>
+            <button class="form__header-btn" @click="$emit('close')">x</button>
+          </div>
+          <input-text />
+          <input-password />
+          <input type="submit" class="registration__form-submit" value="Submit" />
         </form>
     </div>
 </template>
@@ -21,7 +25,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .registration__form-wrapper {
     display: flex;
     justify-content: center;
@@ -30,8 +34,17 @@ export default {
     border: 2px solid rgb(75,221,75);
     padding: 10px;
     border-radius: 4px;
+    background-color: #FFFFFF;
 }
 .registration__form-submit {
     width: 100%;
+}
+.form__header {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+}
+.form__header-btn {
+    padding: 5px 15px;
 }
 </style>
