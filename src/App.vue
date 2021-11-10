@@ -1,41 +1,42 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <IndexPage :title="userFullName" />
+  <div class="app__wrapper">
+    <div class="app__header">
+      <Header />
+    </div>
+    <div class="app__content">
+      <router-view />
+    </div>
+    <div class="app__footer">
+      <Footer />
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
-import IndexPage from '@/pages/IndexPage.vue';
+import Header from './components/header/Header.vue';
+import Footer from './components/footer/Footer.vue';
 
-@Options({
-  components: {
-    IndexPage,
-  },
-})
-export default class App extends Vue {
-  user: any = null;
+ @Options({
+   components: {
+     Header,
+     Footer
+   },
+ })
 
-  async mounted(): Promise<void> {
-    const response = await fetch('/api/users/0').then((resp) => resp.json());
-    this.user = response.body;
-    console.log('USER 0', { user: response.body });
-  }
-
-  get userFullName() {
-    return this.user
-      ? `Default user: ${this.user.first_name} ${this.user.last_name}`
-      : ''
-  }
-}
+export default class App extends Vue {}
 </script>
 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+@import '../public/styles.scss';
+@import '../colors.scss';
+@import '../fonts.scss';
+* {
+  margin: 0;
+  padding: 0;
+}
+.app__content {
+  min-height: calc(100vh - 120px);
+  background: url("https://wallpaperaccess.com/full/1188236.jpg");
 }
 </style>
