@@ -1,11 +1,11 @@
 <template>
     <div class="wrapper">
         <h1>Sign Up</h1>
+        <br>
     </div>
 </template>
 
 <script>
-
 export default {
   name: 'SignUp'
 }

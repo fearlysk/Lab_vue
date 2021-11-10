@@ -17,7 +17,7 @@
             </router-link>
           </div>
         </div>
-  </div>
+    </div>
 </template>
 
 <script>
@@ -42,15 +42,16 @@ export default {
     z-index: 2;
     box-shadow: 0px 0px 18px 9px rgba(16, 122, 24, 0.75);
     border-radius: 4px;
+    background-color: #191919;
 }
 .product__card {
     background-color: #191919;
-    width: 250px;
+    min-width: 252px;
+    min-height: 360px;
     color: #fff2f2;
-    height: 400px;
     border: 1px solid black;
+    padding: 60px 0;
     text-align: center;
-    padding: 0;
     transform: translate(-50%, -50%);
     position: relative;
     top: 50%;
@@ -64,6 +65,7 @@ export default {
 }
 .front{
     transform: perspective(600px) rotateY(0deg);
+    background-color: #191919;
 }
 .back{
     transform: perspective(600px) rotateY(180deg);

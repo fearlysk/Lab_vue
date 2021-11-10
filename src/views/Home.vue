@@ -2,7 +2,7 @@
   <div class="wrapper">
     <router-link :to="{name: 'ApiDemoPage'}">Go to edit menu</router-link>
     <div class="recentlyadded">
-      <h2 class="recentlyadded__headline">New In Store:</h2>
+    <!--  <h2 class="recentlyadded__headline">New In Store:</h2>
         <div class="recentlyadded__item">
           <div>
             <img :src="this.products[this.products.length - 1].image"
@@ -37,6 +37,22 @@
            <h3>Price: {{this.products[this.products.length - 1].price}}</h3>
            <h4 class="link-wrapper"><router-link class="recentlyadded__item-link"
            :to="`/products/${this.products[this.products.length - 3].id}`">
+           Visit store page</router-link></h4>
+         </div>
+        </div> -->
+        <h2 class="recentlyadded__headline">New In Store:</h2>
+        <div class="recentlyadded__item"
+        v-for="item in this.products.slice(-3)"
+        :key="item.id">
+          <div>
+           <img :src="item.image"
+           class="recentlyadded__item-image">
+          </div>
+          <div class="recentlyadded__item-content">
+            <h2>{{item.title}}</h2>
+            <h3>Price: {{item.price}}</h3>
+            <h4 class="link-wrapper"><router-link class="recentlyadded__item-link"
+           :to="`/products/${item.id}`">
            Visit store page</router-link></h4>
          </div>
         </div>
@@ -81,7 +97,11 @@ export default {
   },
   methods: {
     searchCheck() {
-      return this.search === '' ? this.isInactive = true : this.isInactive = false; // eslint-disable-line no-return-assign, no-param-reassign
+      if (this.search === '') {
+        this.isInactive = true;
+      } else {
+        this.isInactive = false;
+      }
     }
   },
   computed: {

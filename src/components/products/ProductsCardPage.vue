@@ -1,14 +1,14 @@
 <template>
   <div class="product__page-wrapper">
     <div class="product__page-title">
-       <h1 class="product__page-title--headline">Game: {{ product[id - 1].title }}</h1>
-        <img :src="product[id-1].image" class="product__page-image">
-       <h1>Genre: {{product[id-1].genre}}</h1>
+       <h1 class="product__page-title--headline">Game: {{ product[id].title }}</h1>
+        <img :src="product[id].image" class="product__page-image">
+       <h1>Genre: {{product[id].genre}}</h1>
     </div>
     <div class="product__page-description">
-      <h3>Developer: {{ product[id - 1].developer}}</h3>
+      <h3>Developer: {{ product[id].developer}}</h3>
       <hr>
-      <h3>Description: {{ product[id - 1].description }}</h3>
+      <h3>Description: {{ product[id].description }}</h3>
       <div class="product__page-description--cart">
         <button class="cartbtn">Add to cart</button>
       </div>

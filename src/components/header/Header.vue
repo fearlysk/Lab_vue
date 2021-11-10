@@ -1,10 +1,8 @@
 <template>
     <div class="header">
-    <div class="registration-modal">
-    <teleport to="#registration-modal">
-      <Registration v-show="showRegModal" @close="showRegModal = false"/>
+    <teleport to="#modals-portal">
+      <CredentialsInput v-show="showRegModal" @close="showRegModal = false"/>
     </teleport>
-    </div>
      <h1 class="header__headline">Game Store</h1>
         <div class="header__nav">
             <div class="header__nav-item">
@@ -29,19 +27,19 @@
                 <a class="header__nav-item--link" @click="showRegModal = !showRegModal">Sign In</a>
             </div>
             <div class="header__nav-item">
-                <a class="header__nav-item--link">Sign Up</a>
+                <a class="header__nav-item--link" href="/signup">Sign Up</a>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-import Registration from '../users/Registration.vue';
+import CredentialsInput from '../users/CredentialsInput.vue';
 
 export default {
   name: 'Header',
   components: {
-    Registration
+    CredentialsInput
   },
   data() {
     return {
@@ -66,10 +64,7 @@ export default {
     justify-content: space-between;
     align-items: center;
     font-family: 'Open Sans', sans-serif;
-    height: 100px;
-}
-.registration-modal {
-    position: absolute;
+    padding: 20px 0;
 }
 .header__headline {
     margin-left: 40px;
@@ -83,7 +78,7 @@ export default {
 .header__nav-item {
     display: flex;
     align-items: center;
-    padding: 0 20px;
+    padding: 20px 20px;
     transition: 0.3s;
     border-bottom: 5px solid transparent;
 }
