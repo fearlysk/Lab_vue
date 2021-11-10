@@ -2,10 +2,10 @@
   <div class="input_text">
     <h3>Enter Your Name:</h3>
       <div :class="{ invalid_msg_input: isValid}" class="valid_msg_input">
-        <h6 class="valid_msg_input-name">Имя</h6>
+        <h6 class="valid_msg_input-name">Name</h6>
           <div class="valid_msg_input-form">
              <input type="text" @input="validateName(this.name)" v-model="name"
-              placeholder="Ваше имя" name="name" required>
+              placeholder="Your Name" name="name" class="text_inp" required>
              <button @click="removetext()" v-if="name != ''" class="remove_text">x</button>
           </div>
         </div>
@@ -45,7 +45,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .input_text {
   border: 2px solid #393838;
   width: 300px;
@@ -58,7 +58,7 @@ export default {
 .input_text .valid_msg_input .valid_msg_input-name {
   margin: 6px 0px 0px 6px;
 }
-input[type=text] {
+.text_inp {
   background-color: #f2f2f2;
   height: 30px;
   width: 190px;
@@ -93,5 +93,6 @@ input[type=text] {
 .remove_text {
   outline: none;
   border: none;
+  width: 30px;
 }
 </style>
