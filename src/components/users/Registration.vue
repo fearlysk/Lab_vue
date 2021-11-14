@@ -40,6 +40,7 @@
 
 <script>
 import axios from 'axios';
+import * as userInfo from '../../constants/user';
 
 export default {
   name: 'Registration',
@@ -59,7 +60,7 @@ export default {
         password: this.password
       });
       if (result.status === 201) {
-        localStorage.setItem('user-info', JSON.stringify(result.data));
+        localStorage.setItem(userInfo, JSON.stringify(result.data));
         this.$router.go()
       }
     },
