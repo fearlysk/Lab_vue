@@ -1,45 +1,9 @@
 <template>
   <div class="wrapper">
-    <router-link :to="{name: 'ApiDemoPage'}">Go to edit menu</router-link>
+    <router-link :to="{name: 'ApiUsersPage'}">Go to edit menu (users)</router-link>
+    <br />
+    <router-link :to="{name: 'ApiDemoPage'}">Go to edit menu (products)</router-link>
     <div class="recentlyadded">
-    <!--  <h2 class="recentlyadded__headline">New In Store:</h2>
-        <div class="recentlyadded__item">
-          <div>
-            <img :src="this.products[this.products.length - 1].image"
-            class="recentlyadded__item-image">
-          </div>
-          <div class="recentlyadded__item-content">
-            <h2>{{this.products[this.products.length - 1].title}}</h2>
-            <h3>Price: {{this.products[this.products.length - 1].price}}</h3>
-            <h4 class="link-wrapper"><router-link class="recentlyadded__item-link"
-           :to="`/products/${this.products[this.products.length - 1].id}`">
-           Visit store page</router-link></h4>
-         </div>
-        </div>
-        <div class="recentlyadded__item">
-          <div>
-            <img :src="this.products[this.products.length - 2].image"
-            class="recentlyadded__item-image">
-          </div>
-          <div class="recentlyadded__item-content">
-            <h2>{{this.products[this.products.length - 2].title}}</h2>
-            <h3>Price: {{this.products[this.products.length - 1].price}}</h3>
-            <h4 class="link-wrapper"><router-link class="recentlyadded__item-link"
-           :to="`/products/${this.products[this.products.length - 2].id}`">
-           Visit store page</router-link></h4>
-         </div>
-        </div>
-        <div class="recentlyadded__item">
-         <div><img :src="this.products[this.products.length - 3].image"
-         class="recentlyadded__item-image"></div>
-         <div class="recentlyadded__item-content">
-           <h2>{{this.products[this.products.length - 3].title}}</h2>
-           <h3>Price: {{this.products[this.products.length - 1].price}}</h3>
-           <h4 class="link-wrapper"><router-link class="recentlyadded__item-link"
-           :to="`/products/${this.products[this.products.length - 3].id}`">
-           Visit store page</router-link></h4>
-         </div>
-        </div> -->
         <h2 class="recentlyadded__headline">New In Store:</h2>
         <div class="recentlyadded__item"
         v-for="item in this.products.slice(-3)"
