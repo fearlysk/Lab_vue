@@ -1,11 +1,15 @@
 <template>
-  <div>
+<div>
     <div class="api__section">
         <div class="form__header">
-          <h2>Sign In</h2>
+          <h2>Sign Up</h2>
           <button class="form__header-btn" @click="$emit('close')">x</button>
         </div>
-         <form @submit.prevent="login">
+         <form @submit.prevent="signUp">
+          <div class="api__section-item">
+           <p>Name: </p>
+           <input v-model="name" type="text" required>
+         </div>
          <div class="api__section-item">
            <p>Email: </p>
            <input v-model="email" type="email" required>
@@ -38,21 +42,24 @@
 import axios from 'axios';
 
 export default {
-  name: 'Login',
+  name: 'Registration',
   data() {
     return {
+      name: '',
       email: '',
       password: '',
       passwordFieldType: 'password'
     }
   },
   methods: {
-    async login() {
-      const result = await axios.get(
-        `http://localhost:3000/users?email=${this.email}&password=${this.password}`
-      )
-      if (result.status === 200 && result.data.length > 0) {
-        localStorage.setItem('user-info', JSON.stringify(result.data[0]));
+    async signUp() {
+      const result = await axios.post('http://localhost:3000/users', {
+        name: this.name,
+        email: this.email,
+        password: this.password
+      });
+      if (result.status === 201) {
+        localStorage.setItem('user-info', JSON.stringify(result.data));
         this.$router.go()
       }
     },
@@ -67,6 +74,9 @@ export default {
 .eyesvg {
   fill: white;
   stroke: white;
+}
+.hide {
+  display: none;
 }
 pre {
   text-align: left;

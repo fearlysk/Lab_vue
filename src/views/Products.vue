@@ -2,7 +2,7 @@
   <div class="wrapper">
     <h1 class="headline">Available Games In Store</h1>
     <div>
-        <products-list />
+      <products-list />
     </div>
   </div>
 </template>

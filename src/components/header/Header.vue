@@ -1,7 +1,10 @@
 <template>
     <div class="header">
     <teleport to="#modals-portal">
-      <CredentialsInput v-show="showRegModal" @close="showRegModal = false"/>
+      <Login v-show="showLogModal" @close="showLogModal = false" />
+    </teleport>
+    <teleport to="#modals-portal">
+      <Registration v-show="showRegModal" @close="showRegModal = false" />
     </teleport>
      <h1 class="header__headline">Game Store</h1>
         <div class="header__nav">
@@ -23,28 +26,41 @@
             <div class="header__nav-item">
                 <a class="header__nav-item--link" href="/about">About</a>
             </div>
-            <div class="header__nav-item">
-                <a class="header__nav-item--link" @click="showRegModal = !showRegModal">Sign In</a>
+            <div class="header__nav-item" :class="{hide: logInactive}">
+                <a class="header__nav-item--link" @click="showLogModal = !showLogModal">Sign In</a>
             </div>
-            <div class="header__nav-item">
-                <a class="header__nav-item--link" href="/signup">Sign Up</a>
+            <div class="header__nav-item" :class="{hide: regInactive}">
+                <a class="header__nav-item--link" @click="showRegModal = !showRegModal">Sign Up</a>
+            </div>
+             <div class="header__nav-item" :class="{hide: profileInactive}">
+                <a class="header__nav-item--link" href="/profile">{{ username }}</a>
+            </div>
+            <div class="header__nav-item" :class="{hide: profileInactive}">
+                <a class="header__nav-item--link" @click="logout()">Logout</a>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-import CredentialsInput from '../users/CredentialsInput.vue';
+import Login from '../users/Login.vue';
+import Registration from '../users/Registration.vue';
 
 export default {
   name: 'Header',
   components: {
-    CredentialsInput
+    Login,
+    Registration
   },
   data() {
     return {
       products: [],
-      showRegModal: false
+      showRegModal: false,
+      showLogModal: false,
+      logInactive: false,
+      regInactive: false,
+      profileInactive: true,
+      username: ''
     }
   },
   mounted() {
@@ -52,11 +68,30 @@ export default {
       .then((res) => res.json())
       .then((data) => { this.products = data })
       .catch((err) => console.log(err.message))
+
+    const user = localStorage.getItem("user-info");
+    const userparsed = JSON.parse(user);
+    this.username = userparsed.name;
+    if (user) {
+      this.logInactive = !this.logInactive;
+      this.regInactive = !this.regInactive;
+      this.profileInactive = !this.profileInactive;
+    }
   },
+  methods: {
+    logout() {
+      localStorage.clear();
+      this.$router.push({ name: 'Home' });
+      setTimeout(() => window.location.reload(), 300);
+    }
+  }
 }
 </script>
 
 <style lang="scss">
+.hide {
+    display: none !important;
+}
 .header {
     background-color: #222222;
     color: #fff2f2;

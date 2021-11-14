@@ -40,7 +40,7 @@ export default {
 <style lang="scss">
 .rating_wrapper {
     border: 1px solid black;
-    width: 200px;
+    min-width: 200px;
     padding: 12px;
     margin: 0 auto;
     border-radius: 6px;
