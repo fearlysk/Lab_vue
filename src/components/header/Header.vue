@@ -64,12 +64,12 @@ export default {
     }
   },
   mounted() {
-    fetch('http://localhost:3000/products')
+    fetch('http://localhost:3000/api/products')
       .then((res) => res.json())
       .then((data) => { this.products = data })
       .catch((err) => console.log(err.message))
 
-    const user = localStorage.getItem("user-info");
+    const user = localStorage.getItem('user-info');
     const userparsed = JSON.parse(user);
     this.username = userparsed.name;
     if (user) {
