@@ -1,10 +1,10 @@
 <template>
     <div class="header">
     <teleport to="#modals-portal">
-      <Login v-show="showLogModal" @close="showLogModal = false" />
+      <Login v-if="showLogModal" @close="closeModal" />
     </teleport>
     <teleport to="#modals-portal">
-      <Registration v-show="showRegModal" @close="showRegModal = false" />
+      <Registration v-if="showRegModal" @close="closeModal" />
     </teleport>
      <h1 class="header__headline">Game Store</h1>
         <div class="header__nav">
@@ -26,11 +26,11 @@
             <div class="header__nav-item">
                 <a class="header__nav-item--link" href="/about">About</a>
             </div>
-            <div class="header__nav-item" :class="{hide: logInactive}">
-                <a class="header__nav-item--link" @click="showLogModal = !showLogModal">Sign In</a>
+            <div class="header__nav-item" :class="{hide: authInactive}">
+                <a class="header__nav-item--link" @click="showLoginModal">Sign In</a>
             </div>
-            <div class="header__nav-item" :class="{hide: regInactive}">
-                <a class="header__nav-item--link" @click="showRegModal = !showRegModal">Sign Up</a>
+            <div class="header__nav-item" :class="{hide: authInactive}">
+                <a class="header__nav-item--link" @click="showRegistrationModal">Sign Up</a>
             </div>
              <div class="header__nav-item" :class="{hide: profileInactive}">
                 <a class="header__nav-item--link" href="/profile">{{ username }}</a>
@@ -45,6 +45,7 @@
 <script>
 import Login from '../users/Login.vue';
 import Registration from '../users/Registration.vue';
+import * as userInfo from '../../constants/user';
 
 export default {
   name: 'Header',
@@ -57,24 +58,22 @@ export default {
       products: [],
       showRegModal: false,
       showLogModal: false,
-      logInactive: false,
-      regInactive: false,
+      authInactive: false,
       profileInactive: true,
       username: ''
     }
   },
   mounted() {
-    fetch('http://localhost:3000/api/products')
+    fetch('http://localhost:3000/products')
       .then((res) => res.json())
       .then((data) => { this.products = data })
       .catch((err) => console.log(err.message))
 
-    const user = localStorage.getItem('user-info');
+    const user = localStorage.getItem(userInfo);
     const userparsed = JSON.parse(user);
     this.username = userparsed.name;
     if (user) {
-      this.logInactive = !this.logInactive;
-      this.regInactive = !this.regInactive;
+      this.authInactive = !this.authInactive;
       this.profileInactive = !this.profileInactive;
     }
   },
@@ -83,6 +82,24 @@ export default {
       localStorage.clear();
       this.$router.push({ name: 'Home' });
       setTimeout(() => window.location.reload(), 300);
+    },
+    showLoginModal() {
+      if (!this.showLogModal) {
+        this.showLogModal = !this.showLogModal;
+      }
+    },
+    showRegistrationModal() {
+      if (!this.showRegModal) {
+        this.showRegModal = !this.showRegModal;
+      }
+    },
+    closeModal() {
+      if (this.showLogModal) {
+        this.showLogModal = !this.showLogModal;
+      }
+      if (this.showRegModal) {
+        this.showRegModal = !this.showRegModal;
+      }
     }
   }
 }

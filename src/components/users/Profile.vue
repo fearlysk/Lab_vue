@@ -5,6 +5,8 @@
 </template>
 
 <script>
+import * as userInfo from '../../constants/user';
+
 export default {
   name: 'Profile',
   data() {
@@ -13,7 +15,7 @@ export default {
     }
   },
   mounted() {
-    const user = localStorage.getItem('user-info');
+    const user = localStorage.getItem(userInfo);
     const userparsed = JSON.parse(user);
     this.name = userparsed.name;
     if (!user) {
