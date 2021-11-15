@@ -1,17 +1,13 @@
 <template>
   <div class="wrapper">
     <div>
-        <h1>About</h1>
+       <p>About</p>
     </div>
   </div>
 </template>
 
-<script>
+<script lang="ts">
 
-export default {
-  name: 'About',
-  components: {}
-}
 </script>
 
 <style lang="scss" scoped>

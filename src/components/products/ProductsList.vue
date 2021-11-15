@@ -1,6 +1,5 @@
 <template>
     <div class="wrapper">
-      <h1 class="products__list-headline">Games</h1>
          <div class="products__list">
             <products-card v-for="product in products" :key="product.id"
             :product="product" />
@@ -38,7 +37,6 @@ export default {
     flex-direction: row;
     justify-content: center;
     flex-wrap: wrap;
-
     padding: 25px 0 75px 0;
 }
 </style>

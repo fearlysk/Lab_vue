@@ -12,6 +12,7 @@
     "pre-commit": "npm run test:unit"
   },
   "dependencies": {
+    "axios": "^0.24.0",
     "core-js": "^3.6.5",
     "json-server": "^0.17.0",
     "lorem-ipsum": "^2.0.4",
