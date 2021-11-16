@@ -12,19 +12,26 @@
   </div>
 </template>
 
-<script lang="ts">
-import { Options, Vue } from 'vue-class-component';
+<script>
+import * as userInfo from './constants/user';
 import Header from './components/header/Header.vue';
 import Footer from './components/footer/Footer.vue';
 
- @Options({
-   components: {
-     Header,
-     Footer
-   },
- })
-
-export default class App extends Vue {}
+export default {
+  name: 'App',
+  components: {
+    Header,
+    Footer
+  },
+  mounted() {
+    if (localStorage.getItem(userInfo) !== null) {
+      const user = localStorage.getItem(userInfo);
+      const userparsed = JSON.parse(user);
+      console.log(userparsed);
+      this.$store.commit('saveUserName', userparsed);
+    }
+  }
+}
 </script>
 
 <style lang="scss">

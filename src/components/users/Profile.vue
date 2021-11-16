@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Welcome! {{name}}</h1>
+    <h1>Welcome! {{userData.name}}</h1>
   </div>
 </template>
 
@@ -11,17 +11,24 @@ export default {
   name: 'Profile',
   data() {
     return {
-      name: ''
+      userData: {
+        name: '',
+        email: '',
+        password: ''
+      }
     }
   },
   mounted() {
     const user = localStorage.getItem(userInfo);
     const userparsed = JSON.parse(user);
-    this.name = userparsed.name;
+    this.userData.name = userparsed.name;
+    this.userData.email = userparsed.email;
+    this.userData.password = userparsed.password;
+    this.$store.commit('saveUserName', this.userData);
     if (!user) {
       this.$router.push({ name: 'Home' });
     }
-  },
+  }
 }
 </script>
 

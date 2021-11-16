@@ -4,7 +4,7 @@
     <br />
     <router-link :to="{name: 'ApiDemoPage'}">Go to edit menu (products)</router-link>
     <div class="recentlyadded">
-        <h2 class="recentlyadded__headline">New In Store:</h2>
+      <h2 class="recentlyadded__headline">New In Store:</h2>
         <div class="recentlyadded__item"
         v-for="item in this.products.slice(-3)"
         :key="item.id">
@@ -44,6 +44,7 @@
 </template>
 
 <script>
+
 export default {
   name: 'Home',
   data() {
@@ -66,7 +67,7 @@ export default {
       } else {
         this.isInactive = false;
       }
-    }
+    },
   },
   computed: {
     searchHandler() {
