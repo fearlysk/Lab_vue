@@ -12,19 +12,21 @@
   </div>
 </template>
 
-<script lang="ts">
-import { Options, Vue } from 'vue-class-component';
+<script>
 import Header from './components/header/Header.vue';
 import Footer from './components/footer/Footer.vue';
+import saveDataToStore from './services/persist';
 
- @Options({
-   components: {
-     Header,
-     Footer
-   },
- })
-
-export default class App extends Vue {}
+export default {
+  name: 'App',
+  components: {
+    Header,
+    Footer
+  },
+  mounted() {
+    saveDataToStore();
+  }
+}
 </script>
 
 <style lang="scss">

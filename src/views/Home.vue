@@ -4,39 +4,39 @@
     <br />
     <router-link :to="{name: 'ApiDemoPage'}">Go to edit menu (products)</router-link>
     <div class="recentlyadded">
-        <h2 class="recentlyadded__headline">New In Store:</h2>
+      <h2 class="recentlyadded__headline">New In Store:</h2>
         <div class="recentlyadded__item"
-        v-for="item in this.products.slice(-3)"
-        :key="item.id">
+          v-for="item in this.products.slice(-3)"
+          :key="item.id">
           <div>
-           <img :src="item.image"
-           class="recentlyadded__item-image">
+            <img :src="item.image"
+            class="recentlyadded__item-image">
           </div>
           <div class="recentlyadded__item-content">
             <h2>{{item.title}}</h2>
             <h3>Price: {{item.price}}</h3>
             <h4 class="link-wrapper"><router-link class="recentlyadded__item-link"
-           :to="`/products/${item.id}`">
-           Visit store page</router-link></h4>
-         </div>
+             :to="`/products/${item.id}`">
+             Visit store page</router-link></h4>
+          </div>
         </div>
     </div>
     <div class="search__wrapper">
     <div class="search__input">
-      <h2>Search:</h2>
-    <input
-      type="search"
-      v-model="search"
-      class="search__input-field"
-      @input="searchCheck()"
-      placeholder="Search..."
-    />
+     <h2>Search:</h2>
+      <input
+       type="search"
+       v-model="search"
+       class="search__input-field"
+       @input="searchCheck()"
+       placeholder="Search..."
+      />
     </div>
     <div :class='{inactive: isInactive}' class="search__item-wrapper"
-    v-for="item in searchHandler" :key="item.id">
+      v-for="item in searchHandler" :key="item.id">
       <div class="search__item">
         <h3>{{item.title}}</h3>
-         <router-link :to="`/products/${item.id}`">Visit store page</router-link>
+          <router-link :to="`/products/${item.id}`">Visit store page</router-link>
       </div>
     </div>
   </div>
@@ -44,6 +44,7 @@
 </template>
 
 <script>
+
 export default {
   name: 'Home',
   data() {
@@ -66,7 +67,7 @@ export default {
       } else {
         this.isInactive = false;
       }
-    }
+    },
   },
   computed: {
     searchHandler() {
