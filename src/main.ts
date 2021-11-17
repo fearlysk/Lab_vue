@@ -11,11 +11,11 @@ app.use(store);
 
 app.config.errorHandler = function (err, vm, info) {
   console.log(`Catched Error: ${(err as any).toString()}\nInfo: ${info}`);
-  store.commit('saveErrors', err);
+  store.dispatch('saveErrors', err);
 }
 app.config.warnHandler = function (msg, vm, trace) {
   console.log(`Warn: ${msg}\nTrace: ${trace}`);
-  store.commit('saveErrors', msg);
+  store.dispatch('saveWarns', msg);
 }
 
 app.mount('#app');

@@ -10,6 +10,10 @@ export default {
       }
     },
   },
-  actions: {},
+  actions: {
+    saveWarns({ commit }, warn) {
+      commit('saveWarns', warn);
+    }
+  },
   getters: {}
 }

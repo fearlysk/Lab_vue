@@ -23,6 +23,12 @@
       "name": "Ivan Ivanov",
       "email": "ivanmail@mail.ru",
       "password": "ivan"
+    },
+    {
+      "name": "Oleg Olegov",
+      "email": "olegmail@mail.ru",
+      "password": "oleg",
+      "id": 4
     }
   ],
   "products": [

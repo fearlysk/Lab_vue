@@ -13,9 +13,9 @@
 </template>
 
 <script>
-import * as userInfo from './constants/user';
 import Header from './components/header/Header.vue';
 import Footer from './components/footer/Footer.vue';
+import saveDataToStore from './services/persist';
 
 export default {
   name: 'App',
@@ -24,12 +24,7 @@ export default {
     Footer
   },
   mounted() {
-    if (localStorage.getItem(userInfo) !== null) {
-      const user = localStorage.getItem(userInfo);
-      const userparsed = JSON.parse(user);
-      console.log(userparsed);
-      this.$store.commit('saveUserName', userparsed);
-    }
+    saveDataToStore();
   }
 }
 </script>

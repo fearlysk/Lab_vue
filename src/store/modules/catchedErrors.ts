@@ -10,6 +10,10 @@ export default {
       }
     },
   },
-  actions: {},
+  actions: {
+    saveErrors({ commit }, error) {
+      commit('saveErrors', error);
+    }
+  },
   getters: {}
 }

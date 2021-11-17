@@ -7,6 +7,10 @@ export default {
       state.loggedUser = data;
     },
   },
-  actions: {},
+  actions: {
+    saveUserName({ commit }, data) {
+      commit('saveUserName', data)
+    }
+  },
   getters: {}
 }
