@@ -7,16 +7,41 @@
         </div>
          <form @submit.prevent="signUp">
           <div class="api__section-item">
-           <p>Name: </p>
-           <input v-model="name" type="text" required>
+           <p>First name: </p>
+           <input v-model="userRegData.firstname" type="text" required>
+         </div>
+         <div class="api__section-item">
+           <p>Last name: </p>
+           <input v-model="userRegData.lastname" type="text" required>
+         </div>
+         <div class="api__section-item">
+           <p>Sex: </p>
+            <input type="radio" id="male" value="Male" v-model="userRegData.sex">
+            <label for="one">Male</label>
+            <br>
+            <input type="radio" id="female" value="Female" v-model="userRegData.sex">
+            <label for="two">Female</label>
+            <br>
+         </div>
+         <div class="api__section-item">
+           <p>Address: </p>
+           <input v-model="userRegData.address" type="text" required>
+         </div>
+          <div class="api__section-item">
+           <p>Shipping Address: </p>
+           <input v-model="userRegData.shippingaddress" type="text" required>
+         </div>
+          <div class="api__section-item">
+           <p>Payment Card: </p>
+           <input v-model="userRegData.paymentcard" type="number" required>
          </div>
          <div class="api__section-item">
            <p>Email: </p>
-           <input v-model="email" type="email" required>
+           <input v-model="userRegData.email" type="email" required>
          </div>
          <div class="api__section-item">
            <p>Password: </p>
-           <input v-model="password" :type="passwordFieldType" required>
+           <input v-model="userRegData.password" :type="passwordFieldType" required>
             <div class="toggle__password-hide" @click="switchVisibility"
               v-if="passwordFieldType == 'password'">
               <svg class="eyesvg" enable-background="new 0 0 24 24"
@@ -38,29 +63,33 @@
 </div>
 </template>
 
-<script>
+<script lang="ts">
 import axios from 'axios';
 import * as userInfo from '../../constants/user';
+import IUser from '../../interfaces/userInterface';
 
 export default {
   name: 'Registration',
   data() {
     return {
-      name: '',
-      email: '',
-      password: '',
+      userRegData: {} as IUser,
       passwordFieldType: 'password'
     }
   },
   methods: {
     async signUp() {
       const result = await axios.post('http://localhost:3000/users', {
-        name: this.name,
-        email: this.email,
-        password: this.password
+        firstname: this.userRegData.firstname,
+        lastname: this.userRegData.lastname,
+        sex: this.userRegData.sex,
+        address: this.userRegData.address,
+        shippingaddress: this.userRegData.shippingaddress,
+        paymentcard: this.userRegData.paymentcard,
+        email: this.userRegData.email,
+        password: this.userRegData.password
       });
       if (result.status === 201) {
-        localStorage.setItem(userInfo, JSON.stringify(result.data));
+        localStorage.setItem(userInfo as any, JSON.stringify(result.data));
         this.$router.go()
       }
     },

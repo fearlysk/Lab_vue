@@ -2,33 +2,89 @@
   "users": [
     {
       "id": 0,
-      "name": "Sergey Sergeev",
+      "role": "admin",
+      "firstname": "Sergey",
+      "lastname": "Sergeev",
+      "sex": "Male",
+      "address": "-",
+      "shippingaddress": "-",
+      "paymentcard": "1234 1234 1234 1234",
       "email": "sergeymail@mail.ru",
-      "password": "sergey"
+      "password": "sergey",
+      "aboutUser": "Admin"
     },
     {
       "id": 1,
-      "name": "Andrey Andreev",
+      "role": "user",
+      "firstname": "Andrey",
+      "lastname": "Andreev",
+      "sex": "Male",
+      "address": "-",
+      "shippingaddress": "-",
+      "paymentcard": "2345 2345 2345 2345",
       "email": "andreymail@mail.ru",
       "password": "andrey"
     },
     {
       "id": 2,
-      "name": "Petr Petrov",
+      "role": "user",
+      "firstname": "Petr",
+      "lastname": "Petrov",
+      "sex": "Male",
+      "address": "-",
+      "shippingaddress": "-",
+      "paymentcard": "3456 3456 3456 3456",
       "email": "petrmail@mail.ru",
       "password": "petr"
     },
     {
       "id": 3,
-      "name": "Ivan Ivanov",
+      "role": "user",
+      "firstname": "Ivan",
+      "lastname": "Ivanov",
+      "sex": "Male",
+      "address": "-",
+      "shippingaddress": "-",
+      "paymentcard": "4567 4567 4567 4567",
       "email": "ivanmail@mail.ru",
-      "password": "ivan"
+      "password": "ivan",
+      "aboutUser": "Someone"
     },
     {
-      "name": "Oleg Olegov",
+      "id": 4,
+      "firstname": "Oleg",
+      "lastname": "Olegov",
+      "sex": "Male",
+      "address": "-",
+      "shippingaddress": "-",
+      "paymentcard": "5678 5678 5678 5678",
       "email": "olegmail@mail.ru",
       "password": "oleg",
-      "id": 4
+      "aboutUser": "nothing"
+    },
+    {
+      "id": 5,
+      "firstname": "Bruce",
+      "lastname": "Wayne",
+      "sex": "Male",
+      "address": "-",
+      "shippingaddress": "-",
+      "paymentcard": "5678 5678 5678 5678",
+      "email": "wayneb@gmail.com",
+      "password": "martha",
+      "aboutUser": "i am batman!"
+    },
+    {
+      "id": 6,
+      "firstname": "A",
+      "lastname": "B",
+      "sex": "Male",
+      "address": "sf",
+      "shippingaddress": "saf",
+      "paymentcard": "saf",
+      "email": "a@s",
+      "password": "newpasswordhere!",
+      "aboutUser": "info"
     }
   ],
   "products": [

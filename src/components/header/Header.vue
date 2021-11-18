@@ -71,7 +71,7 @@ export default {
 
     const user = localStorage.getItem(userInfo);
     const userparsed = JSON.parse(user);
-    this.username = userparsed.name;
+    this.username = userparsed.firstname;
     if (user) {
       this.authInactive = !this.authInactive;
       this.profileInactive = !this.profileInactive;
