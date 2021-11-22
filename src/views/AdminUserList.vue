@@ -8,17 +8,11 @@
 <script>
 export default {
   name: 'AdminUserList',
-  data() {
-    return {
-      users: {}
+  computed: {
+    users() {
+      return this.$store.state.users;
     }
-  },
-  mounted() {
-    fetch('http://localhost:3000/users')
-      .then((res) => res.json())
-      .then((data) => { this.users = data })
-      .catch((err) => console.log(err.message))
-  },
+  }
 }
 </script>
 

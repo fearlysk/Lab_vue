@@ -44,21 +44,13 @@
 </template>
 
 <script>
-
 export default {
   name: 'Home',
   data() {
     return {
-      products: {},
       search: '',
       isInactive: true
     }
-  },
-  mounted() {
-    fetch('http://localhost:3000/products')
-      .then((res) => res.json())
-      .then((data) => { this.products = data })
-      .catch((err) => console.log(err.message))
   },
   methods: {
     searchCheck() {
@@ -72,6 +64,9 @@ export default {
   computed: {
     searchHandler() {
       return this.products.filter((item) => item.title.includes(this.search));
+    },
+    products() {
+      return this.$store.state.products;
     }
   }
 }

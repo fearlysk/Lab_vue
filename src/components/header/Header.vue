@@ -26,23 +26,24 @@
             <div class="header__nav-item">
                 <a class="header__nav-item--link" href="/about">About</a>
             </div>
-            <div class="header__nav-item" :class="{hide: authInactive}">
-                <a class="header__nav-item--link" @click="showLoginModal">Sign In</a>
+            <div class="header__nav-item" v-if="!authInactive">
+              <a class="header__nav-item--link" @click="showLoginModal">Sign In</a>
             </div>
-            <div class="header__nav-item" :class="{hide: authInactive}">
-                <a class="header__nav-item--link" @click="showRegistrationModal">Sign Up</a>
+            <div class="header__nav-item" v-if="!authInactive">
+              <a class="header__nav-item--link" @click="showRegistrationModal">Sign Up</a>
             </div>
-             <div class="header__nav-item" :class="{hide: profileInactive}">
-                <a class="header__nav-item--link" href="/profile">{{ username }}</a>
+            <div class="header__nav-item" v-if="authInactive">
+              <a class="header__nav-item--link" href="/profile">{{ username }}</a>
             </div>
-            <div class="header__nav-item" :class="{hide: profileInactive}">
-                <a class="header__nav-item--link" @click="logout()">Logout</a>
+            <div class="header__nav-item" v-if="authInactive">
+              <a class="header__nav-item--link" @click="logout()">Logout</a>
             </div>
+          </div>
         </div>
-    </div>
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 import Login from '../users/Login.vue';
 import Registration from '../users/Registration.vue';
 import * as userInfo from '../../constants/user';
@@ -59,7 +60,6 @@ export default {
       showRegModal: false,
       showLogModal: false,
       authInactive: false,
-      profileInactive: true,
       username: ''
     }
   },
@@ -71,18 +71,15 @@ export default {
 
     const user = localStorage.getItem(userInfo);
     const userparsed = JSON.parse(user);
-    this.username = userparsed.name;
+    this.username = userparsed.firstname;
     if (user) {
       this.authInactive = !this.authInactive;
-      this.profileInactive = !this.profileInactive;
     }
   },
   methods: {
-    logout() {
-      localStorage.clear();
-      this.$router.push({ name: 'Home' });
-      setTimeout(() => window.location.reload(), 300);
-    },
+    ...mapActions({
+      logout: 'logout'
+    }),
     showLoginModal() {
       if (!this.showLogModal) {
         this.showLogModal = !this.showLogModal;
@@ -107,106 +104,106 @@ export default {
 
 <style lang="scss">
 .hide {
-    display: none !important;
+  display: none !important;
 }
 .header {
-    background-color: #222222;
-    color: #fff2f2;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-family: 'Open Sans', sans-serif;
-    padding: 20px 0;
+  background-color: #222222;
+  color: #fff2f2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Open Sans', sans-serif;
+  padding: 20px 0;
 }
 .header__headline {
-    margin-left: 40px;
+  margin-left: 40px;
 }
 .header__nav {
-    display: flex;
-    width: 40%;
-    height: 100%;
-    justify-content: center;
+  display: flex;
+  width: 40%;
+  height: 100%;
+  justify-content: center;
 }
 .header__nav-item {
-    display: flex;
-    align-items: center;
-    padding: 20px 20px;
-    transition: 0.3s;
-    border-bottom: 5px solid transparent;
+  display: flex;
+  align-items: center;
+  padding: 20px 20px;
+  transition: 0.3s;
+  border-bottom: 5px solid transparent;
 }
 .header__nav-item--home {
-    text-decoration: none;
-    color: #fff2f2;
+  text-decoration: none;
+  color: #fff2f2;
 }
 .header__nav-item--link{
-    text-decoration: none;
-    color: #fff2f2;
-    cursor: pointer;
+  text-decoration: none;
+  color: #fff2f2;
+  cursor: pointer;
 }
 .header__nav-item:hover {
-    border-bottom: 5px solid rgb(75, 221, 75);
-    background-color: #393838;
-    transition: 0.3s;
+  border-bottom: 5px solid rgb(75, 221, 75);
+  background-color: #393838;
+  transition: 0.3s;
 }
 .header__nav-item--products {
-    padding: 0;
-    &::after {
-    content: '';
-    width: 0;
-    height: 0;
-    border: 5px solid transparent;
-    border-top-color: #fff2f2;
-    position: relative;
-    top: 16px;
-    left: 7px;
-    }
+   padding: 0;
+   &::after {
+   content: '';
+   width: 0;
+   height: 0;
+   border: 5px solid transparent;
+   border-top-color: #fff2f2;
+   position: relative;
+   top: 16px;
+   left: 7px;
+   }
 }
 .products__link {
-    margin-top: 0px;
+  margin-top: 0px;
 }
 .products__link-item {
-    text-decoration: none;
-    color: #fff2f2;
+  text-decoration: none;
+  color: #fff2f2;
 }
 .products__dropdown-wrapper {
-    display: none;
-    position: absolute;
-    top: 80px;
-    margin-left: 0px;
+  display: none;
+  position: absolute;
+  top: 80px;
+  margin-left: 0px;
 }
  .products__dropdown {
-    display: flex;
-    flex-direction: column;
-    list-style-type: none;
-    background-color: #393838;
-    padding: 0 20px;
-    padding-bottom: 25px;
-    text-align: left;
-    font-size: 15px;
+  display: flex;
+  flex-direction: column;
+  list-style-type: none;
+  background-color: #393838;
+  padding: 0 20px;
+  padding-bottom: 25px;
+  text-align: left;
+  font-size: 15px;
 }
 .header_nav_item_products:hover {
-    .products__dropdown-wrapper {
-        display: block;
-    }
+  .products__dropdown-wrapper {
+    display: block;
+  }
 }
 .products__dropdown-item {
-    margin-top: 25px;
-    background-color: rgb(75, 221, 75);
-    padding: 10px;
-    transition: 0.3s;
+  margin-top: 25px;
+  background-color: rgb(75, 221, 75);
+  padding: 10px;
+  transition: 0.3s;
 }
 .products__dropdown-item:hover {
-    transition: 0.3s;
-    background-color: #f7e13e;
+  transition: 0.3s;
+  background-color: #f7e13e;
 }
 .products__dropdown-item:hover .products__dropdown-item--link {
-    color: #393838;
-    transition: 0.3s;
+  color: #393838;
+  transition: 0.3s;
 }
 .products__dropdown-item--link {
-    text-decoration: none;
-    padding: 5px 20px;
-    color: #fff2f2;
-    transition: 0.3s;
+  text-decoration: none;
+  padding: 5px 20px;
+  color: #fff2f2;
+  transition: 0.3s;
 }
 </style>
