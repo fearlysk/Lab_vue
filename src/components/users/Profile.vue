@@ -1,51 +1,59 @@
 <template>
   <div class="profile__wrapper">
     <div class="profile__content">
-      <h1 class="profile__content-welcome">Welcome
+      <h1 class="profile__content-welcome">
+        Welcome
         <span class="profile__content-welcome--name">
-        {{userData.firstname}} {{userData.lastname}}!</span></h1>
-          <div class="profile__content-userinfo">
-            <h3>About: {{userData.aboutUser}}</h3>
-            <h3>Your id: <span class="profile__content-userinfo--data">
-            {{userData.id}}</span></h3>
-            <h3>Your email: <span class="profile__content-userinfo--data">
-            {{userData.email}}</span></h3>
-            <h3>Your password: <span class="profile__content-userinfo--data">
-            {{userData.password}}</span></h3>
-            <h3>Sex: <span class="profile__content-userinfo--data">
-            {{userData.sex}}</span></h3>
-            <h3>Address: <span class="profile__content-userinfo--data">
-            {{userData.address}}</span></h3>
-            <h3>Shipping address: <span class="profile__content-userinfo--data">
-            {{userData.shippingaddress}}</span></h3>
-            <h3>Payment card: <span class="profile__content-userinfo--data">
-            {{userData.paymentcard}}</span></h3>
-            <form @submit.prevent="addData">
-              <h2 class="profile__content-userinfo--about">Tell about yourself:</h2>
-              <input v-model="userData.aboutUser" class="profile__content-userinfo-textinp">
-              <br>
-              <input class="profile__content-userinfo-submit" 
-              type="submit" value="Submit"/>
-            </form>
-            <div class="user__actions">
-              <h3 class="user__actions-headline">User Settings</h3>
-              <div class="user__actions-item">
-                <button class="user__actions-item--changepassword" 
-                @click="changePassword">Change Password</button>
-                <alertModal title="Change Password"
-                changePasswordActive dataInfoActive="false" 
-                class="modpw" :class="{hiddenpw: hideModalpw}"/>
-              </div>
-            </div>
+          {{userData.firstname}} {{userData.lastname}}!
+        </span>
+      </h1>
+      <div class="profile__content-userinfo">
+        <h3>
+          Your id:
+          <span class="profile__content-userinfo--data">{{userData.id}}</span>
+        </h3>
+        <h3>
+          Your email:
+          <span class="profile__content-userinfo--data">{{userData.email}}</span>
+        </h3>
+        <h3>
+          Your password:
+          <span class="profile__content-userinfo--data">{{userData.password}}</span>
+        </h3>
+        <h3>
+          Sex: 
+          <span class="profile__content-userinfo--data">{{userData.sex}}</span>
+        </h3>
+        <h3>
+          Address: 
+          <span class="profile__content-userinfo--data">{{userData.address}}</span>
+        </h3>
+        <h3>
+          Shipping address:
+          <span class="profile__content-userinfo--data">{{userData.shippingaddress}}</span>
+        </h3>
+        <h3>
+          Payment card: 
+          <span class="profile__content-userinfo--data">{{userData.paymentcard}}</span>
+        </h3>
+        <div class="user__actions">
+          <h3 class="user__actions-headline">User Settings</h3>
+          <div class="user__actions-item">
+            <button class="user__actions-item--changepassword" 
+            @click="changePassword">Change Password</button>
+            <alertModal title="Change Password"
+            changePasswordActive dataInfoActive="false" 
+            class="modpw" v-if="!hideModalPassword"/>
           </div>
-        <alertModal title="Data successfully updated!"
-        class="mod" :class="{hidden: hideModal}"/>
+        </div>
+      </div>
+      <alertModal title="Data successfully updated!"
+      class="mod" v-if="!hideModal"/>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import axios from 'axios';
 import * as userInfo from '../../constants/user';
 import alertModal from '../../elements/alertModal.vue';
 import IUser from '../../interfaces/userInterface';
@@ -59,7 +67,7 @@ export default {
     return {
       userData: {} as IUser,
       hideModal: true,
-      hideModalpw: true
+      hideModalPassword: true
     }
   },
   mounted() {
@@ -72,26 +80,8 @@ export default {
     }
   },
   methods: {
-    async addData() {
-      const result = await axios.put(`http://localhost:3000/users/${this.userData.id}`, {
-        id: this.userData.id,
-        firstname: this.userData.firstname,
-        lastname: this.userData.lastname,
-        sex: this.userData.sex,
-        address: this.userData.address,
-        shippingaddress: this.userData.shippingaddress,
-        paymentcard: this.userData.paymentcard,
-        email: this.userData.email,
-        password: this.userData.password,
-        aboutUser: this.userData.aboutUser
-      });
-      if (result.status === 200) {
-        localStorage.setItem(userInfo as any, JSON.stringify(result.data));
-        this.hideModal = false;
-      }
-    },
     changePassword() {
-      this.hideModalpw = false;
+      this.hideModalPassword = false;
     }
   }
 }

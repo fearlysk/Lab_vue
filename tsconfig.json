@@ -37,7 +37,7 @@
     "src/**/*.vue",
     "tests/**/*.ts",
     "tests/**/*.tsx"
-, "src/router/index.ts", "src/store/store.js"  ],
+, "src/router/index.ts", "src/store/store.js", "src/services/persist.js", "src/store/modules/catchedErrors.js", "src/store/modules/catchedWarns.js"  ],
   "exclude": [
     "node_modules"
   ]

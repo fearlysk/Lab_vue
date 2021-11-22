@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 import Header from './components/header/Header.vue';
 import Footer from './components/footer/Footer.vue';
 import saveDataToStore from './services/persist';
@@ -25,6 +26,14 @@ export default {
   },
   mounted() {
     saveDataToStore();
+    this.fetchProducts();
+    this.fetchUsers();
+  },
+  methods: {
+    ...mapActions({
+      fetchProducts: 'fetchProducts',
+      fetchUsers: 'fetchUsers'
+    })
   }
 }
 </script>

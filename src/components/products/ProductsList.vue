@@ -11,20 +11,14 @@
 import ProductsCard from './ProductsCard.vue';
 
 export default {
-  data() {
-    return {
-      products: {}
-    }
-  },
-  mounted() {
-    fetch('http://localhost:3000/api/products')
-      .then((res) => res.json())
-      .then((data) => { this.products = data })
-      .catch((err) => console.log(err.message))
-  },
   components: {
     ProductsCard
   },
+  computed: {
+    products() {
+      return this.$store.state.products
+    }
+  }
 }
 </script>
 

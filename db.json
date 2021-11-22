@@ -73,18 +73,6 @@
       "email": "wayneb@gmail.com",
       "password": "martha",
       "aboutUser": "i am batman!"
-    },
-    {
-      "id": 6,
-      "firstname": "A",
-      "lastname": "B",
-      "sex": "Male",
-      "address": "sf",
-      "shippingaddress": "saf",
-      "paymentcard": "saf",
-      "email": "a@s",
-      "password": "newpasswordhere!",
-      "aboutUser": "info"
     }
   ],
   "products": [
