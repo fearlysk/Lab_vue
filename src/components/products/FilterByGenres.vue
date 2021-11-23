@@ -2,14 +2,14 @@
 <div class="options__select">
   <p class="options__title" @click="areOptionsVisible = !areOptionsVisible">{{selected}}</p>
   <div class="options" v-if="areOptionsVisible">
-    <p
+    <li
     v-for="option in options"
     :key="option.id"
     class="options__item"
     @click="selectOption(option)"
     >
     {{option.genre}}
-    </p>
+    </li>
   </div>
 </div>
 </template>
@@ -38,9 +38,6 @@ export default {
     selectOption(option) {
       this.$emit('select', option); 
       this.areOptionsVisible = false;
-    },
-    hideSelect() {
-      this.areOptionsVisible = false;
     }
   }
 }
@@ -65,6 +62,7 @@ export default {
 .options__item {
   margin: 0;
   padding: 5px 10px;
+  list-style-type: none;
 }
 .options__item:hover {
     background-color: green;

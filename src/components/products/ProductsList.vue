@@ -5,11 +5,13 @@
         <div class="products__filtration-section">
          <h3 class="products__filtration-section--headline">Category:</h3>
          <div class="products__filtration-section--filter">
+         <ul>
          <filter-by-genres 
           :options="categories"
           @select="sortByCategories"
           :selected="selected"
          />
+         </ul>
          </div>
          </div>
          <div class="products__filtration-section">
@@ -123,9 +125,6 @@ export default {
         return this.products;
       }
     }
-  },
-  mounted() {
-    this.sortByCategories();
   },
   methods: {
     setRangeSlider() {
