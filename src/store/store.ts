@@ -25,6 +25,11 @@ const store = createStore({
   },
   state: {
     products: [],
+    productCategories: [
+      { genre: 'All', value: 'All' },
+      { genre: 'Action', value: 'Action' },
+      { genre: 'Shooter', value: 'Shooter' },
+    ],
     users: [],
     userRegData: {} as IUser,
     loggedUser: {}
@@ -43,5 +48,13 @@ const store = createStore({
         .catch((err) => console.log(err.message))
     }
   },
+  getters: {
+    products(state) {
+      return state.products;
+    },
+    productCategories(state) {
+      return state.productCategories;
+    }
+  }
 });
 export default store;

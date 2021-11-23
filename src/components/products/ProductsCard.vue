@@ -7,6 +7,7 @@
             <p>Title: {{ product.title }}</p>
             <p>Price: {{ product.price }}</p>
             <p>Genre: {{ product.genre }}</p>
+            <p>Rating: {{ product.rating }}</p>
           </div>
           <div class="back">
             <p>{{product.description}}</p>

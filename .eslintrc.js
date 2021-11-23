@@ -22,7 +22,12 @@ module.exports = {
     'class-methods-use-this': 0,
     'no-trailing-spaces': 0,
     'lines-between-class-members': 0,
-    '@typescript-eslint/explicit-module-boundary-types': 'off'
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
+    '@typescript-eslint/no-this-alias': 'off',
+    'no-unused-expressions': 'off',
+    'arrow-body-style': 'off',
+    'no-else-return': 'off',
+    'array-callback-return': 'off'
   },
   overrides: [
     {
