@@ -94,7 +94,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapMutations, mapGetters } from 'vuex';
 import ProductsCard from './ProductsCard.vue';
 import FilterByGenres from './FilterByGenres.vue';
 
@@ -127,6 +127,9 @@ export default {
     }
   },
   methods: {
+    ...mapMutations([
+      'showLoadingSpinner'
+    ]),
     setRangeSlider() {
       if (this.minPrice > this.maxPrice) {
         const temp = this.maxPrice;
@@ -160,6 +163,8 @@ export default {
     sortByCategories(category) {
       const vm = this;
       this.sortedProducts = this.products;
+      this.showLoadingSpinner(true);
+      setTimeout(() => this.showLoadingSpinner(false), 500);
       this.sortedProducts = this.sortedProducts.filter((item) => {
         return item.price >= vm.minPrice && item.price <= vm.maxPrice;
       });

@@ -35,6 +35,7 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex';
 import axios from 'axios';
 import * as userInfo from '../../constants/user';
 
@@ -48,12 +49,17 @@ export default {
     }
   },
   methods: {
+    ...mapMutations([
+      'showLoadingSpinner'
+    ]),
     async login() {
+      this.showLoadingSpinner(true);
       const result = await axios.get(
         `http://localhost:3000/users?email=${this.email}&password=${this.password}`
       )
       if (result.status === 200 && result.data.length > 0) {
         localStorage.setItem(userInfo, JSON.stringify(result.data[0]));
+        this.showLoadingSpinner(false);
         this.$router.go()
       }
     },

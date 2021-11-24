@@ -32,7 +32,13 @@ const store = createStore({
     ],
     users: [],
     userRegData: {} as IUser,
-    loggedUser: {}
+    loggedUser: {},
+    showLoading: false
+  },
+  mutations: {
+    showLoadingSpinner(state, payload) {
+      state.showLoading = payload;
+    }
   },
   actions: {
     async fetchProducts() {
