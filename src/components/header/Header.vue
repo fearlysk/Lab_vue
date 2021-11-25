@@ -6,7 +6,7 @@
     <teleport to="#modals-portal">
       <Registration v-if="showRegModal" @close="closeModal" />
     </teleport>
-    <teleport to="#modals-portal">
+    <teleport to="#loader-portal">
       <Loader v-if="showLoading" />
     </teleport>
      <h1 class="header__headline">Game Store</h1>
