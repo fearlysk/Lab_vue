@@ -67,6 +67,7 @@
 </template>
 
 <script lang="ts">
+import { mapMutations } from 'vuex';
 import axios from 'axios';
 import * as userInfo from '../../constants/user';
 import IUser from '../../interfaces/userInterface';
@@ -89,7 +90,11 @@ export default {
     }
   },
   methods: {
+    ...mapMutations([
+      'showLoadingSpinner'
+    ]),
     async signUp() {
+      this.showLoadingSpinner(true);
       const result = await axios.post('http://localhost:3000/users', {
         firstname: this.userRegData.firstname,
         lastname: this.userRegData.lastname,
@@ -102,6 +107,7 @@ export default {
       });
       if (result.status === 201) {
         localStorage.setItem(userInfo as any, JSON.stringify(result.data));
+        this.showLoadingSpinner(false);
         this.$router.go()
       }
     },

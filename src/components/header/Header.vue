@@ -6,6 +6,9 @@
     <teleport to="#modals-portal">
       <Registration v-if="showRegModal" @close="closeModal" />
     </teleport>
+    <teleport to="#loader-portal">
+      <Loader v-if="showLoading" />
+    </teleport>
      <h1 class="header__headline">Game Store</h1>
         <div class="header__nav">
             <div class="header__nav-item">
@@ -43,16 +46,18 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 import Login from '../users/Login.vue';
 import Registration from '../users/Registration.vue';
+import Loader from '../Loader.vue';
 import * as userInfo from '../../constants/user';
 
 export default {
   name: 'Header',
   components: {
     Login,
-    Registration
+    Registration,
+    Loader
   },
   data() {
     return {
@@ -62,6 +67,11 @@ export default {
       authInactive: false,
       username: ''
     }
+  },
+  computed: {
+    ...mapState({
+      showLoading: (state) => state.showLoading
+    })
   },
   mounted() {
     fetch('http://localhost:3000/products')
