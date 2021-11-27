@@ -12,13 +12,14 @@
      <h1 class="header__headline">Game Store</h1>
         <div class="header__nav">
             <div class="header__nav-item">
-                <a class="header__nav-item--home" href="/">Home</a>
+                <router-link to="/" class="header__nav-item--home">Home</router-link>
             </div>
             <div class="header__nav-item header_nav_item_products">
                 <div class="products__link">
-                    <a class="products__link-item header__nav-item--products" href="/products">
+                    <router-link to="/products" 
+                    class="products__link-item header__nav-item--products">
                         Products
-                    </a>
+                    </router-link>
                 </div>
                 <div class="products__dropdown-wrapper">
                     <ul class="products__dropdown">
@@ -27,7 +28,8 @@
                 </div>
             </div>
             <div class="header__nav-item">
-                <a class="header__nav-item--link" href="/about">About</a>
+                <router-link to="/cart" class="header__nav-item--link">
+                Cart: {{ cartItemCount }}</router-link>
             </div>
             <div class="header__nav-item" v-if="!authInactive">
               <a class="header__nav-item--link" @click="showLoginModal">Sign In</a>
@@ -36,7 +38,7 @@
               <a class="header__nav-item--link" @click="showRegistrationModal">Sign Up</a>
             </div>
             <div class="header__nav-item" v-if="authInactive">
-              <a class="header__nav-item--link" href="/profile">{{ username }}</a>
+              <router-link to="/profile" class="header__nav-item--link">{{ username }}</router-link>
             </div>
             <div class="header__nav-item" v-if="authInactive">
               <a class="header__nav-item--link" @click="logout()">Logout</a>
@@ -70,7 +72,8 @@ export default {
   },
   computed: {
     ...mapState({
-      showLoading: (state) => state.showLoading
+      showLoading: (state) => state.showLoading,
+      cartItemCount: (state) => state.cartItemCount
     })
   },
   mounted() {

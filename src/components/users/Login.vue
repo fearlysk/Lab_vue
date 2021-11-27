@@ -1,5 +1,4 @@
 <template>
-  <div>
     <div class="api__section">
         <div class="form__header">
           <h2>Sign In</h2>
@@ -31,7 +30,6 @@
         </div>
       </form>
     </div>
-</div>
 </template>
 
 <script>

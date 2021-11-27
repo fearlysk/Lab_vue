@@ -1,4 +1,19 @@
 <template>
+  <teleport to="#modals-portal">
+    <Login v-if="showLogModal" @close="closeModal" />
+  </teleport>
+  <teleport to="#modals-portal">
+    <Registration v-if="showRegModal" @close="closeModal" />
+  </teleport>
+  <div class='user-auth' v-if="showAuth">
+    <h2>To order, please sign in or register:</h2>
+     <div class="header__nav-item">
+      <a class="header__nav-item--link" @click="showLoginModal">Sign In</a>
+     </div>
+     <div class="header__nav-item" v-if="!authInactive">
+      <a class="header__nav-item--link" @click="showRegistrationModal">Sign Up</a>
+     </div>
+  </div>
   <div class="product__card-wrapper">
         <div class="product__card">
           <div class="front">
@@ -14,30 +29,100 @@
             <Rating />
             <router-link :to="`/products/${product.id}`">
             <h3 class="product__card-pagelink">Open product page</h3>
-            <button class="product__card-cartbtn">Add to cart</button>
             </router-link>
+            <button @click="addToCart(product)" class="product__card-cartbtn">Add to cart</button>
           </div>
         </div>
     </div>
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import Rating from '../../elements/rating.vue';
+import * as userInfo from '../../constants/user';
+import Login from '../users/Login.vue';
+import Registration from '../users/Registration.vue';
 
 export default {
   name: 'ProductsCard',
   components: {
-    Rating
+    Rating,
+    Login,
+    Registration
+  },
+  data() {
+    return {
+      showRegModal: false,
+      showLogModal: false,
+      showAuth: false
+    }
   },
   props: {
     product: {
       type: Object
     }
+  },
+  computed: {
+    ...mapState({
+      cartItems: (state) => state.cartItems
+    }),
+  },
+  methods: {
+    showLoginModal() {
+      if (!this.showLogModal) {
+        this.showLogModal = !this.showLogModal;
+        this.showAuth = !this.showAuth;
+      }
+    },
+    showRegistrationModal() {
+      if (!this.showRegModal) {
+        this.showRegModal = !this.showRegModal;
+        this.showAuth = !this.showAuth;
+      }
+    },
+    closeModal() {
+      if (this.showLogModal) {
+        this.showLogModal = !this.showLogModal;
+      }
+      if (this.showRegModal) {
+        this.showRegModal = !this.showRegModal;
+      }
+    },
+    addToCart(item) {
+      if (localStorage.getItem(userInfo) === null) {
+        this.showAuth = true;
+      }
+      if (localStorage.getItem(userInfo) !== null) {
+        item = { ...item, quantity: 1 };
+        if (this.cartItems.length > 0) {
+          const temp = this.cartItems.some((i) => i.id === item.id);
+          if (temp) {
+            const itemIndex = this.cartItems.findIndex((el) => el.id === item.id);
+            this.cartItems[itemIndex].quantity += 1;
+          } else {
+            this.cartItems.push(item);
+          }
+        } else {
+          this.cartItems.push(item);
+        }
+        this.$store.state.cartItemCount += 1;
+      }
+    },
   }
 }
 </script>
 
 <style lang="scss">
+.user-auth {
+  z-index: 3;
+  position: fixed;
+  top: 25%;
+  left: 40%;
+  max-width: 70%;
+  background: black;
+  border: 1px solid green;
+  padding: 10px;
+}
 .product__card-wrapper {
     margin: 15px 25px;
     z-index: 2;

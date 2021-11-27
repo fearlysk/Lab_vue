@@ -36,7 +36,7 @@
       v-for="item in searchHandler" :key="item.id">
       <div class="search__item">
         <h3>{{item.title}}</h3>
-          <router-link :to="`/products/${item.id}`">Visit store page</router-link>
+        <router-link :to="`/products/${item.id}`">Visit store page</router-link>
       </div>
     </div>
   </div>
@@ -44,6 +44,8 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
   name: 'Home',
   data() {
@@ -59,15 +61,15 @@ export default {
       } else {
         this.isInactive = false;
       }
-    },
+    }
   },
   computed: {
+    ...mapState({
+      products: (state) => state.products
+    }),
     searchHandler() {
       return this.products.filter((item) => item.title.includes(this.search));
     },
-    products() {
-      return this.$store.state.products;
-    }
   }
 }
 </script>

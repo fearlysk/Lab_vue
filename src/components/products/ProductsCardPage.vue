@@ -1,4 +1,20 @@
 <template>
+  <teleport to="#modals-portal">
+    <Login v-if="showLogModal" @close="closeModal" />
+  </teleport>
+  <teleport to="#modals-portal">
+    <Registration v-if="showRegModal" @close="closeModal" />
+  </teleport>
+  <div class='user-auth' v-if="showAuth">
+    <h2>To order, please sign in or register:</h2>
+     <div class="header__nav-item">
+      <a class="header__nav-item--link" @click="showLoginModal">Sign In</a>
+     </div>
+     <div class="header__nav-item" v-if="!authInactive">
+      <a class="header__nav-item--link" @click="showRegistrationModal">Sign Up</a>
+     </div>
+  </div>
+ 
   <div class="product__page-wrapper">
     <div class="product__page-title">
        <h1 class="product__page-title--headline">Game: {{ product[id].title }}</h1>
@@ -10,22 +26,41 @@
       <hr>
       <h3>Description: {{ product[id].description }}</h3>
       <div class="product__page-description--cart">
-        <button class="cartbtn">Add to cart</button>
+        <button @click="goToCart" class="cartbtn">Go to cart</button>
+        <button @click="addToCart(this.product[id])" class="cartbtn">Add to cart</button>
+        <button @click="removeFromCart(this.product[id])" class="cartbtn">Remove from cart</button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex';
+import * as userInfo from '../../constants/user';
+import Login from '../users/Login.vue';
+import Registration from '../users/Registration.vue';
+
 export default {
   name: 'ProductsCardPage',
+  components: {
+    Login, 
+    Registration
+  },
   data() {
     return {
-      product: {}
+      product: {},
+      showRegModal: false,
+      showLogModal: false,
+      showAuth: false
     }
   },
   props: {
     id: Number
+  },
+  computed: {
+    ...mapState({
+      cartItems: (state) => state.cartItems
+    }),
   },
   mounted() {
     fetch('http://localhost:3000/products')
@@ -33,10 +68,80 @@ export default {
       .then((data) => { this.product = data })
       .catch((err) => console.log(err.message))
   },
+  methods: {
+    showLoginModal() {
+      if (!this.showLogModal) {
+        this.showLogModal = !this.showLogModal;
+        this.showAuth = !this.showAuth;
+      }
+    },
+    showRegistrationModal() {
+      if (!this.showRegModal) {
+        this.showRegModal = !this.showRegModal;
+        this.showAuth = !this.showAuth;
+      }
+    },
+    goToCart() {
+      this.$router.push('/cart');
+    },
+    addToCart(item) {
+      if (localStorage.getItem(userInfo) === null) {
+        this.showAuth = true;
+      }
+      if (localStorage.getItem(userInfo) !== null) {
+        item = { ...item, quantity: 1 };
+        if (this.cartItems.length > 0) {
+          const temp = this.cartItems.some((i) => i.id === item.id);
+          if (temp) {
+            const itemIndex = this.cartItems.findIndex((el) => el.id === item.id);
+            this.cartItems[itemIndex].quantity += 1;
+          } else {
+            this.cartItems.push(item);
+          }
+        } else {
+          this.cartItems.push(item);
+        }
+        this.$store.state.cartItemCount += 1;
+      }
+    },
+    removeFromCart(item) {
+      if (this.cartItems.length > 0) {
+        const temp = this.cartItems.some((i) => i.id === item.id);
+        if (temp) {
+          const itemIndex = this.cartItems.findIndex((el) => el.id === item.id);
+          if (this.cartItems[itemIndex].quantity) {
+            this.cartItems[itemIndex].quantity -= 1;
+            this.$store.state.cartItemCount -= 1;
+          }
+          if (!this.cartItems[itemIndex].quantity) {
+            this.cartItems.splice(itemIndex, 1);
+          }
+        }
+      }
+    },
+    closeModal() {
+      if (this.showLogModal) {
+        this.showLogModal = !this.showLogModal;
+      }
+      if (this.showRegModal) {
+        this.showRegModal = !this.showRegModal;
+      }
+    }
+  }
 }
 </script>
 
 <style lang="scss">
+.user-auth {
+  z-index: 3;
+  position: fixed;
+  top: 25%;
+  left: 40%;
+  max-width: 70%;
+  background: black;
+  border: 1px solid green;
+  padding: 10px;
+}
 .product__page-wrapper {
   color: white;
   display: flex;

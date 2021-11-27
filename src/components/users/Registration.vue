@@ -159,6 +159,7 @@ pre {
   box-shadow: 0px 0px 18px 9px rgba(16, 122, 24, 0.75);
   margin: 0 30px;
   color: #FFFFFF;
+  z-index: 4;
 }
 .api__section-item {
   margin: 10px 15px;
