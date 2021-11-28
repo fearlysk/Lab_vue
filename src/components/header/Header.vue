@@ -2,8 +2,6 @@
     <div class="header">
     <teleport to="#modals-portal">
       <Login v-if="showLogModal" @close="closeModal" />
-    </teleport>
-    <teleport to="#modals-portal">
       <Registration v-if="showRegModal" @close="closeModal" />
     </teleport>
     <teleport to="#loader-portal">
@@ -143,6 +141,7 @@ export default {
   padding: 20px 20px;
   transition: 0.3s;
   border-bottom: 5px solid transparent;
+  cursor: pointer;
 }
 .header__nav-item--home {
   text-decoration: none;

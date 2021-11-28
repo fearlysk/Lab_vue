@@ -1,17 +1,15 @@
 <template>
   <teleport to="#modals-portal">
     <Login v-if="showLogModal" @close="closeModal" />
-  </teleport>
-  <teleport to="#modals-portal">
     <Registration v-if="showRegModal" @close="closeModal" />
   </teleport>
   <div class='user-auth' v-if="showAuth">
     <h2>To order, please sign in or register:</h2>
-     <div class="header__nav-item">
-      <a class="header__nav-item--link" @click="showLoginModal">Sign In</a>
+     <div class="header__nav-item" @click="showLoginModal">
+      <p class="header__nav-item--link">Sign In</p>
      </div>
-     <div class="header__nav-item" v-if="!authInactive">
-      <a class="header__nav-item--link" @click="showRegistrationModal">Sign Up</a>
+     <div class="header__nav-item" v-if="!authInactive" @click="showRegistrationModal">
+      <p class="header__nav-item--link">Sign Up</p>
      </div>
   </div>
  
@@ -26,9 +24,9 @@
       <hr>
       <h3>Description: {{ product[id].description }}</h3>
       <div class="product__page-description--cart">
-        <button @click="goToCart" class="cartbtn">Go to cart</button>
-        <button @click="addToCart(this.product[id])" class="cartbtn">Add to cart</button>
-        <button @click="removeFromCart(this.product[id])" class="cartbtn">Remove from cart</button>
+        <button @click="goToCart" class="cart-btn">Go to cart</button>
+        <button @click="addToCart(this.product[id])" class="cart-btn">Add to cart</button>
+        <button @click="removeFromCart(this.product[id])" class="cart-btn">Remove from cart</button>
       </div>
     </div>
   </div>
@@ -90,14 +88,10 @@ export default {
       }
       if (localStorage.getItem(userInfo) !== null) {
         item = { ...item, quantity: 1 };
-        if (this.cartItems.length > 0) {
-          const temp = this.cartItems.some((i) => i.id === item.id);
-          if (temp) {
-            const itemIndex = this.cartItems.findIndex((el) => el.id === item.id);
-            this.cartItems[itemIndex].quantity += 1;
-          } else {
-            this.cartItems.push(item);
-          }
+        const temp = this.cartItems.some((i) => i.id === item.id);
+        if (temp) {
+          const itemIndex = this.cartItems.findIndex((el) => el.id === item.id);
+          this.cartItems[itemIndex].quantity += 1;
         } else {
           this.cartItems.push(item);
         }
@@ -105,17 +99,15 @@ export default {
       }
     },
     removeFromCart(item) {
-      if (this.cartItems.length > 0) {
-        const temp = this.cartItems.some((i) => i.id === item.id);
-        if (temp) {
-          const itemIndex = this.cartItems.findIndex((el) => el.id === item.id);
-          if (this.cartItems[itemIndex].quantity) {
-            this.cartItems[itemIndex].quantity -= 1;
-            this.$store.state.cartItemCount -= 1;
-          }
-          if (!this.cartItems[itemIndex].quantity) {
-            this.cartItems.splice(itemIndex, 1);
-          }
+      const temp = this.cartItems.some((i) => i.id === item.id);
+      if (temp) {
+        const itemIndex = this.cartItems.findIndex((el) => el.id === item.id);
+        if (this.cartItems[itemIndex].quantity) {
+          this.cartItems[itemIndex].quantity -= 1;
+          this.$store.state.cartItemCount -= 1;
+        }
+        if (!this.cartItems[itemIndex].quantity) {
+          this.cartItems.splice(itemIndex, 1);
         }
       }
     },
@@ -177,7 +169,7 @@ export default {
   border-radius: 7px;
   box-shadow: 0px 0px 18px 3px rgba(25, 214, 39, 0.33);
 }
-.cartbtn {
+.cart-btn {
   width: 100%;
   height: 100%;
   padding: 5px 10px;

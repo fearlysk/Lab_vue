@@ -1,17 +1,15 @@
 <template>
   <teleport to="#modals-portal">
     <Login v-if="showLogModal" @close="closeModal" />
-  </teleport>
-  <teleport to="#modals-portal">
     <Registration v-if="showRegModal" @close="closeModal" />
   </teleport>
   <div class='user-auth' v-if="showAuth">
     <h2>To order, please sign in or register:</h2>
-     <div class="header__nav-item">
-      <a class="header__nav-item--link" @click="showLoginModal">Sign In</a>
+     <div class="header__nav-item" @click="showLoginModal">
+      <p class="header__nav-item--link">Sign In</p>
      </div>
-     <div class="header__nav-item" v-if="!authInactive">
-      <a class="header__nav-item--link" @click="showRegistrationModal">Sign Up</a>
+     <div class="header__nav-item" v-if="!authInactive" @click="showRegistrationModal">
+      <p class="header__nav-item--link">Sign Up</p>
      </div>
   </div>
   <div class="product__card-wrapper">
@@ -94,14 +92,10 @@ export default {
       }
       if (localStorage.getItem(userInfo) !== null) {
         item = { ...item, quantity: 1 };
-        if (this.cartItems.length > 0) {
-          const temp = this.cartItems.some((i) => i.id === item.id);
-          if (temp) {
-            const itemIndex = this.cartItems.findIndex((el) => el.id === item.id);
-            this.cartItems[itemIndex].quantity += 1;
-          } else {
-            this.cartItems.push(item);
-          }
+        const temp = this.cartItems.some((i) => i.id === item.id);
+        if (temp) {
+          const itemIndex = this.cartItems.findIndex((el) => el.id === item.id);
+          this.cartItems[itemIndex].quantity += 1;
         } else {
           this.cartItems.push(item);
         }

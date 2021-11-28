@@ -24,12 +24,11 @@
     <div class="search__wrapper">
     <div class="search__input">
      <h2>Search:</h2>
-      <input
-       type="search"
+      <Input
+       inputType="search"
        v-model="search"
        class="search__input-field"
        @input="searchCheck()"
-       placeholder="Search..."
       />
     </div>
     <div :class='{inactive: isInactive}' class="search__item-wrapper"
@@ -45,9 +44,13 @@
 
 <script>
 import { mapState } from 'vuex';
+import Input from '../elements/Input.vue'
 
 export default {
   name: 'Home',
+  components: {
+    Input
+  },
   data() {
     return {
       search: '',

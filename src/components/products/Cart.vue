@@ -27,11 +27,10 @@
          </ul>
         <button class="checkout-btn">Checkout</button>
          <h2>Search:</h2>
-          <input
-           type="search"
+          <Input
+           inputType="search"
            v-model="search"
            class="search__input-field"
-           placeholder="Search..."
           />
        </div>
       <CartEmpty v-else />
@@ -42,12 +41,14 @@
 import { mapState } from 'vuex';
 import Summary from './Summary.vue';
 import CartEmpty from './CartEmpty.vue';
+import Input from '../../elements/Input.vue'
 
 export default {
   name: 'Cart',
   components: {
     Summary,
-    CartEmpty
+    CartEmpty,
+    Input
   },
   data() {
     return {
@@ -62,11 +63,9 @@ export default {
       return this.cartItems.filter((item) => item.title.includes(this.search));
     },
     totalPrice() {
-      let price = 0;
-      this.$store.state.cartItems.map((el) => {
-        price += el.quantity * el.price;
-      });
-      return price;
+      return this.cartItems.reduce((sum, el) => {
+        return sum + el.price * el.quantity;
+      }, 0);
     },
     ...mapState({
       cartItems: (state) => state.cartItems
@@ -75,31 +74,25 @@ export default {
   methods: {
     addToCart(item) {
       item = { ...item, quantity: 1 };
-      if (this.cartItems.length > 0) {
-        const temp = this.cartItems.some((i) => i.id === item.id);
-        if (temp) {
-          const itemIndex = this.cartItems.findIndex((el) => el.id === item.id);
-          this.cartItems[itemIndex].quantity += 1;
-        } else {
-          this.cartItems.push(item);
-        }
+      const temp = this.cartItems.some((i) => i.id === item.id);
+      if (temp) {
+        const itemIndex = this.cartItems.findIndex((el) => el.id === item.id);
+        this.cartItems[itemIndex].quantity += 1;
       } else {
         this.cartItems.push(item);
       }
       this.$store.state.cartItemCount += 1;
     },
     removeFromCart(item) {
-      if (this.cartItems.length > 0) {
-        const temp = this.cartItems.some((i) => i.id === item.id);
-        if (temp) {
-          const itemIndex = this.cartItems.findIndex((el) => el.id === item.id);
-          if (this.cartItems[itemIndex].quantity) {
-            this.cartItems[itemIndex].quantity -= 1;
-            this.$store.state.cartItemCount -= 1;
-          }
-          if (!this.cartItems[itemIndex].quantity) {
-            this.cartItems.splice(itemIndex, 1);
-          }
+      const temp = this.cartItems.some((i) => i.id === item.id);
+      if (temp) {
+        const itemIndex = this.cartItems.findIndex((el) => el.id === item.id);
+        if (this.cartItems[itemIndex].quantity) {
+          this.cartItems[itemIndex].quantity -= 1;
+          this.$store.state.cartItemCount -= 1;
+        }
+        if (!this.cartItems[itemIndex].quantity) {
+          this.cartItems.splice(itemIndex, 1);
         }
       }
     }
