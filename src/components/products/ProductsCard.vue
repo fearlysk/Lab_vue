@@ -5,11 +5,11 @@
   </teleport>
   <div class='user-auth' v-if="showAuth">
     <h2>To order, please sign in or register:</h2>
-     <div class="header__nav-item" @click="showLoginModal">
-      <p class="header__nav-item--link">Sign In</p>
+     <div class="auth__nav-item">
+       <button class="auth__nav-item--btn" @click="showLoginModal">Sign In</button>
      </div>
-     <div class="header__nav-item" v-if="!authInactive" @click="showRegistrationModal">
-      <p class="header__nav-item--link">Sign Up</p>
+     <div class="auth__nav-item">
+       <button class="auth__nav-item--btn" @click="showRegistrationModal">Sign Up</button>
      </div>
   </div>
   <div class="product__card-wrapper">
@@ -118,25 +118,40 @@ export default {
   padding: 10px;
 }
 .product__card-wrapper {
-    margin: 15px 25px;
-    z-index: 2;
-    box-shadow: 0px 0px 18px 9px rgba(16, 122, 24, 0.75);
-    border-radius: 4px;
-    background-color: #191919;
+  margin: 15px 25px;
+  z-index: 2;
+  box-shadow: 0px 0px 18px 9px rgba(16, 122, 24, 0.75);
+  border-radius: 4px;
+  background-color: #191919;
+}
+.auth__nav-item {
+  width: 100%;
+  padding: 0;
+  margin: 10px 0;
+}
+.auth__nav-item--btn {
+  width: 100%;
+  padding: 10px;
+  cursor: pointer;
+  background: white;
+  border: 3px solid black;
+}
+.auth__nav-item--btn:hover{
+  border: 3px solid green;
 }
 .product__card {
-    background-color: #191919;
-    min-width: 252px;
-    min-height: 360px;
-    color: #fff2f2;
-    border: 1px solid black;
-    padding: 60px 0;
-    text-align: center;
-    transform: translate(-50%, -50%);
-    position: relative;
-    top: 50%;
-    left: 50%;
-    border-radius: 4px;
+  background-color: #191919;
+  min-width: 252px;
+  min-height: 360px;
+  color: #fff2f2;
+  border: 1px solid black;
+  padding: 60px 0;
+  text-align: center;
+  transform: translate(-50%, -50%);
+  position: relative;
+  top: 50%;
+  left: 50%;
+  border-radius: 4px;
 }
 .product__card-img {
   width: 250px;

@@ -5,11 +5,11 @@
   </teleport>
   <div class='user-auth' v-if="showAuth">
     <h2>To order, please sign in or register:</h2>
-     <div class="header__nav-item" @click="showLoginModal">
-      <p class="header__nav-item--link">Sign In</p>
+     <div class="auth__nav-item">
+       <button class="auth__nav-item--btn" @click="showLoginModal">Sign In</button>
      </div>
-     <div class="header__nav-item" v-if="!authInactive" @click="showRegistrationModal">
-      <p class="header__nav-item--link">Sign Up</p>
+     <div class="auth__nav-item">
+       <button class="auth__nav-item--btn" @click="showRegistrationModal">Sign Up</button>
      </div>
   </div>
  
@@ -168,6 +168,21 @@ export default {
   margin: 10px auto;
   border-radius: 7px;
   box-shadow: 0px 0px 18px 3px rgba(25, 214, 39, 0.33);
+}
+.auth__nav-item {
+  width: 100%;
+  padding: 0;
+  margin: 10px 0;
+}
+.auth__nav-item--btn {
+  width: 100%;
+  padding: 10px;
+  cursor: pointer;
+  background: white;
+  border: 3px solid black;
+}
+.auth__nav-item--btn:hover{
+  border: 3px solid green;
 }
 .cart-btn {
   width: 100%;
