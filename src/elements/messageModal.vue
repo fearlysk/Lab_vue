@@ -1,28 +1,27 @@
 <template>
-    <div :class="{hidden: inactive}" class="message__modal-wrapper">
-        <div class="message__modal">
-            <div class="message__modal-header">
-                <div class="message__modal-headline">
-                    <h2>Headline</h2>
-                </div>
-                <div class="message__modal-exit">
-                    <button id="closemodal-btn" @click="close_message()"
-                    class="message__modal-exit--btn">x</button> <!-- Later change to SVG -->
-                </div>
-            </div>
-              <div class="message__modal-body">
-                    <p>{{message}}</p>
-                </div>
-                <div class="message__modal-options">
-                    <div class="message__modal-option--accept" @click="close_message()">
-                      <p>Accept</p>
-                    </div>
-                    <div class="message__modal-option--decline" @click="close_message()">
-                      <p>Decline</p>
-                    </div>
-                </div>
+  <div :class="{hidden: inactive}" class="message__modal-wrapper">
+    <div class="message__modal">
+       <div class="message__modal-header">
+        <div class="message__modal-headline">
+         <h2>Headline</h2>
         </div>
+        <div class="message__modal-exit">
+         <button @click="closeMessage()" class="message__modal-exit--btn">x</button>
+        </div>
+       </div>
+       <div class="message__modal-body">
+        <p>{{message}}</p>
+       </div>
+       <div class="message__modal-options">
+        <div class="message__modal-option--accept" @click="closeMessage()">
+         <p>Accept</p>
+        </div>
+        <div class="message__modal-option--decline" @click="closeMessage()">
+         <p>Decline</p>
+        </div>
+       </div>
     </div>
+  </div>
 </template>
 
 <script>
@@ -35,7 +34,7 @@ export default {
     }
   },
   methods: {
-    close_message() {
+    closeMessage() {
       this.inactive = !this.inactive;
     }
   }

@@ -33,7 +33,9 @@ const store = createStore({
     users: [],
     userRegData: {} as IUser,
     loggedUser: {},
-    showLoading: false
+    showLoading: false,
+    cartItems: [],
+    cartItemCount: 0
   },
   mutations: {
     showLoadingSpinner(state, payload) {

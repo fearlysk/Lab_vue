@@ -8,6 +8,7 @@ import ApiDemoPage from '../pages/ApiDemoPage.vue';
 import ApiUsersPage from '../pages/ApiUsersPage.vue';
 import AdminUserList from '../views/AdminUserList.vue';
 import Profile from '../components/users/Profile.vue';
+import Cart from '../components/products/Cart.vue';
 
 const routes = [
   {
@@ -55,6 +56,11 @@ const routes = [
     path: '/profile',
     name: 'Profile',
     component: Profile
+  },
+  {
+    path: '/cart',
+    name: 'Cart',
+    component: Cart
   }
 ]
 

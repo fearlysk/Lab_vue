@@ -82,6 +82,7 @@
       "price": 50,
       "genre": "Shooter",
       "rating": 3,
+      "quantity": 1,
       "developer": "DICE",
       "createdAt": "163",
       "description": "Battlefield 1 (also known as BF1) is the fifteenth installment in the Battlefield Series developed by DICE and published by EA. The game is set during World War I."
@@ -93,6 +94,7 @@
       "price": 40,
       "genre": "Action",
       "rating": 5,
+      "quantity": 1,
       "developer": "Rockstar Games",
       "createdAt": "1636",
       "description": "Grand Theft Auto V is a 2013 action-adventure game developed by Rockstar North and published by Rockstar Games. It is the seventh main entry in the Grand Theft Auto series."
@@ -104,6 +106,7 @@
       "price": 10,
       "genre": "Shooter",
       "rating": 4,
+      "quantity": 1,
       "developer": "Valve",
       "createdAt": "163610",
       "description": "Counter-Strike: Global Offensive (CS:GO) is a multiplayer first-person shooter developed by Valve and Hidden Path Entertainment. It is the fourth game in the Counter-Strike series."
@@ -115,6 +118,7 @@
       "price": 20,
       "genre": "Action",
       "rating": 3,
+      "quantity": 1,
       "developer": "PUBG Corporation",
       "createdAt": "1",
       "description": "PlayerUnknown's Battlegrounds (also known as PUBG: Battlegrounds) is an online multiplayer battle royale game developed and published by PUBG Corporation, a subsidiary of Bluehole."
@@ -126,6 +130,7 @@
       "price": 50,
       "genre": "Action",
       "rating": 5,
+      "quantity": 1,
       "developer": "Insomniac Games",
       "createdAt": "1636279836870",
       "updatedAt": "1636279836870",

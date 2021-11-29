@@ -27,7 +27,8 @@ module.exports = {
     'no-unused-expressions': 'off',
     'arrow-body-style': 'off',
     'no-else-return': 'off',
-    'array-callback-return': 'off'
+    'array-callback-return': 'off',
+    'no-param-reassign': 'off'
   },
   overrides: [
     {

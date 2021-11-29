@@ -24,19 +24,18 @@
     <div class="search__wrapper">
     <div class="search__input">
      <h2>Search:</h2>
-      <input
-       type="search"
+      <Input
+       inputType="search"
        v-model="search"
        class="search__input-field"
        @input="searchCheck()"
-       placeholder="Search..."
       />
     </div>
     <div :class='{inactive: isInactive}' class="search__item-wrapper"
       v-for="item in searchHandler" :key="item.id">
       <div class="search__item">
         <h3>{{item.title}}</h3>
-          <router-link :to="`/products/${item.id}`">Visit store page</router-link>
+        <router-link :to="`/products/${item.id}`">Visit store page</router-link>
       </div>
     </div>
   </div>
@@ -44,8 +43,14 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+import Input from '../elements/Input.vue'
+
 export default {
   name: 'Home',
+  components: {
+    Input
+  },
   data() {
     return {
       search: '',
@@ -59,15 +64,15 @@ export default {
       } else {
         this.isInactive = false;
       }
-    },
+    }
   },
   computed: {
+    ...mapState({
+      products: (state) => state.products
+    }),
     searchHandler() {
       return this.products.filter((item) => item.title.includes(this.search));
     },
-    products() {
-      return this.$store.state.products;
-    }
   }
 }
 </script>

@@ -5,6 +5,7 @@
   @input="$emit('update:modelValue', $event.target.value)"
   @change="$emit('update:modelValue', $event.target.value)"
   :checked="value === modelValue"
+  class="user-input"
   />
  </div>
 </template>
@@ -33,5 +34,7 @@ export default {
 </script>
 
 <style lang="scss">
-
+.user-input {
+  width: 100%;
+}
 </style>
