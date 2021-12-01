@@ -1,4 +1,12 @@
 <template>
+<alertMessage 
+ v-if="dataLoadingError"
+ :message="'Failed to load data!'"
+ >
+<div @click="this.dataLoadingError = !this.dataLoadingError" class="alertmessage__option-accept">
+  <p class="alertmessage__option-accept--text">Accept</p>
+</div>
+</alertMessage>
   <div class="products-order">
     <Summary 
     :totalPrice="totalPrice"
@@ -7,21 +15,21 @@
       <li 
       v-for="item in cartItems" 
       :key="item.id">
-        <div class="order-item">
-        <div class="order-item--title">
-         <h3 class="item-title">{{item.title}}</h3>
-        </div>
-        <div class="order-item--price">
-         <h3>Price: {{item.price}}</h3>
-        </div>
-        <div class="order-item--quantity">
-         <h3>Qty: {{item.quantity}}</h3>
-        </div>
-        </div>
+      <div class="order-item">
+      <div class="order-item__title">
+       <h3 class="item-title">{{item.title}}</h3>
+      </div>
+      <div class="order-item__price">
+       <h3>Price: {{item.price}}</h3>
+      </div>
+      <div class="order-item__quantity">
+       <h3>Qty: {{item.quantity}}</h3>
+      </div>
+      </div>
       </li>
     </ul>
-    <h2 class="order-code">Your order code: {{orderCode}}</h2>
-    <br>
+  <h2 class="order-code">Your order code: {{orderCode}}</h2>
+  <br>
   </div>
   <div class="order__checkout">
     <h1>Checkout</h1>
@@ -31,30 +39,28 @@
       <Input 
         inputType="text"
         v-model="firstname"
-        @input="$emit('update:modelValue', $event.target.value)"
-        @change="$emit('update:modelValue', $event.target.value)"
         class="user-input"
       />
-      <p v-if="invalidName" class="invalid">! Name must be equal to account name</p>
+      <p v-if="this.firstname !== this.loggedUser.firstname"
+      class="invalid">! Name must be equal to your account name</p>
+      <p v-if="this.firstname === this.loggedUser.firstname" class="valid">! OK</p>
       </div>
       <div class="order__checkout-form--item">
       <label for="lastname">Last name:</label>
       <Input 
         inputType="text"
         v-model="lastname"
-        @input="$emit('update:modelValue', $event.target.value)"
-        @change="$emit('update:modelValue', $event.target.value)"
         class="user-input"
       />
-      <p v-if="invalidSurname" class="invalid">! Surname must be equal to account surname</p>
+      <p v-if="this.lastname !== this.loggedUser.lastname"
+      class="invalid">! Surname must be equal to your account surname</p>
+      <p v-if="this.lastname === this.loggedUser.lastname" class="valid">! OK</p>
       </div>
       <div class="order__checkout-form--item">
       <label for="deliveryaddress">Delivery address:</label>
       <Input 
         inputType="text"
         v-model="deliveryaddress"
-        @input="$emit('update:modelValue', $event.target.value)"
-        @change="$emit('update:modelValue', $event.target.value)"
         class="user-input"
       />
       </div>
@@ -63,21 +69,19 @@
       <Input 
         inputType="text"
         v-model="phonenumber"
-        @input="$emit('update:modelValue', $event.target.value)"
-        @change="$emit('update:modelValue', $event.target.value)"
         class="user-input"
         :mask="'+375(##)#######'"
       />
       <p>{{phonenumber}}</p>
-      <p v-if="invalidPhonenumber" class="invalid">! Phonenumber must be 12 numbers length</p>
+      <p v-if="this.phonenumber.length < 15"
+      class="invalid">! Phonenumber must be 12 numbers long</p>
+      <p v-if="this.phonenumber.length === 15" class="valid">! OK</p>
       </div>
       <div class="order__checkout-form--item">
       <label for="deliveryday">Delivery day:</label>
       <Input 
         inputType="date"
         v-model="deliveryday"
-        @input="$emit('update:modelValue', $event.target.value)"
-        @change="$emit('update:modelValue', $event.target.value)"
         class="user-input"
       />
       </div>  
@@ -96,12 +100,14 @@ import axios from 'axios';
 import { mapState } from 'vuex';
 import Input from '../../elements/Input.vue';
 import Summary from './Summary.vue';
+import alertMessage from '../../elements/alertMessage.vue';
 
 export default {
   name: 'Order',
   components: {
     Input,
-    Summary
+    Summary,
+    alertMessage
   },
   data() {
     return {
@@ -111,9 +117,7 @@ export default {
       deliveryaddress: '',
       deliveryday: '',
       phonenumber: '',
-      invalidName: false,
-      invalidSurname: false,
-      invalidPhonenumber: false
+      dataLoadingError: false
     }
   },
   computed: {
@@ -142,15 +146,7 @@ export default {
       this.loggedUser.orderCode = this.orderCode;
     },
     validateForm() {
-      if (this.firstname.length === 0) {
-        this.invalidName = true;
-      } 
-      if (this.lastname.length === 0) {
-        this.invalidSurname = true;
-      } 
-      if (this.phonenumber.length !== 15) {
-        this.invalidPhonenumber = true;
-      } else if (this.firstname === this.loggedUser.firstname
+      if (this.firstname === this.loggedUser.firstname
       && this.lastname === this.loggedUser.lastname
       && this.phonenumber.length === 15) {
         this.invalidName = false;
@@ -174,6 +170,8 @@ export default {
         this.$store.state.cartItems = [];
         this.$store.state.cartItemCount = 0;
         this.$router.push('products');
+      } else {
+        this.dataLoadingError = true;
       }
     }
   }
@@ -215,14 +213,17 @@ export default {
   border-bottom: 1px solid green;
   padding: 10px 0;
 }
-.order-item--title {
+.order-item__title {
   width: 33.3%
 }
-.order-item--quantity {
+.order-item__quantity {
   display: flex;
   flex-direction: row;
 }
 .invalid {
   color: red;
+}
+.valid {
+  color: lawngreen;
 }
 </style>
