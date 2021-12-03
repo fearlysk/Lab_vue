@@ -3,9 +3,9 @@
  v-if="dataLoadingError"
  :message="'Failed to load data!'"
  >
-<div @click="this.dataLoadingError = !this.dataLoadingError" class="alertmessage__option-accept">
+<button @click="this.dataLoadingError = false" class="alertmessage__option-accept">
   <p class="alertmessage__option-accept--text">Accept</p>
-</div>
+</button>
 </alertMessage>
   <div class="products-order">
     <Summary 
@@ -41,9 +41,10 @@
         v-model="firstname"
         class="user-input"
       />
-      <p v-if="this.firstname !== this.loggedUser.firstname"
+      <p v-if="this.firstname.toLowerCase() !== this.loggedUser.firstname.toLowerCase()"
       class="invalid">! Name must be equal to your account name</p>
-      <p v-if="this.firstname === this.loggedUser.firstname" class="valid">! OK</p>
+      <p v-if="this.firstname.toLowerCase() === this.loggedUser.firstname.toLowerCase()"
+      class="valid">! OK</p>
       </div>
       <div class="order__checkout-form--item">
       <label for="lastname">Last name:</label>
@@ -52,9 +53,10 @@
         v-model="lastname"
         class="user-input"
       />
-      <p v-if="this.lastname !== this.loggedUser.lastname"
+      <p v-if="this.lastname.toLowerCase() !== this.loggedUser.lastname.toLowerCase()"
       class="invalid">! Surname must be equal to your account surname</p>
-      <p v-if="this.lastname === this.loggedUser.lastname" class="valid">! OK</p>
+      <p v-if="this.lastname.toLowerCase() === this.loggedUser.lastname.toLowerCase()"
+      class="valid">! OK</p>
       </div>
       <div class="order__checkout-form--item">
       <label for="deliveryaddress">Delivery address:</label>
@@ -73,9 +75,9 @@
         :mask="'+375(##)#######'"
       />
       <p>{{phonenumber}}</p>
-      <p v-if="this.phonenumber.length < 15"
-      class="invalid">! Phonenumber must be 12 numbers long</p>
-      <p v-if="this.phonenumber.length === 15" class="valid">! OK</p>
+      <p v-if="this.phonenumber.length < this.maxCharLength"
+      class="invalid">! Invalid number</p>
+      <p v-if="this.phonenumber.length === this.maxCharLength" class="valid">! OK</p>
       </div>
       <div class="order__checkout-form--item">
       <label for="deliveryday">Delivery day:</label>
@@ -117,7 +119,9 @@ export default {
       deliveryaddress: '',
       deliveryday: '',
       phonenumber: '',
-      dataLoadingError: false
+      total: this.totalPrice,
+      dataLoadingError: false,
+      maxCharLength: 15
     }
   },
   computed: {
@@ -148,7 +152,7 @@ export default {
     validateForm() {
       if (this.firstname === this.loggedUser.firstname
       && this.lastname === this.loggedUser.lastname
-      && this.phonenumber.length === 15) {
+      && this.phonenumber.length === this.maxCharLength) {
         this.invalidName = false;
         this.invalidSurname = false;
         this.invalidPhonenumber = false;
@@ -164,12 +168,13 @@ export default {
         deliveryaddress: this.deliveryaddress,
         deliveryday: this.deliveryday,
         phonenumber: this.phonenumber,
-        ordereditems: this.cartItems
+        ordereditems: this.cartItems,
+        total: this.totalPrice
       });
       if (result.status === 201) {
         this.$store.state.cartItems = [];
         this.$store.state.cartItemCount = 0;
-        this.$router.push('products');
+        this.$router.push({ name: 'ThankYou', params: { id: this.orderCode } });
       } else {
         this.dataLoadingError = true;
       }
