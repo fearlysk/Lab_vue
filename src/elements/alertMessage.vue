@@ -6,7 +6,7 @@
                     <h2>Error</h2>
                 </div>
                 <div class="alert-message__exit">
-                    <button @click="closeMessage" id="alertmessage__close-btn"
+                    <button @click="closeMessage"
                     class="alert-message__exit-btn">x</button>
                 </div>
             </div>

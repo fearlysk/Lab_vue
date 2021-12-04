@@ -3,8 +3,8 @@
  v-if="dataLoadingError"
  :message="'Failed to load data!'"
  >
-<button @click="this.dataLoadingError = false" class="alertmessage__option-accept">
-  <p class="alertmessage__option-accept--text">Accept</p>
+<button @click="this.dataLoadingError = false" class="alert-message__option-accept">
+  <p class="alert-message__option-accept--text">Accept</p>
 </button>
 </alertMessage>
   <div class="products-order">
@@ -41,9 +41,9 @@
         v-model="firstname"
         class="user-input"
       />
-      <p v-if="this.firstname.toLowerCase() !== this.loggedUser.firstname.toLowerCase()"
+      <p v-if="this.invalidName === true"
       class="invalid">! Name must be equal to your account name</p>
-      <p v-if="this.firstname.toLowerCase() === this.loggedUser.firstname.toLowerCase()"
+      <p v-if="this.invalidName === false"
       class="valid">! OK</p>
       </div>
       <div class="order__checkout-form--item">
@@ -53,9 +53,9 @@
         v-model="lastname"
         class="user-input"
       />
-      <p v-if="this.lastname.toLowerCase() !== this.loggedUser.lastname.toLowerCase()"
+      <p v-if="this.invalidSurname === true"
       class="invalid">! Surname must be equal to your account surname</p>
-      <p v-if="this.lastname.toLowerCase() === this.loggedUser.lastname.toLowerCase()"
+      <p v-if="this.invalidSurname === false"
       class="valid">! OK</p>
       </div>
       <div class="order__checkout-form--item">
@@ -75,9 +75,9 @@
         :mask="'+375(##)#######'"
       />
       <p>{{phonenumber}}</p>
-      <p v-if="this.phonenumber.length < this.maxCharLength"
+      <p v-if="this.invalidPhonenumber === true"
       class="invalid">! Invalid number</p>
-      <p v-if="this.phonenumber.length === this.maxCharLength" class="valid">! OK</p>
+      <p v-if="this.invalidPhonenumber === false" class="valid">! OK</p>
       </div>
       <div class="order__checkout-form--item">
       <label for="deliveryday">Delivery day:</label>
@@ -119,7 +119,9 @@ export default {
       deliveryaddress: '',
       deliveryday: '',
       phonenumber: '',
-      total: this.totalPrice,
+      invalidName: null,
+      invalidSurname: null,
+      invalidPhonenumber: null,
       dataLoadingError: false,
       maxCharLength: 15
     }
@@ -150,8 +152,17 @@ export default {
       this.loggedUser.orderCode = this.orderCode;
     },
     validateForm() {
-      if (this.firstname === this.loggedUser.firstname
-      && this.lastname === this.loggedUser.lastname
+      if (this.firstname.toLowerCase() !== this.loggedUser.firstname.toLowerCase()) {
+        this.invalidName = true;
+      }
+      if (this.lastname.toLowerCase() !== this.loggedUser.lastname.toLowerCase()) {
+        this.invalidSurname = true;
+      }
+      if (this.phonenumber.length < this.maxCharLength) {
+        this.invalidPhonenumber = true;
+      }
+      if (this.firstname.toLowerCase() === this.loggedUser.firstname.toLowerCase()
+      && this.lastname.toLowerCase() === this.loggedUser.lastname.toLowerCase()
       && this.phonenumber.length === this.maxCharLength) {
         this.invalidName = false;
         this.invalidSurname = false;
@@ -174,7 +185,7 @@ export default {
       if (result.status === 201) {
         this.$store.state.cartItems = [];
         this.$store.state.cartItemCount = 0;
-        this.$router.push({ name: 'ThankYou', params: { id: this.orderCode } });
+        this.$router.push({ name: 'Thanks', params: { id: this.orderCode } });
       } else {
         this.dataLoadingError = true;
       }
