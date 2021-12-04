@@ -25,7 +25,7 @@
              </div>
             </li>
          </ul>
-        <button class="checkout-btn">Checkout</button>
+         <router-link to="/order"><button class="checkout-btn">Checkout</button></router-link>
          <h2>Search:</h2>
           <Input
            inputType="search"

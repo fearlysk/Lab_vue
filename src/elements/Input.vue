@@ -6,6 +6,7 @@
   @change="$emit('update:modelValue', $event.target.value)"
   :checked="value === modelValue"
   class="user-input"
+  v-maska="mask"
   />
  </div>
 </template>
@@ -27,6 +28,10 @@ export default {
     },
     value: {
       type: String, 
+      default: null
+    },
+    mask: {
+      type: String,
       default: null
     }
   }

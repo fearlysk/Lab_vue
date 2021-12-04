@@ -9,6 +9,7 @@ import ApiUsersPage from '../pages/ApiUsersPage.vue';
 import AdminUserList from '../views/AdminUserList.vue';
 import Profile from '../components/users/Profile.vue';
 import Cart from '../components/products/Cart.vue';
+import Order from '../components/products/Order.vue';
 
 const routes = [
   {
@@ -61,6 +62,11 @@ const routes = [
     path: '/cart',
     name: 'Cart',
     component: Cart
+  },
+  {
+    path: '/order',
+    name: 'Order',
+    component: Order
   }
 ]
 
