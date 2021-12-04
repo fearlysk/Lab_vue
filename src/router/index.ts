@@ -10,6 +10,7 @@ import AdminUserList from '../views/AdminUserList.vue';
 import Profile from '../components/users/Profile.vue';
 import Cart from '../components/products/Cart.vue';
 import Order from '../components/products/Order.vue';
+import ThankYou from '../components/products/ThankYou.vue'
 
 const routes = [
   {
@@ -67,6 +68,12 @@ const routes = [
     path: '/order',
     name: 'Order',
     component: Order
+  },
+  {
+    path: '/order/thanks/:id',
+    name: 'Thanks',
+    component: ThankYou,
+    props: true
   }
 ]
 

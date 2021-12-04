@@ -119,7 +119,7 @@ export default {
   flex-direction: row;
   justify-content: space-between;
   border-bottom: 1px solid green;
-   padding: 10px 0;
+  padding: 10px 0;
 }
 .order-item--title {
   width: 33.3%
