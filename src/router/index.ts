@@ -11,6 +11,10 @@ import Profile from '../components/users/Profile.vue';
 import Cart from '../components/products/Cart.vue';
 import Order from '../components/products/Order.vue';
 import ThankYou from '../components/products/ThankYou.vue'
+import Admin from '../components/users/Admin.vue';
+import AdminProducts from '../components/users/AdminProducts.vue';
+import AdminProductsCreate from '../components/users/AdminProductsCreate.vue';
+import AdminProductsEdit from '../components/users/AdminProductsEdit.vue';
 
 const routes = [
   {
@@ -73,6 +77,27 @@ const routes = [
     path: '/order/thanks/:id',
     name: 'Thanks',
     component: ThankYou,
+    props: true
+  },
+  {
+    path: '/admin',
+    name: 'Admin',
+    component: Admin
+  },
+  {
+    path: '/admin/products',
+    name: 'AdminProducts',
+    component: AdminProducts
+  },
+  {
+    path: '/admin/products/create',
+    name: 'AdminProductsCreate',
+    component: AdminProductsCreate
+  },
+  {
+    path: '/admin/products/edit/:id',
+    name: 'AdminProductsEdit',
+    component: AdminProductsEdit,
     props: true
   }
 ]

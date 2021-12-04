@@ -52,7 +52,7 @@ export default class ApiDemoPage extends Vue {
       requestInit.body = JSON.stringify(body)
     }
 
-    return fetch(`http://localhost:3000/api/${path}`, requestInit)
+    return fetch(`http://localhost:3000/${path}`, requestInit)
       .then((response) => response.json())
       .catch((error) => {
         console.log('REQUEST FAILED', error.message);
@@ -91,12 +91,12 @@ export default class ApiDemoPage extends Vue {
 
   /*  How to get all demo categories  */
   async updateDemoCategoriesList() {
-    this.demoCategories = await this.request('demo-categories', null, 'GET')
+    this.demoCategories = await this.request('products', null, 'GET')
   }
 
   /*  How to create new demo category  */
   async createNewDemoCategory() {
-    await this.request('demo-categories', this.generateRandomDemoCategoryData());
+    await this.request('products', this.generateRandomDemoCategoryData());
     this.updateDemoCategoriesList();
   }
 
@@ -110,7 +110,7 @@ export default class ApiDemoPage extends Vue {
       createdAt: lastCategory.createdAt
     }
 
-    await this.request(`demo-categories/${lastCategory.id}`, categoryData, 'PATCH');
+    await this.request(`products/${lastCategory.id}`, categoryData, 'PATCH');
     this.updateDemoCategoriesList();
   }
 
@@ -120,7 +120,7 @@ export default class ApiDemoPage extends Vue {
 
     const categoryId = this.demoCategories[0].id;
 
-    await this.request(`demo-categories/${categoryId}`, null, 'DELETE');
+    await this.request(`products/${categoryId}`, null, 'DELETE');
     this.updateDemoCategoriesList();
   }
 }

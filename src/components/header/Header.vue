@@ -21,13 +21,16 @@
                 </div>
                 <div class="products__dropdown-wrapper">
                     <ul class="products__dropdown">
-                      <li class="products__dropdown-item">Category Placeholder</li>
+                      <li class="products__dropdown-item">Placeholder</li>
                     </ul>
                 </div>
             </div>
             <div class="header__nav-item">
                 <router-link to="/cart" class="header__nav-item--link">
                 Cart: {{ cartItemCount }}</router-link>
+            </div>
+            <div v-if="this.loggedUser.role === 'admin'" class="header__nav-item">
+              <router-link to="/admin" class="header__nav-item--link">Admin</router-link>
             </div>
             <div class="header__nav-item" v-if="!authInactive">
               <a class="header__nav-item--link" @click="showLoginModal">Sign In</a>
@@ -71,7 +74,8 @@ export default {
   computed: {
     ...mapState({
       showLoading: (state) => state.showLoading,
-      cartItemCount: (state) => state.cartItemCount
+      cartItemCount: (state) => state.cartItemCount,
+      loggedUser: (state) => state.user.loggedUser
     })
   },
   mounted() {

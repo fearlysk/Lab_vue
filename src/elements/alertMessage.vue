@@ -48,7 +48,7 @@ export default {
     font-family: 'Open Sans';
     background-color: #222222;
     z-index: 4;
-    position: absolute;
+    position: fixed;
     top: 25%;
     left: 33%;
 }
