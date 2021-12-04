@@ -2,7 +2,7 @@
   <div v-if="!isValidUser">
     <h2>User not found!</h2>
   </div>
-  <div v-if="isValidUser" class="greet">
+  <div v-else class="greet">
   <h2 class="greet-headline">Thank you for order!</h2>
   <p class="order-code">Your order code: <span class="order-code__id">{{order.id}}</span></p>
   <div class="order">
