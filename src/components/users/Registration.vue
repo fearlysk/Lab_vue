@@ -59,7 +59,7 @@
             </div>
           </div>
         <div class="api__section-item">
-          <Input inputType="submit" class="api__section-btn" value="Submit" />
+          <Input inputType="submit" class="api__section-btn" modelValue="Confirm" />
         </div>
       </form>
     </div>

@@ -1,18 +1,20 @@
 <template>
 <alertMessage 
  v-if="dataLoadingError"
+ :headline="'Error'"
  :message="'Failed to load data!'"
  >
-<button @click="this.dataLoadingError = false" class="alert-message__option-accept">
-  <p class="alert-message__option-accept--text">Accept</p>
+<button @click="hideErrorModal" class="alert-message--option__accept">
+  <p class="alert-message--option__accept--text">Accept</p>
 </button>
 </alertMessage>
 <alertMessage 
  v-if="dataLoadingSuccess"
+ :headline="'Success'"
  :message="'Product created successfully!'"
  >
-<button @click="this.dataLoadingSuccess = false" class="alert-message__option-accept">
-  <p class="alert-message__option-accept--text">Accept</p>
+<button @click="hideSuccessModal" class="alert-message--option__accept">
+  <p class="alert-message--option__accept--text">Accept</p>
 </button>
 </alertMessage>
   <div class="product__create">
@@ -98,17 +100,19 @@ export default {
     })
   },
   mounted() {
-    fetch('http://localhost:3000/products')
-      .then((res) => res.json())
-      .then((data) => { this.products = data })
-      .catch((err) => console.log(err.message))
-    this.isAdmin();
+    this.checkRole();
   },
   methods: {
-    isAdmin() {
+    checkRole() {
       if (this.loggedUser.role !== 'admin') {
         this.$router.push('/');
       }
+    },
+    hideErrorModal() {
+      this.dataLoadingError = false;
+    },
+    hideSuccessModal() {
+      this.dataLoadingSuccess = false;
     },
     async createProduct() {
       const result = await axios.post('http://localhost:3000/products', {

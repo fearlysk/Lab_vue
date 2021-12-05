@@ -3,11 +3,7 @@
         <div class="alert-message">
             <div class="alert-message__header">
                 <div class="alert-message__headline">
-                    <h2>Error</h2>
-                </div>
-                <div class="alert-message__exit">
-                    <button @click="closeMessage"
-                    class="alert-message__exit-btn">x</button>
+                    <h2>{{headline}}</h2>
                 </div>
             </div>
             <div class="alert-message__body">
@@ -24,16 +20,15 @@
 export default {
   name: 'alertMessage',
   props: {
+    headline: {
+      type: String,
+      default: null
+    },
     message: {
       type: String,
       default: null
     }
   },
-  methods: {
-    closeMessage() {
-      this.isMessageVisible = false;
-    }
-  }
 }
 </script>
 
@@ -89,15 +84,15 @@ export default {
     display: flex;
     justify-content: flex-end;
 }
-.alert-message__option-accept {
+.alert-message--option__accept {
     margin: 0 3%;
     padding: 0px;
     height: 20px;
 }
-.alert-message__option-accept--text {
+.alert-message--option__accept--text {
     margin: 0;
 }
-.alert-message__option-accept {
+.alert-message--option__accept {
     transition: 0.3s;
     border: 2px solid rgb(75,221,75);
     margin: 0 15px;
@@ -106,14 +101,14 @@ export default {
     box-sizing: content-box;
     border-radius: 4px;
 }
-.alert-message__option-accept:hover {
+.alert-message--option__accept:hover {
     cursor: pointer;
     transition: 0.3s;
     background-color: rgb(75,221,75);
     color: #fff2f2;
 }
 @media screen and (max-width: 900px) {
-    .alert-message__option-accept {
+    .alert-message--option__accept {
         padding: 5px 25px;
     }
 }

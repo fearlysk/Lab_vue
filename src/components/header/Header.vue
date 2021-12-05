@@ -29,7 +29,7 @@
                 <router-link to="/cart" class="header__nav-item--link">
                 Cart: {{ cartItemCount }}</router-link>
             </div>
-            <div v-if="this.loggedUser.role === 'admin'" class="header__nav-item">
+            <div v-if="isAdmin" class="header__nav-item">
               <router-link to="/admin" class="header__nav-item--link">Admin</router-link>
             </div>
             <div class="header__nav-item" v-if="!authInactive">
@@ -76,7 +76,10 @@ export default {
       showLoading: (state) => state.showLoading,
       cartItemCount: (state) => state.cartItemCount,
       loggedUser: (state) => state.user.loggedUser
-    })
+    }),
+    isAdmin() {
+      return this.loggedUser.role === 'admin';
+    }
   },
   mounted() {
     fetch('http://localhost:3000/products')

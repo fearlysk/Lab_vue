@@ -2,10 +2,10 @@
   <div class="wrapper">
     <h1>Admin page</h1>
     <div class="admin-actions">
-      <div class="admin-actions--item">
+      <div class="admin-actions__item">
         <router-link to="/admin/products" class="action-link">Open products list</router-link>
       </div>
-      <div class="admin-actions--item">
+      <div class="admin-actions__item">
         <router-link to="/home" class="action-link">Go to homepage</router-link>
       </div>
     </div>
@@ -23,10 +23,10 @@ export default {
     })
   },
   mounted() {
-    this.isAdmin();
+    this.checkRole();
   },
   methods: {
-    isAdmin() {
+    checkRole() {
       if (this.loggedUser.role !== 'admin') {
         this.$router.push('/');
       }
@@ -45,17 +45,17 @@ export default {
   display: flex;
   justify-content: space-evenly;
 }
-.admin-actions--item {
+.admin-actions__item {
   border: 1px solid white;
-  padding: 5px 10px;
   transition: 0.3s;
 }
-.admin-actions--item:hover {
+.admin-actions__item:hover {
   transition: 0.3s;
   border: 1px solid green;
 }
 .action-link {
   color: white;
   text-decoration: none;
+  padding: 25px 15px;
 }
 </style>

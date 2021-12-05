@@ -2,7 +2,7 @@
     <div class="rating_wrapper">
         <form action="#">
             <div class="form_item">
-                <div class="form_label">Rate us:</div>
+                <div class="form_label">Rating:</div>
                 <div class="rating">
                     <div class="rating_items">
                         <input id="rating_5" type="radio" class="rating_item"

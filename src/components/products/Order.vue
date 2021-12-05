@@ -1,9 +1,10 @@
 <template>
 <alertMessage 
  v-if="dataLoadingError"
+ :headline="'Error'"
  :message="'Failed to load data!'"
  >
-<button @click="this.dataLoadingError = false" class="alert-message__option-accept">
+<button @click="closeErrorModal" class="alert-message__option-accept">
   <p class="alert-message__option-accept--text">Accept</p>
 </button>
 </alertMessage>
@@ -150,6 +151,9 @@ export default {
       }
       this.orderCode = retVal;
       this.loggedUser.orderCode = this.orderCode;
+    },
+    closeErrorModal() {
+      this.dataLoadingError = false
     },
     validateForm() {
       if (this.firstname.toLowerCase() !== this.loggedUser.firstname.toLowerCase()) {
