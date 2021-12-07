@@ -3,38 +3,42 @@
     <div class="profile__content">
       <h1 class="profile__content-welcome">
         Welcome
-        <span class="profile__content-welcome--name">
+        <span class="profile__content-welcome__name">
           {{userData.firstname}} {{userData.lastname}}!
         </span>
       </h1>
       <div class="profile__content-userinfo">
         <h3>
           Your id:
-          <span class="profile__content-userinfo--data">{{userData.id}}</span>
+          <span class="profile__content-userinfo__data">{{userData.id}}</span>
+        </h3>
+        <h3>
+          Your role:
+          <span class="profile__content-userinfo__data">{{userData.role}}</span>
         </h3>
         <h3>
           Your email:
-          <span class="profile__content-userinfo--data">{{userData.email}}</span>
+          <span class="profile__content-userinfo__data">{{userData.email}}</span>
         </h3>
         <h3>
           Your password:
-          <span class="profile__content-userinfo--data">{{userData.password}}</span>
+          <span class="profile__content-userinfo__data">{{userData.password}}</span>
         </h3>
         <h3>
           Sex: 
-          <span class="profile__content-userinfo--data">{{userData.sex}}</span>
+          <span class="profile__content-userinfo__data">{{userData.sex}}</span>
         </h3>
         <h3>
           Address: 
-          <span class="profile__content-userinfo--data">{{userData.address}}</span>
+          <span class="profile__content-userinfo__data">{{userData.address}}</span>
         </h3>
         <h3>
           Shipping address:
-          <span class="profile__content-userinfo--data">{{userData.shippingaddress}}</span>
+          <span class="profile__content-userinfo__data">{{userData.shippingaddress}}</span>
         </h3>
         <h3>
           Payment card: 
-          <span class="profile__content-userinfo--data">{{userData.paymentcard}}</span>
+          <span class="profile__content-userinfo__data">{{userData.paymentcard}}</span>
         </h3>
         <div class="user__actions">
           <h3 class="user__actions-headline">User Settings</h3>
@@ -114,7 +118,7 @@ body {
   padding-bottom: 6px;
   margin: 0 auto;
 }
-.profile__content-welcome--name {
+.profile__content-welcome__name {
   border-bottom: 2px solid white;
   padding-bottom: 5px;
 }
@@ -123,7 +127,7 @@ body {
   margin: 15px auto;
   max-width: 40%;
 }
-.profile__content-userinfo--data {
+.profile__content-userinfo__data {
   border-bottom: 2px solid lawngreen;
   padding-bottom: 1px;
 }

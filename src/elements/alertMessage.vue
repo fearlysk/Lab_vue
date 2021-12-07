@@ -84,15 +84,15 @@ export default {
     display: flex;
     justify-content: flex-end;
 }
-.alert-message--option__accept {
+.alert-message__accept {
     margin: 0 3%;
     padding: 0px;
     height: 20px;
 }
-.alert-message--option__accept--text {
+.alert-message__accept-text {
     margin: 0;
 }
-.alert-message--option__accept {
+.alert-message__accept {
     transition: 0.3s;
     border: 2px solid rgb(75,221,75);
     margin: 0 15px;
@@ -101,14 +101,14 @@ export default {
     box-sizing: content-box;
     border-radius: 4px;
 }
-.alert-message--option__accept:hover {
+.alert-message__accept:hover {
     cursor: pointer;
     transition: 0.3s;
     background-color: rgb(75,221,75);
     color: #fff2f2;
 }
 @media screen and (max-width: 900px) {
-    .alert-message--option__accept {
+    .alert-message__accept {
         padding: 5px 25px;
     }
 }

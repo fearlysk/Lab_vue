@@ -4,8 +4,8 @@
  :headline="'Error'"
  :message="'Failed to load data!'"
  >
-<button @click="closeErrorModal" class="alert-message__option-accept">
-  <p class="alert-message__option-accept--text">Accept</p>
+<button @click="closeErrorModal" class="alert-message__accept">
+  <p class="alert-message__accept-text">Accept</p>
 </button>
 </alertMessage>
   <div class="products-order">
@@ -16,14 +16,14 @@
       <li 
       v-for="item in cartItems" 
       :key="item.id">
-      <div class="order-item">
-      <div class="order-item__title">
+      <div class="order__item">
+      <div class="order__item-title">
        <h3 class="item-title">{{item.title}}</h3>
       </div>
-      <div class="order-item__price">
+      <div class="order__item-price">
        <h3>Price: {{item.price}}</h3>
       </div>
-      <div class="order-item__quantity">
+      <div class="order__item-quantity">
        <h3>Qty: {{item.quantity}}</h3>
       </div>
       </div>
@@ -35,7 +35,7 @@
   <div class="order__checkout">
     <h1>Checkout</h1>
     <form @submit.prevent="validateForm" class="order__checkout-form">
-      <div class="order__checkout-form--item">
+      <div class="order__checkout-form__item">
       <label for="firstname">First name:</label>
       <Input 
         inputType="text"
@@ -47,7 +47,7 @@
       <p v-if="this.invalidName === false"
       class="valid">! OK</p>
       </div>
-      <div class="order__checkout-form--item">
+      <div class="order__checkout-form__item">
       <label for="lastname">Last name:</label>
       <Input 
         inputType="text"
@@ -59,7 +59,7 @@
       <p v-if="this.invalidSurname === false"
       class="valid">! OK</p>
       </div>
-      <div class="order__checkout-form--item">
+      <div class="order__checkout-form__item">
       <label for="deliveryaddress">Delivery address:</label>
       <Input 
         inputType="text"
@@ -67,7 +67,7 @@
         class="user-input"
       />
       </div>
-      <div class="order__checkout-form--item">
+      <div class="order__checkout-form__item">
       <label for="phonenumber">Phone number:</label>
       <Input 
         inputType="text"
@@ -80,7 +80,7 @@
       class="invalid">! Invalid number</p>
       <p v-if="this.invalidPhonenumber === false" class="valid">! OK</p>
       </div>
-      <div class="order__checkout-form--item">
+      <div class="order__checkout-form__item">
       <label for="deliveryday">Delivery day:</label>
       <Input 
         inputType="date"
@@ -88,7 +88,7 @@
         class="user-input"
       />
       </div>  
-      <div class="order__checkout-form--item">
+      <div class="order__checkout-form__item">
       <Input 
         inputType="Submit"
         :modelValue="'Confirm order'"
@@ -211,7 +211,7 @@ export default {
 .order__checkout-form {
   text-align: left;
 }
-.order__checkout-form--item {
+.order__checkout-form__item {
   margin-top: 10px;
 }
 .cart-items {
@@ -224,7 +224,7 @@ export default {
   max-width: 50%;
   margin: 0 auto;
 }
-.order-item {
+.order__item {
   display: flex;
   flex-wrap: wrap;
   width: 100%;
@@ -233,10 +233,10 @@ export default {
   border-bottom: 1px solid green;
   padding: 10px 0;
 }
-.order-item__title {
+.order__item-title {
   width: 33.3%
 }
-.order-item__quantity {
+.order__item-quantity {
   display: flex;
   flex-direction: row;
 }

@@ -4,8 +4,8 @@
  :headline="'Error'"
  :message="'Failed to load data!'"
  >
-<button @click="hideErrorModal" class="alert-message--option__accept">
-  <p class="alert-message--option__accept--text">Accept</p>
+<button @click="hideErrorModal" class="alert-message__accept">
+  <p class="alert-message__accept-text">Accept</p>
 </button>
 </alertMessage>
 <alertMessage 
@@ -13,8 +13,8 @@
  :headline="'Success'"
  :message="'Data updated successfully!'"
  >
-<button @click="hideSuccessModal" class="alert-message--option__accept">
-  <p class="alert-message--option__accept--text">Accept</p>
+<button @click="hideSuccessModal" class="alert-message__accept">
+  <p class="alert-message__accept-text">Accept</p>
 </button>
 </alertMessage>
   <div class="product__create">

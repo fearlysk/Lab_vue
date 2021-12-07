@@ -4,8 +4,8 @@
  :headline="'Success'"
  :message="'Product removed successfully!'"
  >
-<button @click="hideProductRemovedTooltip" class="alert-message--option__accept">
-  <p class="alert-message--option__accept--text">Accept</p>
+<button @click="hideProductRemovedTooltip" class="alert-message__accept">
+  <p class="alert-message__accept-text">Accept</p>
 </button>
 </alertMessage>
 <alertMessage 
@@ -13,8 +13,8 @@
  :headline="'Error'"
  :message="'An error occured!'"
  >
-<button @click="hideErrorModal" class="alert-message--option__accept">
-  <p class="alert-message--option__accept--text">Accept</p>
+<button @click="hideErrorModal" class="alert-message__accept">
+  <p class="alert-message__accept-text">Accept</p>
 </button>
 </alertMessage>
   <div class="wrapper">
