@@ -3,8 +3,10 @@
     <div class="alert__modal-headline"><h1>{{ title }}</h1></div>
     <div class="alert__modal-changepassword" :class="{changePWActive: changePasswordActive}">
       <h1>Enter new password:</h1>
-      <input class="alert__modal-changepassword--input" 
-      v-model="userData.password" placeholder="New password" />
+      <Input
+       class="alert__modal-changepassword--input" 
+       v-model="userData.password"
+       placeholder="New password" />
       <div @click="addData" class="accept__btn"><h3>Confirm</h3></div>
     </div>
     <div>
@@ -18,6 +20,7 @@
 <script lang="ts">
 import axios from 'axios';
 import * as userInfo from '../constants/user';
+import Input from './Input.vue';
 import IUser from '../interfaces/userInterface';
 
 export default {
@@ -27,6 +30,9 @@ export default {
       userData: {} as IUser,
       isClosed: false,
     }
+  },
+  components: {
+    Input
   },
   props: {
     title: String,
@@ -51,6 +57,7 @@ export default {
     async addData() {
       const result = await axios.put(`http://localhost:3000/users/${this.userData.id}`, {
         id: this.userData.id,
+        role: this.userData.role,
         firstname: this.userData.firstname,
         lastname: this.userData.lastname,
         sex: this.userData.sex,

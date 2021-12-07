@@ -1,8 +1,5 @@
 <template>
   <div class="wrapper">
-    <router-link :to="{name: 'ApiUsersPage'}">Go to edit menu (users)</router-link>
-    <br />
-    <router-link :to="{name: 'ApiDemoPage'}">Go to edit menu (products)</router-link>
     <div class="recentlyadded">
       <h2 class="recentlyadded__headline">New In Store:</h2>
         <div class="recentlyadded__item"
@@ -71,7 +68,8 @@ export default {
       products: (state) => state.products
     }),
     searchHandler() {
-      return this.products.filter((item) => item.title.includes(this.search));
+      return this.products.filter((item) => item.title.toLowerCase()
+        .includes(this.search.toLowerCase()));
     },
   }
 }

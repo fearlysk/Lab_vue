@@ -60,7 +60,8 @@ export default {
       cartItems: (state) => state.cartItems
     }),
     searchHandler() {
-      return this.cartItems.filter((item) => item.title.includes(this.search));
+      return this.cartItems.filter((item) => item.title.toLowerCase()
+        .includes(this.search.toLowerCase()));
     },
     totalPrice() {
       return this.cartItems.reduce((sum, el) => {
