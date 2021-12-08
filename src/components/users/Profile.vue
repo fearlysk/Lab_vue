@@ -58,7 +58,6 @@
 </template>
 
 <script lang="ts">
-import * as userInfo from '../../constants/user';
 import alertModal from '../../elements/alertModal.vue';
 import IUser from '../../interfaces/userInterface';
 
@@ -75,10 +74,9 @@ export default {
     }
   },
   mounted() {
-    const user = localStorage.getItem(userInfo as any);
+    const user = this.$store.state.user.loggedUser;
     const userparsed = JSON.parse(user as any);
-    this.userData = { ...this.userData, ...userparsed }
-    this.$store.dispatch('saveUserName', this.userData);
+    this.userData = userparsed;
     if (!user) {
       this.$router.push({ name: 'Home' });
     }

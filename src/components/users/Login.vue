@@ -44,7 +44,6 @@
 import { mapMutations } from 'vuex';
 import axios from 'axios';
 import Input from '../../elements/Input.vue';
-import * as userInfo from '../../constants/user';
 
 export default {
   name: 'Login',
@@ -68,7 +67,8 @@ export default {
         `http://localhost:3000/users?email=${this.email}&password=${this.password}`
       )
       if (result.status === 200 && result.data.length > 0) {
-        localStorage.setItem(userInfo, JSON.stringify(result.data[0]));
+        this.$store.commit('saveUserName', JSON.stringify(result.data[0]));
+        this.$store.state.userAuth.isUserLoggedIn = true;
         this.showLoadingSpinner(false);
         this.$router.go()
       }

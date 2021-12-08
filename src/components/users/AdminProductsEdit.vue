@@ -101,7 +101,8 @@ export default {
     return {
       product: {},
       dataLoadingError: false,
-      dataLoadingSuccess: false
+      dataLoadingSuccess: false,
+      role: ''
     }
   },
   computed: {
@@ -114,11 +115,15 @@ export default {
       .then((res) => res.json())
       .then((data) => { this.product = data })
       .catch((err) => console.log(err.message))
+    const user = this.loggedUser;
+    const userparsed = JSON.parse(user);
+    this.username = userparsed.firstname;
+    this.role = userparsed.role;
     this.checkRole();
   },
   methods: {
     checkRole() {
-      if (this.loggedUser.role !== 'admin') {
+      if (this.role !== 'admin') {
         this.$router.push('/');
       }
     },

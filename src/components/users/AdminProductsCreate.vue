@@ -91,7 +91,8 @@ export default {
       genre: '',
       description: '',
       dataLoadingError: false,
-      dataLoadingSuccess: false
+      dataLoadingSuccess: false,
+      role: ''
     }
   },
   computed: {
@@ -100,11 +101,15 @@ export default {
     })
   },
   mounted() {
+    const user = this.loggedUser;
+    const userparsed = JSON.parse(user);
+    this.username = userparsed.firstname;
+    this.role = userparsed.role;
     this.checkRole();
   },
   methods: {
     checkRole() {
-      if (this.loggedUser.role !== 'admin') {
+      if (this.role !== 'admin') {
         this.$router.push('/');
       }
     },

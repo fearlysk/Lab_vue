@@ -70,7 +70,8 @@ export default {
     return {
       products: [],
       productRemovedTooltip: false,
-      errorModal: false
+      errorModal: false,
+      role: ''
     }
   },
   computed: {
@@ -83,11 +84,15 @@ export default {
       .then((res) => res.json())
       .then((data) => { this.products = data })
       .catch((err) => console.log(err.message))
+    const user = this.loggedUser;
+    const userparsed = JSON.parse(user);
+    this.username = userparsed.firstname;
+    this.role = userparsed.role;
     this.checkRole();
   },
   methods: {
     checkRole() {
-      if (this.loggedUser.role !== 'admin') {
+      if (this.role !== 'admin') {
         this.$router.push('/');
       }
     },

@@ -9,7 +9,7 @@ export default {
   },
   actions: {
     saveUserName({ commit }, data) {
-      commit('saveUserName', data)
+      commit('saveUserName', data);
     }
   },
   getters: {}

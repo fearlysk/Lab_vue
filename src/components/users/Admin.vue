@@ -17,20 +17,29 @@ import { mapState } from 'vuex'
 
 export default {
   name: 'Admin',
+  data() {
+    return {
+      role: ''
+    }
+  },
   computed: {
     ...mapState({
       loggedUser: (state) => state.user.loggedUser
     })
   },
   mounted() {
+    const user = this.loggedUser;
+    const userparsed = JSON.parse(user);
+    this.username = userparsed.firstname;
+    this.role = userparsed.role;
     this.checkRole();
   },
   methods: {
     checkRole() {
-      if (this.loggedUser.role !== 'admin') {
+      if (this.role !== 'admin') {
         this.$router.push('/');
       }
-    }
+    },
   }
 }
 </script>

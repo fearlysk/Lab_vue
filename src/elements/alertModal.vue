@@ -19,7 +19,6 @@
 
 <script lang="ts">
 import axios from 'axios';
-import * as userInfo from '../constants/user';
 import Input from './Input.vue';
 import IUser from '../interfaces/userInterface';
 
@@ -41,10 +40,9 @@ export default {
     dataInfoActive: Boolean
   },
   mounted() {
-    const user = localStorage.getItem(userInfo as any);
+    const user = this.$store.state.user.loggedUser;
     const userparsed = JSON.parse(user as any);
-    this.userData = { ...this.userData, ...userparsed }
-    this.$store.dispatch('saveUserName', this.userData);
+    this.userData = userparsed;
     if (!user) {
       this.$router.push({ name: 'Home' });
     }
@@ -68,8 +66,11 @@ export default {
         password: this.userData.password,
         aboutUser: this.userData.aboutUser
       });
+      console.log(result.status);
       if (result.status === 200) {
-        localStorage.setItem(userInfo as any, JSON.stringify(result.data));
+        this.$store.commit('saveUserName', JSON.stringify(result.data));
+        this.$store.state.userAuth.isUserLoggedIn = true;
+        this.$router.go();
         this.closeModal();
       }
     },

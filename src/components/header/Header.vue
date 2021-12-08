@@ -53,7 +53,6 @@ import { mapActions, mapState } from 'vuex';
 import Login from '../users/Login.vue';
 import Registration from '../users/Registration.vue';
 import Loader from '../Loader.vue';
-import * as userInfo from '../../constants/user';
 
 export default {
   name: 'Header',
@@ -68,7 +67,8 @@ export default {
       showRegModal: false,
       showLogModal: false,
       authInactive: false,
-      username: ''
+      username: '',
+      role: ''
     }
   },
   computed: {
@@ -78,7 +78,7 @@ export default {
       loggedUser: (state) => state.user.loggedUser
     }),
     isAdmin() {
-      return this.loggedUser.role === 'admin';
+      return this.role === 'admin';
     }
   },
   mounted() {
@@ -86,13 +86,14 @@ export default {
       .then((res) => res.json())
       .then((data) => { this.products = data })
       .catch((err) => console.log(err.message))
-
-    const user = localStorage.getItem(userInfo);
+    const user = this.loggedUser;
     const userparsed = JSON.parse(user);
     this.username = userparsed.firstname;
-    if (user) {
+    this.role = userparsed.role;
+    if (this.$store.state.userAuth.isUserLoggedIn) {
       this.authInactive = !this.authInactive;
     }
+    console.log(this.loggedUser.role === 'admin');
   },
   methods: {
     ...mapActions({
