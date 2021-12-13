@@ -11,6 +11,7 @@ import Admin from '../components/users/Admin.vue';
 import AdminProducts from '../components/users/AdminProducts.vue';
 import AdminProductsCreate from '../components/users/AdminProductsCreate.vue';
 import AdminProductsEdit from '../components/users/AdminProductsEdit.vue';
+import GamePlatforms from '../components/products/GamePlatforms.vue';
 
 const routes = [
   {
@@ -27,6 +28,12 @@ const routes = [
     path: '/products/:id',
     name: 'ProductsCardPage',
     component: ProductsCardPage,
+    props: true
+  },
+  {
+    path: '/products/platforms/:platform',
+    name: 'GamePlatforms',
+    component: GamePlatforms,
     props: true
   },
   {

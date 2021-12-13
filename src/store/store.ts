@@ -22,7 +22,6 @@ const store = createStore({
     ],
     users: [],
     userRegData: {} as IUser,
-    // loggedUser: {},
     showLoading: false,
     cartItems: [],
     cartItemCount: 0

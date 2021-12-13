@@ -1,22 +1,24 @@
 <template>
-<alertMessage 
+<AlertMessage 
  v-if="productRemovedTooltip"
  :headline="'Success'"
  :message="'Product removed successfully!'"
+ :isError="false"
  >
 <button @click="hideProductRemovedTooltip" class="alert-message__accept">
   <p class="alert-message__accept-text">Accept</p>
 </button>
-</alertMessage>
-<alertMessage 
+</AlertMessage>
+<AlertMessage 
  v-if="errorModal"
  :headline="'Error'"
  :message="'An error occured!'"
+ :isError="true"
  >
 <button @click="hideErrorModal" class="alert-message__accept">
   <p class="alert-message__accept-text">Accept</p>
 </button>
-</alertMessage>
+</AlertMessage>
   <div class="wrapper">
     <h1 class="products-headline">Products List</h1>
     <div class="products__list">
@@ -28,12 +30,12 @@
             <h3 class="product-item">Genre: {{product.genre}}</h3>
             <h3 class="product-item">Description: {{product.description}}</h3>
             <div class="product-item__actions">
-            <div>
-              <router-link 
-              :to="{ name: 'AdminProductsEdit', params: { id: product.id }}">
-              <button class="action-btn">Edit product</button>
-              </router-link>
-            </div>
+              <div>
+                <router-link 
+                :to="{ name: 'AdminProductsEdit', params: { id: product.id }}">
+                <button class="action-btn">Edit product</button>
+                </router-link>
+              </div>
             <div>
             <button @click="removeProduct(product.id)" 
             class="action-btn">Remove product</button>
@@ -59,19 +61,19 @@
 <script>
 import axios from 'axios';
 import { mapState } from 'vuex';
-import alertMessage from '../../elements/alertMessage.vue';
+import AlertMessage from '../../elements/AlertMessage.vue';
+import ADMIN from '../../constants/admin';
 
 export default {
   name: 'AdminProducts',
   components: {
-    alertMessage
+    AlertMessage
   },
   data() {
     return {
       products: [],
       productRemovedTooltip: false,
-      errorModal: false,
-      role: ''
+      errorModal: false
     }
   },
   computed: {
@@ -84,15 +86,11 @@ export default {
       .then((res) => res.json())
       .then((data) => { this.products = data })
       .catch((err) => console.log(err.message))
-    const user = this.loggedUser;
-    const userparsed = JSON.parse(user);
-    this.username = userparsed.firstname;
-    this.role = userparsed.role;
     this.checkRole();
   },
   methods: {
     checkRole() {
-      if (this.role !== 'admin') {
+      if (this.loggedUser === null || this.loggedUser.role !== ADMIN) {
         this.$router.push('/');
       }
     },
@@ -131,8 +129,8 @@ export default {
   padding: 10px;
 }
 .product__item-img {
-  max-width: 300px;
-  max-height: 250px;
+  width: 60%;
+  height: auto;
   border-radius: 5px;
   margin-left: 30%;
 }

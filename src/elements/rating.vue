@@ -38,6 +38,8 @@ export default {
 </script>
 
 <style lang="scss">
+@import '../assets/styles/colors.scss';
+
 .rating_wrapper {
     border: 1px solid black;
     min-width: 200px;
@@ -86,12 +88,12 @@ export default {
 
 .rating_item:checked,
 .rating_item:checked ~ .rating_label {
-    color: #f7e13e;
+    color: $golden;
 }
 
 .rating_label:hover,
 .rating_label:hover ~ .rating_label,
 .rating_label:checked ~ .rating_label:hover {
-    color: #f7e13e;
+    color: $golden;
 }
 </style>

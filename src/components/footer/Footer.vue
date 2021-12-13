@@ -1,6 +1,16 @@
 <template>
     <div class="footer">
-        <h3>Footer content will be here</h3>
+      <div class="footer__headline"><h2>Incredible convinient</h2></div>
+      <div class="footer__companies">
+        <div><a href="https://www.rockstargames.com/" target="_blank"><img class="footer__companies-image"
+        src="../../assets/Rockstar.png" alt="Image not found" /></a></div>
+        <div><a href="https://insomniac.games/" target="_blank"><img class="footer__companies-image"
+        src="../../assets/Insomniac.jpg" alt="Image not found" /></a></div>
+        <div><a href="https://valvesoftware.com/" target="_blank"><img class="footer__companies-image"
+        src="../../assets/Valve.png" alt="Image not found" /></a></div>
+        <div><a href="https://valvesoftware.com/" target="_blank"><img class="footer__companies-image"
+        src="../../assets/EA.png" alt="Image not found" /></a></div>
+      </div>
     </div>
 </template>
 
@@ -10,10 +20,29 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+@import '../../assets/styles/colors.scss';
+
 .footer {
-    background-color: #222222;
-    text-align: center;
-    color: white;
+  background-color: $darkgray;
+  text-align: center;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  &__headline {
+  margin-top: 15px;
+  }
+  &__companies {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  margin: 20px 0;
+  }
+  &__companies-image {
+  max-width: 80px;
+  max-height: 80px;
+}
 }
 </style>

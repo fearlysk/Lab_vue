@@ -1,18 +1,5 @@
 <template>
-  <teleport to="#modals-portal">
-    <Login v-if="showLogModal" @close="closeModal" />
-    <Registration v-if="showRegModal" @close="closeModal" />
-  </teleport>
-  <div class='user-auth' v-if="showAuth">
-    <h2>To order, please sign in or register:</h2>
-     <div class="auth__nav-item">
-       <button class="auth__nav-item--btn" @click="showLoginModal">Sign In</button>
-     </div>
-     <div class="auth__nav-item">
-       <button class="auth__nav-item--btn" @click="showRegistrationModal">Sign Up</button>
-     </div>
-  </div>
- 
+  <RequireAuth v-if="this.showAuth" />
   <div class="product__page-wrapper">
     <div class="product__page-title">
        <h1 class="product__page-title--headline">Game: {{ product[id].title }}</h1>
@@ -34,21 +21,16 @@
 
 <script>
 import { mapState } from 'vuex';
-import * as userInfo from '../../constants/user';
-import Login from '../users/Login.vue';
-import Registration from '../users/Registration.vue';
+import RequireAuth from './RequireAuth.vue';
 
 export default {
   name: 'ProductsCardPage',
   components: {
-    Login, 
-    Registration
+    RequireAuth
   },
   data() {
     return {
       product: {},
-      showRegModal: false,
-      showLogModal: false,
       showAuth: false
     }
   },
@@ -57,7 +39,8 @@ export default {
   },
   computed: {
     ...mapState({
-      cartItems: (state) => state.cartItems
+      cartItems: (state) => state.cartItems,
+      loggedUser: (state) => state.user.loggedUser
     }),
   },
   mounted() {
@@ -67,26 +50,14 @@ export default {
       .catch((err) => console.log(err.message))
   },
   methods: {
-    showLoginModal() {
-      if (!this.showLogModal) {
-        this.showLogModal = !this.showLogModal;
-        this.showAuth = !this.showAuth;
-      }
-    },
-    showRegistrationModal() {
-      if (!this.showRegModal) {
-        this.showRegModal = !this.showRegModal;
-        this.showAuth = !this.showAuth;
-      }
-    },
     goToCart() {
       this.$router.push('/cart');
     },
     addToCart(item) {
-      if (localStorage.getItem(userInfo) === null) {
+      if (!this.$store.state.userAuth.isUserLoggedIn) {
         this.showAuth = true;
       }
-      if (localStorage.getItem(userInfo) !== null) {
+      if (this.$store.state.userAuth.isUserLoggedIn) {
         item = { ...item, quantity: 1 };
         const temp = this.cartItems.some((i) => i.id === item.id);
         if (temp) {
@@ -110,30 +81,12 @@ export default {
           this.cartItems.splice(itemIndex, 1);
         }
       }
-    },
-    closeModal() {
-      if (this.showLogModal) {
-        this.showLogModal = !this.showLogModal;
-      }
-      if (this.showRegModal) {
-        this.showRegModal = !this.showRegModal;
-      }
     }
   }
 }
 </script>
 
 <style lang="scss">
-.user-auth {
-  z-index: 3;
-  position: fixed;
-  top: 25%;
-  left: 40%;
-  max-width: 70%;
-  background: black;
-  border: 1px solid green;
-  padding: 10px;
-}
 .product__page-wrapper {
   color: white;
   display: flex;

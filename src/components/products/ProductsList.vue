@@ -5,19 +5,19 @@
         <div class="products__filtration-section">
          <h3 class="products__filtration-section--headline">Category:</h3>
          <div class="products__filtration-section--filter">
-         <ul>
-         <filter-by-genres 
-          :options="categories"
-          @select="sortByCategories"
-          :selected="selected"
-         />
-         </ul>
+           <ul>
+           <filter-by-genres 
+            :options="categories"
+            @select="sortByCategories"
+            :selected="selected"
+           />
+           </ul>
          </div>
          </div>
          <div class="products__filtration-section">
          <h3 class="products__filtration-section--headline">Price:</h3>
          <div class="products__filtration-section--filter">
-          <div class="range-slider">
+         <div class="range-slider">
             <input 
              class="range-slider--item"
              type="range" 
@@ -40,7 +40,7 @@
             <p>Min:{{minPrice}}</p>
             <p>Max:{{maxPrice}}</p>
           </div>
-         </div>
+         </div> 
          </div>
         <div class="products__filtration-section">
          <h3 class="products__filtration-section--headline">Rating:</h3>
@@ -119,11 +119,7 @@ export default {
       categories: 'productCategories'
     }),
     filteredProducts() {
-      if (this.sortedProducts.length) {
-        return this.sortedProducts;
-      } else {
-        return this.products;
-      }
+      return this.sortedProducts.length ? this.sortedProducts : this.products;
     }
   },
   methods: {
@@ -161,19 +157,17 @@ export default {
       this.sortByCategories();
     },
     sortByCategories(category) {
-      const vm = this;
       this.sortedProducts = this.products;
-      this.showLoadingSpinner(true);
       setTimeout(() => this.showLoadingSpinner(false), 500);
       this.sortedProducts = this.sortedProducts.filter((item) => {
-        return item.price >= vm.minPrice && item.price <= vm.maxPrice;
+        return item.price >= this.minPrice && item.price <= this.maxPrice;
       });
       this.sortedProducts = this.sortedProducts.filter((item) => {
-        return item.rating >= vm.minRating && item.rating <= vm.maxRating;  
+        return item.rating >= this.minRating && item.rating <= this.maxRating;  
       });
       if (category) {
         this.sortedProducts = this.sortedProducts.filter((item) => {
-          vm.selected = category.genre;
+          this.selected = category.genre;
           return item.genre === category.genre;
         })
       }
@@ -251,6 +245,6 @@ export default {
   flex-direction: row;
   justify-content: flex-start;
   flex-wrap: wrap;
-  padding: 25px 0 75px 0;
+  padding: 0 0 25px 0;
 }
 </style>

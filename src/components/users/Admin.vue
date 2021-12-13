@@ -14,29 +14,21 @@
 
 <script>
 import { mapState } from 'vuex'
+import ADMIN from '../../constants/admin';
 
 export default {
   name: 'Admin',
-  data() {
-    return {
-      role: ''
-    }
-  },
   computed: {
     ...mapState({
       loggedUser: (state) => state.user.loggedUser
     })
   },
   mounted() {
-    const user = this.loggedUser;
-    const userparsed = JSON.parse(user);
-    this.username = userparsed.firstname;
-    this.role = userparsed.role;
     this.checkRole();
   },
   methods: {
     checkRole() {
-      if (this.role !== 'admin') {
+      if (this.loggedUser === null || this.loggedUser.role !== ADMIN) {
         this.$router.push('/');
       }
     },

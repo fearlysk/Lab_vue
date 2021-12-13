@@ -1,99 +1,87 @@
 <template>
-<alertMessage 
+<AlertMessage 
  v-if="dataLoadingError"
  :headline="'Error'"
  :message="'Failed to load data!'"
- >
+ > 
 <button @click="closeErrorModal" class="alert-message__accept">
   <p class="alert-message__accept-text">Accept</p>
 </button>
-</alertMessage>
+</AlertMessage>
   <div class="products-order">
     <Summary 
-    :totalPrice="totalPrice"
+     :totalPrice="totalPrice"
     />
     <ul class="cart-items">
       <li 
-      v-for="item in cartItems" 
-      :key="item.id">
-      <div class="order__item">
-      <div class="order__item-title">
-       <h3 class="item-title">{{item.title}}</h3>
-      </div>
-      <div class="order__item-price">
-       <h3>Price: {{item.price}}</h3>
-      </div>
-      <div class="order__item-quantity">
-       <h3>Qty: {{item.quantity}}</h3>
-      </div>
-      </div>
+       v-for="item in cartItems" 
+       :key="item.id">
+        <div class="order__item">
+        <div class="order__item-title">
+         <h3 class="item-title">{{item.title}}</h3>
+        </div>
+        <div class="order__item-price">
+         <h3>Price: {{item.price}}</h3>
+        </div>
+        <div class="order__item-quantity">
+         <h3>Qty: {{item.quantity}}</h3>
+        </div>
+        </div>
       </li>
     </ul>
-  <h2 class="order-code">Your order code: {{orderCode}}</h2>
+  <h2 class="order__code">Your order code: {{orderCode}}</h2>
   <br>
   </div>
   <div class="order__checkout">
     <h1>Checkout</h1>
     <form @submit.prevent="validateForm" class="order__checkout-form">
-      <div class="order__checkout-form__item">
+      <div class="order__item">
       <label for="firstname">First name:</label>
       <Input 
         inputType="text"
-        v-model="firstname"
-        class="user-input"
+        v-model="firstName"
       />
-      <p v-if="this.invalidName === true"
+      <p v-if="this.invalidName"
       class="invalid">! Name must be equal to your account name</p>
-      <p v-if="this.invalidName === false"
-      class="valid">! OK</p>
+      <p v-if="this.invalidName === false" class="valid">! OK</p>
       </div>
-      <div class="order__checkout-form__item">
+      <div class="order__item">
       <label for="lastname">Last name:</label>
       <Input 
         inputType="text"
-        v-model="lastname"
-        class="user-input"
+        v-model="lastName"
       />
-      <p v-if="this.invalidSurname === true"
+      <p v-if="this.invalidSurname"
       class="invalid">! Surname must be equal to your account surname</p>
-      <p v-if="this.invalidSurname === false"
-      class="valid">! OK</p>
+      <p v-if="this.invalidSurname === false" class="valid">! OK</p>
       </div>
-      <div class="order__checkout-form__item">
-      <label for="deliveryaddress">Delivery address:</label>
+      <div class="order__item">
+      <label for="delivery-address">Delivery address:</label>
       <Input 
         inputType="text"
-        v-model="deliveryaddress"
-        class="user-input"
+        v-model="deliveryAddress"
       />
       </div>
-      <div class="order__checkout-form__item">
-      <label for="phonenumber">Phone number:</label>
+      <div class="order__item">
+      <label for="phone-number">Phone number:</label>
       <Input 
         inputType="text"
-        v-model="phonenumber"
-        class="user-input"
+        v-model="phoneNumber"
         :mask="'+375(##)#######'"
       />
       <p>{{phonenumber}}</p>
-      <p v-if="this.invalidPhonenumber === true"
+      <p v-if="this.invalidPhonenumber"
       class="invalid">! Invalid number</p>
       <p v-if="this.invalidPhonenumber === false" class="valid">! OK</p>
       </div>
-      <div class="order__checkout-form__item">
-      <label for="deliveryday">Delivery day:</label>
+      <div class="order__item">
+      <label for="delivery-day">Delivery day:</label>
       <Input 
         inputType="date"
-        v-model="deliveryday"
-        class="user-input"
+        v-model="deliveryDay"
       />
       </div>  
-      <div class="order__checkout-form__item">
-      <Input 
-        inputType="Submit"
-        :modelValue="'Confirm order'"
-      />
-      </div>           
+      <button class="order__item-btn" type="submit">Submit</button>         
     </form>
   </div>
 </template>
@@ -103,23 +91,23 @@ import axios from 'axios';
 import { mapState } from 'vuex';
 import Input from '../../elements/Input.vue';
 import Summary from './Summary.vue';
-import alertMessage from '../../elements/alertMessage.vue';
+import AlertMessage from '../../elements/AlertMessage.vue';
 
 export default {
   name: 'Order',
   components: {
     Input,
     Summary,
-    alertMessage
+    AlertMessage
   },
   data() {
     return {
       orderCode: '',
-      firstname: '',
-      lastname: '',
-      deliveryaddress: '',
-      deliveryday: '',
-      phonenumber: '',
+      firstName: '',
+      lastName: '',
+      deliveryAddress: '',
+      deliveryDay: '',
+      phoneNumber: '',
       invalidName: null,
       invalidSurname: null,
       invalidPhonenumber: null,
@@ -156,18 +144,18 @@ export default {
       this.dataLoadingError = false
     },
     validateForm() {
-      if (this.firstname.toLowerCase() !== this.loggedUser.firstname.toLowerCase()) {
+      if (this.firstName.toLowerCase() !== this.loggedUser.firstName.toLowerCase()) {
         this.invalidName = true;
       }
-      if (this.lastname.toLowerCase() !== this.loggedUser.lastname.toLowerCase()) {
+      if (this.lastName.toLowerCase() !== this.loggedUser.lastName.toLowerCase()) {
         this.invalidSurname = true;
       }
-      if (this.phonenumber.length < this.maxCharLength) {
+      if (this.phoneNumber.length < this.maxCharLength) {
         this.invalidPhonenumber = true;
       }
-      if (this.firstname.toLowerCase() === this.loggedUser.firstname.toLowerCase()
-      && this.lastname.toLowerCase() === this.loggedUser.lastname.toLowerCase()
-      && this.phonenumber.length === this.maxCharLength) {
+      if (this.firstName.toLowerCase() === this.loggedUser.firstName.toLowerCase()
+      && this.lastName.toLowerCase() === this.loggedUser.lastName.toLowerCase()
+      && this.phoneNumber.length === this.maxCharLength) {
         this.invalidName = false;
         this.invalidSurname = false;
         this.invalidPhonenumber = false;
@@ -175,17 +163,18 @@ export default {
       }
     },
     async saveOrder() {
-      const result = await axios.post('http://localhost:3000/orders', {
+      const orderData = {
         id: this.orderCode,
         userId: this.loggedUser.id,
-        firstname: this.firstname,
-        lastname: this.lastname,
-        deliveryaddress: this.deliveryaddress,
-        deliveryday: this.deliveryday,
-        phonenumber: this.phonenumber,
-        ordereditems: this.cartItems,
+        firstName: this.firstName,
+        lastName: this.lastName,
+        deliveryAddress: this.deliveryAddress,
+        deliveryDay: this.deliveryDay,
+        phoneNumber: this.phoneNumber,
+        orderedItems: this.cartItems,
         total: this.totalPrice
-      });
+      }
+      const result = await axios.post('http://localhost:3000/orders', orderData);
       if (result.status === 201) {
         this.$store.state.cartItems = [];
         this.$store.state.cartItemCount = 0;
@@ -206,7 +195,7 @@ export default {
 .order__checkout {
   text-align: center;
   max-width: 20%;
-  margin: 0 auto;
+  margin: auto;
 }
 .order__checkout-form {
   text-align: left;
@@ -217,7 +206,7 @@ export default {
 .cart-items {
   list-style-type: none;
 }
-.order-code {
+.order__code {
   text-align: center;
   padding: 10px 0;
   border-bottom: 1px solid green;
@@ -232,6 +221,10 @@ export default {
   justify-content: space-between;
   border-bottom: 1px solid green;
   padding: 10px 0;
+}
+.order__item-btn {
+  margin: 10px auto;
+  width: 100%;
 }
 .order__item-title {
   width: 33.3%

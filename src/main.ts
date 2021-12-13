@@ -3,7 +3,7 @@ import Maska from 'maska'
 import App from './App.vue'
 import store from './store/store'
 import router from './router'
-import '../public/styles.scss'
+import './assets/styles/styles.scss';
 
 const app = createApp(App);
 app.use(router);
