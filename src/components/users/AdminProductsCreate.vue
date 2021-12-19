@@ -137,6 +137,7 @@ export default {
     },
     hideSuccessModal() {
       this.dataLoadingSuccess = false;
+      this.$router.push('/admin/products');
     },
     async createProduct() {
       const productData = {

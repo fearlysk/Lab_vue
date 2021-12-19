@@ -2,8 +2,11 @@
   <teleport to="#modals-portal">
     <Login v-if="showLogModal" @close="closeModal" />
     <Registration v-if="showRegModal" @close="closeModal" />
+    <RequireAuth v-if="showModal" @close="closeModal" />
   </teleport>
-  <RequireAuth v-if="showAuth"/>
+  <div v-if="this.$store.state.showAlert" class="alert-modal">
+    <Alert @close="closeAlert" :message="alertMessage" />
+  </div>
   <div class="product__card-wrapper">
     <div class="product__card">
       <div class="front">
@@ -33,20 +36,23 @@
 
 <script>
 import { mapState } from 'vuex';
-import Rating from '../../elements/rating.vue';
+import Rating from '../../elements/Rating.vue';
 import RequireAuth from './RequireAuth.vue';
+import Alert from '../../elements/Alert.vue';
 
 export default {
   name: 'ProductsCard',
   components: {
     Rating,
-    RequireAuth
+    RequireAuth,
+    Alert
   },
   data() {
     return {
       showRegModal: false,
       showLogModal: false,
-      showAuth: false
+      showModal: false,
+      alertMessage: 'Added to cart!',
     }
   },
   props: {
@@ -62,7 +68,7 @@ export default {
   methods: {
     addToCart(item) {
       if (!this.$store.state.userAuth.isUserLoggedIn) {
-        this.showAuth = true;
+        this.showModal = true;
       }
       if (this.$store.state.userAuth.isUserLoggedIn) {
         item = { ...item, quantity: 1 };
@@ -74,8 +80,24 @@ export default {
           this.cartItems.push(item);
         }
         this.$store.state.cartItemCount += 1;
+        this.$store.state.showAlert = true;
+        setTimeout(() => this.$store.dispatch('hideAlert'), 1500);
       }
     },
+    closeModal() {
+      if (this.showLogModal) {
+        this.showLogModal = false;
+      }
+      if (this.showRegModal) {
+        this.showRegModal = false;
+      }
+      if (this.showModal) {
+        this.showModal = false;
+      }
+    },
+    closeAlert() {
+      this.$store.state.showAlert = false;
+    }
   }
 }
 </script>
@@ -83,6 +105,15 @@ export default {
 <style lang="scss" scoped>
 @import '../../assets/styles/colors.scss';
 
+.alert-modal {
+  position: fixed;
+  top: 20%;
+  left: 0;
+  z-index: 6;
+  background: green;
+  width: 100%;
+  padding: 10px;
+}
 .product__card-wrapper {
   margin: 25px 25px;
   z-index: 2;

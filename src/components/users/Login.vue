@@ -127,9 +127,6 @@ export default {
 pre {
   text-align: left;
 }
-.login__wrapper {
-  color: white;
-}
 .preview {
   border: 1px solid white;
   padding: 12px;
@@ -143,6 +140,7 @@ pre {
   padding: 5px 10px;
 }
 .login__wrapper {
+  color: white;
   border: 1px solid white;
   padding: 15px;
   display: flex;
@@ -153,10 +151,10 @@ pre {
   border: 1px solid white;
   padding: 10px;
   margin: 0 10px;
-  background-color: black;
   box-shadow: 0px 0px 18px 9px rgba(16, 122, 24, 0.75);
   margin: 0 30px;
   color: #FFFFFF;
+  background-color: rgba(0,0,0, 0.85);
 }
 .login__section-item {
   margin: 10px 15px;

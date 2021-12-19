@@ -1,20 +1,43 @@
 <template>
+<teleport to="#modals-portal">
   <div class="alert-modal" :class="{inactive: isClosed}">
-    <div class="alert-modal__headline"><h1>{{ title }}</h1></div>
-      <div class="alert-modal__change-password" :class="{changePWActive: changePasswordActive}">
-        <h1>Enter new password:</h1>
-          <Input
-           class="alert-modal__change-password--input" 
-           v-model="userData.password"
-           placeholder="New password" />
-         <div @click="addData" class="accept__btn"><h3>Confirm</h3></div>
-      </div>
-      <div>
-        <div class="alert-modal-btns" :class="{dataInfoInactive: dataInfoActive}">
-          <div @click="closeModal" class="accept__btn"><h3>Confirm</h3></div>
+    <div class="alert-modal__headline">
+      <div><h1>{{ title }}</h1></div>
+      <div><button class="alert-modal__headline-btn" @click="closeModal">x</button></div>
+    </div>
+    <div class="alert-modal__form">
+        <div class="alert-modal__change-data">
+          <h2>First name:</h2>
+            <Input
+             class="alert-modal__change-data--input" 
+             v-model="userData.firstName"
+             placeholder="First name" />
         </div>
-      </div>
+        <div class="alert-modal__change-data">
+          <h2>Last name:</h2>
+            <Input
+             class="alert-modal__change-data--input" 
+             v-model="userData.lastName"
+             placeholder="Last name" />
+        </div>
+        <div class="alert-modal__change-data">
+          <h2>Password:</h2>
+            <Input
+             class="alert-modal__change-data--input" 
+             v-model="userData.password"
+             placeholder="Password" />
+        </div>
+        <div class="alert-modal__change-data">
+          <h2>Email: </h2>
+            <Input
+             class="alert-modal__change-data--input" 
+             v-model="userData.email"
+             placeholder="Email" />
+        </div>
+      <div @click="addData" class="accept__btn"><h3>Confirm</h3></div>
+    </div>
   </div>
+</teleport>
 </template>
 
 <script lang="ts">
@@ -47,9 +70,12 @@ export default {
     }
   },
   methods: {
-    closeModal() {
+    closeModals() {
       this.isClosed = true;
       this.$router.go();
+    },
+    closeModal() {
+      this.$emit('close');
     },
     async addData() {
       const result = await axios.put(`http://localhost:3000/users/${this.userData.id}`, {
@@ -62,8 +88,7 @@ export default {
         shippingAddress: this.userData.shippingAddress,
         paymentCard: this.userData.paymentCard,
         email: this.userData.email,
-        password: this.userData.password,
-        aboutUser: this.userData.aboutUser
+        password: this.userData.password
       });
       console.log(result.status);
       if (result.status === 200) {
@@ -82,20 +107,29 @@ export default {
 
 .alert-modal {
   background-color: $darkbg;
-  min-height: 30%;
-  min-width: 60%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
+  height: auto;
+  padding: 10px 0;
   border-radius: 3px;
   color: #fff2f2;
-  z-index: 4;
   border: 1px solid green;
-  position: relative;
+  position: fixed;
+  max-width: 40%;
+  z-index: 4;
+  left: 0;
+  right: 0;
+  top: 25%;
+  margin: auto !important;
 }
 .alert-modal__headline {
-  margin-left: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 0;
+  margin: 0 10%;
+  border-bottom: 1px solid green;
+}
+.alert-modal__headline-btn {
+  padding: 5px 10px;
 }
 .alert-modal-btns {
   display: flex;
@@ -119,18 +153,12 @@ export default {
 }
 .inactive {
   display: none !important;
-  background: red;
 }
-.alert-modal__change-password {
-  display: none;
+.alert-modal__change-data {
+  max-width: 70%;
+  margin: 15px auto;
 }
-.alert-modal__change-password--input {
+.alert-modal__change-data--input {
   margin: 10px;
-}
-.changePWActive {
-  display: block !important;
-}
-.dataInfoInactive {
-  display: none !important;
 }
 </style>

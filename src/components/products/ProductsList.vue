@@ -1,96 +1,96 @@
 <template>
-    <div class="wrapper">
-      <div class="products__filtration">
-        <h2 class="products__filtration-headline">Sort</h2>
-        <div class="products__filtration-section">
-         <h3 class="products__filtration-section--headline">Category:</h3>
-         <div class="products__filtration-section--filter">
-           <ul>
-           <filter-by-genres 
-            :options="categories"
-            @select="sortByCategories"
-            :selected="selected"
-           />
-           </ul>
-         </div>
-         </div>
-         <div class="products__filtration-section">
-         <h3 class="products__filtration-section--headline">Price:</h3>
-         <div class="products__filtration-section--filter">
-         <div class="range-slider">
-            <input 
-             class="range-slider--item"
-             type="range" 
-             min="0" max="60" 
-             step="10"
-             v-model.number="minPrice"
-             @change="setRangeSlider"
-            >
-            <input 
-             class="range-slider--item"
-             type="range" 
-             min="0" 
-             max="60" 
-             step="10"
-             v-model.number="maxPrice"
-             @change="setRangeSlider"
-            >
-          </div>
-          <div class="range-values">
-            <p>Min:{{minPrice}}</p>
-            <p>Max:{{maxPrice}}</p>
-          </div>
-         </div> 
-         </div>
-        <div class="products__filtration-section">
-         <h3 class="products__filtration-section--headline">Rating:</h3>
-        <div class="products__filtration-section--filter">
-          <div class="range-slider">
-            <input 
-             class="range-slider--item"
-             type="range" 
-             min="0"
-             max="5" 
-             step="1"
-             v-model.number="minRating"
-             @change="setRangeSliderRating"
-            >
-            <input 
-             class="range-slider--item"
-             type="range" 
-             min="0" 
-             max="5" 
-             step="1"
-             v-model.number="maxRating"
-             @change="setRangeSliderRating"
-            >
-          </div>
-          <div class="range-values">
-            <p>Min:{{minRating}}</p>
-            <p>Max:{{maxRating}}</p>
-         </div>
+  <div class="wrapper">
+    <div class="products__filtration">
+      <h2 class="products__filtration-headline">Sort</h2>
+      <div class="products__filtration-section">
+       <h3 class="products__filtration-section--headline">Category:</h3>
+       <div class="products__filtration-section--filter">
+         <ul>
+         <filter-by-genres 
+          :options="categories"
+          @select="sortByCategories"
+          :selected="selected"
+         />
+         </ul>
+       </div>
+       </div>
+       <div class="products__filtration-section">
+       <h3 class="products__filtration-section--headline">Price:</h3>
+       <div class="products__filtration-section--filter">
+       <div class="range-slider">
+          <input 
+           class="range-slider--item"
+           type="range" 
+           min="0" max="60" 
+           step="10"
+           v-model.number="minPrice"
+           @change="setRangeSlider"
+          >
+          <input 
+           class="range-slider--item"
+           type="range" 
+           min="0" 
+           max="60" 
+           step="10"
+           v-model.number="maxPrice"
+           @change="setRangeSlider"
+          >
         </div>
-      </div>
-        <div class="products__filtration-section">
-         <h3 class="products__filtration-section--headline">Sort by creation date:</h3>
-         <div class="products__filtration-section--filter">
-           <div class="sortByDate-btn--wrapper">
-             <button class="sortByDate-btn" @click="sortByNewest">Sort by newest</button>
-            </div>
-           <div class="sortByDate-btn--wrapper">
-             <button class="sortByDate-btn" @click="sortByOldest">Sort by oldest</button>
-            </div>
-         </div>
-         </div>
-      </div>
-      <div class="products__list-wrapper">
-        <h2 class="products__list-headline">Products</h2>
-      <div class="products__list">
-         <products-card v-for="product in filteredProducts" :key="product.id"
-         :product="product" />
+        <div class="range-values">
+          <p>Min:{{minPrice}}</p>
+          <p>Max:{{maxPrice}}</p>
+        </div>
+       </div> 
+       </div>
+      <div class="products__filtration-section">
+       <h3 class="products__filtration-section--headline">Rating:</h3>
+      <div class="products__filtration-section--filter">
+        <div class="range-slider">
+          <input 
+           class="range-slider--item"
+           type="range" 
+           min="0"
+           max="5" 
+           step="1"
+           v-model.number="minRating"
+           @change="setRangeSliderRating"
+          >
+          <input 
+           class="range-slider--item"
+           type="range" 
+           min="0" 
+           max="5" 
+           step="1"
+           v-model.number="maxRating"
+           @change="setRangeSliderRating"
+          >
+        </div>
+        <div class="range-values">
+          <p>Min:{{minRating}}</p>
+          <p>Max:{{maxRating}}</p>
+       </div>
       </div>
     </div>
+      <div class="products__filtration-section">
+       <h3 class="products__filtration-section--headline">Sort by creation date:</h3>
+       <div class="products__filtration-section--filter">
+         <div class="sortByDate-btn--wrapper">
+           <button class="sortByDate-btn" @click="sortByNewest">Sort by newest</button>
+          </div>
+         <div class="sortByDate-btn--wrapper">
+           <button class="sortByDate-btn" @click="sortByOldest">Sort by oldest</button>
+          </div>
+       </div>
+       </div>
     </div>
+    <div class="products__list-wrapper">
+      <h2 class="products__list-headline">Products</h2>
+    <div class="products__list">
+       <products-card v-for="product in filteredProducts" :key="product.id"
+       :product="product" />
+    </div>
+  </div>
+</div>
 </template>
 
 <script>

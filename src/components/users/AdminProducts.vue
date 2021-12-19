@@ -19,12 +19,12 @@
   <p class="alert-message__accept-text">Accept</p>
 </button>
 </AlertMessage>
-  <div class="wrapper">
+  <div class="products">
     <h1 class="products-headline">Products List</h1>
     <div class="products__list">
         <div class="products__list">
           <div v-for="product in products" :key="product.id" class="products__list-item">
-            <img class="product__item-img" :src="product.image" alt="Image Not Found" />
+            <img class="product-item__img" :src="product.image" alt="Image Not Found" />
             <h3 class="product-item">Title: {{product.title}}</h3>
             <h3 class="product-item">Price: {{product.price}}</h3>
             <h3 class="product-item">Genre: {{product.genre}}</h3>
@@ -121,6 +121,9 @@ export default {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1199px;
 }
 .products__list-item {
   margin: 25px 5px;
@@ -128,7 +131,7 @@ export default {
   max-width: 30%;
   padding: 10px;
 }
-.product__item-img {
+.product-item__img {
   width: 60%;
   height: auto;
   border-radius: 5px;

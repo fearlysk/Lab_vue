@@ -3,7 +3,8 @@
       <Login v-if="showLogModal" @close="closeModal" />
       <Registration v-if="showRegModal" @close="closeModal" />
       <Loader v-if="showLoading" />
-     <h1 class="header__headline">Game Store</h1>
+     <h1 class="header__headline"><router-link
+      class="header__headline-link" to="/">Game Store</router-link></h1>
         <div class="header__nav">
             <div class="header__nav-item">
                 <router-link to="/" class="header__nav-item--home">Home</router-link>
@@ -139,6 +140,10 @@ export default {
   padding: 20px 0;
   &__headline {
     margin-left: 40px;
+  }
+  &__headline-link {
+    text-decoration: none;
+    color: $white;
   }
   &__nav {
   display: flex;

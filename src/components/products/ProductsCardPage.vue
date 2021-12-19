@@ -1,5 +1,8 @@
 <template>
-  <RequireAuth v-if="this.showAuth" />
+  <RequireAuth v-if="this.showModal" @close="closeModal" />
+  <div v-if="this.$store.state.showAlert" class="alert-modal">
+    <Alert @close="closeAlert" :message="alertMessage" />
+  </div>
   <div class="product__page-wrapper">
     <div class="product__page-title">
        <h1 class="product__page-title--headline">Game: {{ product[id].title }}</h1>
@@ -12,7 +15,9 @@
       <h3>Description: {{ product[id].description }}</h3>
       <div class="product__page-description--cart">
         <button @click="goToCart" class="cart-btn">Go to cart</button>
-        <button @click="addToCart(this.product[id])" class="cart-btn">Add to cart</button>
+        <button @click="addToCart(this.product[id])"
+        class="cart-btn">
+        Add to cart: {{this.itemQuantity}}</button>
         <button @click="removeFromCart(this.product[id])" class="cart-btn">Remove from cart</button>
       </div>
     </div>
@@ -22,16 +27,22 @@
 <script>
 import { mapState } from 'vuex';
 import RequireAuth from './RequireAuth.vue';
+import Alert from '../../elements/Alert.vue';
 
 export default {
   name: 'ProductsCardPage',
   components: {
-    RequireAuth
+    RequireAuth,
+    Alert
   },
   data() {
     return {
       product: {},
-      showAuth: false
+      showRegModal: false,
+      showLogModal: false,
+      showModal: false,
+      alertMessage: null,
+      itemQuantity: 0
     }
   },
   props: {
@@ -43,19 +54,30 @@ export default {
       loggedUser: (state) => state.user.loggedUser
     }),
   },
-  mounted() {
-    fetch('http://localhost:3000/products')
+  async mounted() {
+    await fetch('http://localhost:3000/products')
       .then((res) => res.json())
       .then((data) => { this.product = data })
       .catch((err) => console.log(err.message))
+    await this.getItemQuantity(this.product[this.id])
   },
   methods: {
+    getItemQuantity(item) {
+      if (this.$store.state.userAuth.isUserLoggedIn) {
+        item = { ...item };
+        const temp = this.cartItems.some((i) => i.id === item.id);
+        if (temp) {
+          const itemIndex = this.cartItems.findIndex((el) => el.id === item.id);
+          this.itemQuantity = this.cartItems[itemIndex].quantity;
+        }
+      }
+    },
     goToCart() {
       this.$router.push('/cart');
     },
     addToCart(item) {
       if (!this.$store.state.userAuth.isUserLoggedIn) {
-        this.showAuth = true;
+        this.showModal = true;
       }
       if (this.$store.state.userAuth.isUserLoggedIn) {
         item = { ...item, quantity: 1 };
@@ -63,10 +85,15 @@ export default {
         if (temp) {
           const itemIndex = this.cartItems.findIndex((el) => el.id === item.id);
           this.cartItems[itemIndex].quantity += 1;
+          this.itemQuantity = this.cartItems[itemIndex].quantity;
         } else {
           this.cartItems.push(item);
+          this.itemQuantity = 1;
         }
         this.$store.state.cartItemCount += 1;
+        this.alertMessage = 'Added to cart!';
+        this.$store.state.showAlert = true;
+        setTimeout(() => this.$store.dispatch('hideAlert'), 1500);
       }
     },
     removeFromCart(item) {
@@ -75,18 +102,47 @@ export default {
         const itemIndex = this.cartItems.findIndex((el) => el.id === item.id);
         if (this.cartItems[itemIndex].quantity) {
           this.cartItems[itemIndex].quantity -= 1;
+          this.itemQuantity = this.cartItems[itemIndex].quantity;
           this.$store.state.cartItemCount -= 1;
+          this.alertMessage = 'Removed from cart!';
+          this.$store.state.showAlert = true;
+          setTimeout(() => this.$store.dispatch('hideAlert'), 1500);
         }
         if (!this.cartItems[itemIndex].quantity) {
           this.cartItems.splice(itemIndex, 1);
+          this.cartItems = null;
         }
       }
+    },
+    closeModal() {
+      if (this.showLogModal) {
+        this.showLogModal = false;
+      }
+      if (this.showRegModal) {
+        this.showRegModal = false;
+      }
+      if (this.showModal) {
+        this.showModal = false;
+      }
+    },
+    closeAlert() {
+      this.$store.state.showAlert = false;
     }
   }
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+.alert-modal {
+  position: fixed;
+  top: 10%;
+  left: 0;
+  z-index: 6;
+  background: green;
+  width: 100%;
+  height: auto;
+  padding: 10px;
+}
 .product__page-wrapper {
   color: white;
   display: flex;

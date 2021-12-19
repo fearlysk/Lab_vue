@@ -24,7 +24,8 @@ const store = createStore({
     userRegData: {} as IUser,
     showLoading: false,
     cartItems: [],
-    cartItemCount: 0
+    cartItemCount: 0,
+    showAlert: false
   },
   mutations: {
     showLoadingSpinner(state, payload) {
@@ -43,6 +44,9 @@ const store = createStore({
         .then((res) => res.json())
         .then((data) => { this.state.users = data })
         .catch((err) => console.log(err.message))
+    },
+    hideAlert() {
+      this.state.showAlert = false;
     }
   },
   getters: {

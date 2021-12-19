@@ -44,15 +44,13 @@
           <h3 class="user__actions-headline">User Settings</h3>
           <div class="user__actions-item">
             <button class="user__actions-item--changepassword" 
-            @click="changePassword">Change Password</button>
-            <AlertModal title="Change Password"
-            changePasswordActive dataInfoActive="false" 
-            class="modal-password" v-if="!hideModalPassword"/>
+            @click="showModal">Change user data</button>
           </div>
         </div>
       </div>
-     <AlertModal title="Data successfully updated!"
-     class="modal-tooltip" v-if="!hideModal"/>
+      <AlertModal title="Change Password"
+      changePasswordActive dataInfoActive="false" 
+      v-if="showAlertModal" @close="closeModal"/>
     </div>
   </div>
 </template>
@@ -69,8 +67,7 @@ export default {
   data() {
     return {
       userData: {} as IUser,
-      hideModal: true,
-      hideModalPassword: true
+      showAlertModal: false
     }
   },
   mounted() {
@@ -81,9 +78,16 @@ export default {
     }
   },
   methods: {
-    changePassword() {
-      this.hideModalPassword = false;
-    }
+    closeModal() {
+      if (this.showAlertModal) {
+        this.showAlertModal = false;
+      }
+    },
+    showModal() {
+      if (!this.showAlertModal) {
+        this.showAlertModal = true;
+      }
+    },
   }
 }
 </script>
@@ -95,11 +99,6 @@ body {
 .modal-tooltip {
   position: absolute;
   top: 25%;
-}
-.modal-password {
-  position: absolute;
-  top: 45%;
-  left: 20%;
 }
 .profile {
   background-color: black;

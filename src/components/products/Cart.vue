@@ -12,7 +12,13 @@
              :key="item.id">
              <div class="order-item">
                <div class="order-item__title">
-                <h3 class="item-title">{{item.title}}</h3>
+                <h3 class="item-title">
+                  <router-link
+                   class="item-title__link"
+                  :to="`/products/${item.id}`">
+                  {{item.title}}
+                  </router-link>
+                </h3>
                </div>
                <div class="order-item__price">
                 <h3>Price: {{item.price}}</h3>
@@ -140,5 +146,8 @@ export default {
 }
 .item-title {
   margin: 0 5px;
+}
+.item-title__link {
+  color: white;
 }
 </style>

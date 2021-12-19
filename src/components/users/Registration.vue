@@ -193,7 +193,7 @@ pre {
   display: block;
   border: 1px solid white;
   padding: 10px;
-  background-color: black;
+  background-color: rgba(0,0,0, 0.85);
   box-shadow: 0px 0px 18px 9px rgba(16, 122, 24, 0.75);
   margin: 0 30px;
   color: #FFFFFF;
