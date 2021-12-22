@@ -14,8 +14,8 @@
 
 <script>
 import { mapActions } from 'vuex';
-import Header from './components/header/Header.vue';
-import Footer from './components/footer/Footer.vue';
+import Header from './components/Header/Header.vue';
+import Footer from './components/Footer/Footer.vue';
 
 export default {
   name: 'App',

@@ -26,8 +26,8 @@
 
 <script>
 import { mapState } from 'vuex';
-import RequireAuth from './RequireAuth.vue';
-import Alert from '../../elements/Alert.vue';
+import RequireAuth from '../Modals/RequireAuth.vue';
+import Alert from '../UI/Alert.vue';
 
 export default {
   name: 'ProductsCardPage',
@@ -138,7 +138,7 @@ export default {
   top: 10%;
   left: 0;
   z-index: 6;
-  background: green;
+  background-color: rgba(0, 128, 0, 0.75);
   width: 100%;
   height: auto;
   padding: 10px;

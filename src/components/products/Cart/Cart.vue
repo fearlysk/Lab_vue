@@ -45,9 +45,9 @@
 
 <script>
 import { mapState } from 'vuex';
-import Summary from './Summary.vue';
+import Summary from '../Order/Summary.vue';
 import CartEmpty from './CartEmpty.vue';
-import Input from '../../elements/Input.vue'
+import Input from '../../UI/Input.vue';
 
 export default {
   name: 'Cart',
@@ -108,7 +108,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../assets/styles/colors.scss';
+@import '../../../assets/styles/colors.scss';
 
 .cart__headline {
   text-align: center;

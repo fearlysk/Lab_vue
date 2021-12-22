@@ -25,7 +25,7 @@
       <form @submit.prevent="createProduct">
        <label for="image">Image url:</label>
        <Input
-        v-model="image"
+        v-model="productData.image"
         inputType="text"
         class="data-input"
         name="image"
@@ -33,7 +33,7 @@
        />
        <label for="title">Title:</label>
        <Input
-        v-model="title"
+        v-model="productData.title"
         inputType="text"
         class="data-input"
         name="title"
@@ -41,7 +41,7 @@
        />
        <label for="price">Price:</label>
        <Input
-        v-model="price"
+        v-model="productData.price"
         inputType="number"
         class="data-input"
         name="price"
@@ -49,27 +49,28 @@
        />
        <label for="genre">Genre:</label>
        <Input
-        v-model="genre"
+        v-model="productData.genre"
         inputType="text"
         class="data-input"
         name="genre"
         required="true"
        />
        <label for="pc">For PC:</label>
-       <input type="checkbox" v-model="pc" class="data-input__checkbox" name="pc">
-       <span>{{pc}}</span>
+       <input type="checkbox" v-model="productData.pc" class="data-input__checkbox" name="pc">
+       <span>{{productData.pc}}</span>
        <br>
        <label for="xbox">For Xbox:</label>
-       <input type="checkbox" v-model="xbox" class="data-input__checkbox" name="xbox">
-       <span>{{xbox}}</span>
+       <input type="checkbox" v-model="productData.xbox" class="data-input__checkbox" name="xbox">
+       <span>{{productData.xbox}}</span>
        <br>
        <label for="playstation">For PlayStation:</label>
-       <input type="checkbox" v-model="playstation" class="data-input__checkbox" name="playstation">
-       <span>{{playstation}}</span>
+       <input type="checkbox" v-model="productData.playstation"
+       class="data-input__checkbox" name="playstation">
+       <span>{{productData.playstation}}</span>
        <br>
        <label for="description">Description:</label>
        <Input
-        v-model="description"
+        v-model="productData.description"
         inputType="text"
         class="data-input"
         name="description"
@@ -90,11 +91,12 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import { mapState } from 'vuex';
 import axios from 'axios';
-import Input from '../../elements/Input.vue';
-import AlertMessage from '../../elements/AlertMessage.vue'
+import IProduct from '../../interfaces/productInterface';
+import Input from '../UI/Input.vue';
+import AlertMessage from '../UI/AlertMessage.vue'
 import ADMIN from '../../constants/admin';
 
 export default {
@@ -105,22 +107,15 @@ export default {
   },
   data() {
     return {
+      productData: {} as IProduct,
       products: [],
-      image: '',
-      title: '',
-      price: '',
-      genre: '',
-      pc: false,
-      xbox: false,
-      playstation: false,
-      description: '',
       dataLoadingError: false,
       dataLoadingSuccess: false
     }
   },
   computed: {
     ...mapState({
-      loggedUser: (state) => state.user.loggedUser
+      loggedUser: (state: any) => state.user.loggedUser
     })
   },
   mounted() {
@@ -141,14 +136,14 @@ export default {
     },
     async createProduct() {
       const productData = {
-        image: this.image,
-        title: this.title,
-        price: this.price,
-        genre: this.genre,
-        pc: this.pc,
-        xbox: this.xbox,
-        playstation: this.playstation,
-        description: this.description,
+        image: this.productData.image,
+        title: this.productData.title,
+        price: this.productData.price,
+        genre: this.productData.genre,
+        pc: this.productData.pc,
+        xbox: this.productData.xbox,
+        playstation: this.productData.playstation,
+        description: this.productData.description,
         createdAt: new Date().getTime().toString(),
         updatedAt: new Date().getTime().toString()
       }

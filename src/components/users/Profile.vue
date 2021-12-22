@@ -56,7 +56,7 @@
 </template>
 
 <script lang="ts">
-import AlertModal from '../../elements/AlertModal.vue';
+import AlertModal from '../UI/AlertModal.vue';
 import IUser from '../../interfaces/userInterface';
 
 export default {

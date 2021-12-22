@@ -1,17 +1,17 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import Home from '../views/Home.vue';
-import ProductsCardPage from '../components/products/ProductsCardPage.vue'
+import ProductsCardPage from '../components/Products/ProductsCardPage.vue'
 import Products from '../views/Products.vue';
 import NotFound from '../views/NotFound.vue';
-import Profile from '../components/users/Profile.vue';
-import Cart from '../components/products/Cart.vue';
-import Order from '../components/products/Order.vue';
-import ThankYou from '../components/products/ThankYou.vue'
-import Admin from '../components/users/Admin.vue';
-import AdminProducts from '../components/users/AdminProducts.vue';
-import AdminProductsCreate from '../components/users/AdminProductsCreate.vue';
-import AdminProductsEdit from '../components/users/AdminProductsEdit.vue';
-import GamePlatforms from '../components/products/GamePlatforms.vue';
+import Profile from '../components/Users/Profile.vue';
+import Cart from '../components/Products/Cart/Cart.vue';
+import Order from '../components/Products/Order/Order.vue';
+import ThankYou from '../components/Products/Order/ThankYou.vue';
+import Admin from '../components/Users/Admin.vue';
+import AdminProducts from '../components/Users/AdminProducts.vue';
+import AdminProductsCreate from '../components/Users/AdminProductsCreate.vue';
+import AdminProductsEdit from '../components/Users/AdminProductsEdit.vue';
+import GamePlatforms from '../components/Products/Filtration/GamePlatforms.vue';
 
 const routes = [
   {

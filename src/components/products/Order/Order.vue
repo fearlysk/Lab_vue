@@ -89,9 +89,9 @@
 <script>
 import axios from 'axios';
 import { mapState } from 'vuex';
-import Input from '../../elements/Input.vue';
+import Input from '../../UI/Input.vue';
 import Summary from './Summary.vue';
-import AlertMessage from '../../elements/AlertMessage.vue';
+import AlertMessage from '../../UI/AlertMessage.vue';
 
 export default {
   name: 'Order',

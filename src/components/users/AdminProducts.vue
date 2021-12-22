@@ -61,7 +61,7 @@
 <script>
 import axios from 'axios';
 import { mapState } from 'vuex';
-import AlertMessage from '../../elements/AlertMessage.vue';
+import AlertMessage from '../UI/AlertMessage.vue';
 import ADMIN from '../../constants/admin';
 
 export default {

@@ -41,7 +41,7 @@
 
 <script>
 import { mapState } from 'vuex';
-import Input from '../elements/Input.vue'
+import Input from '../components/UI/Input.vue';
 
 export default {
   name: 'Home',

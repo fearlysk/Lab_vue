@@ -95,9 +95,9 @@
 import { mapMutations } from 'vuex';
 import axios from 'axios';
 import IUser from '../../interfaces/userInterface';
-import Input from '../../elements/Input.vue';
-import EyeOpened from '../../elements/icons/EyeOpened.vue';
-import EyeClosed from '../../elements/icons/EyeClosed.vue';
+import Input from '../UI/Input.vue';
+import EyeOpened from '../Icons/EyeOpened.vue';
+import EyeClosed from '../Icons/EyeClosed.vue';
 
 export default {
   name: 'Registration',

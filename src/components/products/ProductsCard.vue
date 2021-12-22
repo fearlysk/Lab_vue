@@ -36,9 +36,9 @@
 
 <script>
 import { mapState } from 'vuex';
-import Rating from '../../elements/Rating.vue';
-import RequireAuth from './RequireAuth.vue';
-import Alert from '../../elements/Alert.vue';
+import Rating from '../UI/Rating.vue';
+import RequireAuth from '../Modals/RequireAuth.vue';
+import Alert from '../UI/Alert.vue';
 
 export default {
   name: 'ProductsCard',
@@ -110,7 +110,7 @@ export default {
   top: 20%;
   left: 0;
   z-index: 6;
-  background: green;
+  background-color: rgba(0, 128, 0, 0.25);
   width: 100%;
   padding: 10px;
 }

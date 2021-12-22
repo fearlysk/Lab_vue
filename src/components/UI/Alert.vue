@@ -36,7 +36,6 @@ export default {
   width: 100%;
   height: auto;
   margin: 20px 0;
-  background: green;
 }
 .alert__close-btn {
   padding: 5px 10px;

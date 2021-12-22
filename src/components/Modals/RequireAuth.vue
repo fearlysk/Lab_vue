@@ -20,8 +20,8 @@
 </template>
 
 <script>
-import Login from '../users/Login.vue';
-import Registration from '../users/Registration.vue';
+import Login from '../Modals/Login.vue';
+import Registration from '../Modals/Registration.vue';
 
 export default {
   name: 'RequireAuth',

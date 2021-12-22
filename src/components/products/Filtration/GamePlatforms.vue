@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import ProductsCard from './ProductsCard.vue';
+import ProductsCard from '../ProductsCard.vue';
 
 export default {
   name: 'GamePlatforms',

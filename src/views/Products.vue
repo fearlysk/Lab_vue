@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import ProductsList from '../components/products/ProductsList.vue';
+import ProductsList from '../components/Products/ProductsList.vue';
 
 export default {
   name: 'About',

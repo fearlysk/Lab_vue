@@ -55,9 +55,9 @@
 
 <script>
 import { mapActions, mapState } from 'vuex';
-import Login from '../users/Login.vue';
-import Registration from '../users/Registration.vue';
-import Loader from '../Loader.vue';
+import Login from '../Modals/Login.vue';
+import Registration from '../Modals/Registration.vue';
+import Loader from '../UI/Loader.vue';
 
 export default {
   name: 'Header',

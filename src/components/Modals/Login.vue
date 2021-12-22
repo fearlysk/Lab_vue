@@ -57,10 +57,10 @@
 <script>
 import { mapMutations } from 'vuex';
 import axios from 'axios';
-import Input from '../../elements/Input.vue';
-import EyeOpened from '../../elements/icons/EyeOpened.vue';
-import EyeClosed from '../../elements/icons/EyeClosed.vue';
-import AlertMessage from '../../elements/AlertMessage.vue';
+import Input from '../UI/Input.vue';
+import EyeOpened from '../Icons/EyeOpened.vue';
+import EyeClosed from '../Icons/EyeClosed.vue';
+import AlertMessage from '../UI/AlertMessage.vue';
 
 export default {
   name: 'Login',

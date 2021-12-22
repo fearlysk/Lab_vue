@@ -43,7 +43,7 @@
 <script lang="ts">
 import axios from 'axios';
 import Input from './Input.vue';
-import IUser from '../interfaces/userInterface';
+import IUser from '../../interfaces/userInterface';
 
 export default {
   name: 'AlertModal',
@@ -103,7 +103,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../assets/styles/colors.scss';
+@import '../../assets/styles/colors.scss';
 
 .alert-modal {
   background-color: $darkbg;

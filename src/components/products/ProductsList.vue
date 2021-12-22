@@ -96,7 +96,7 @@
 <script>
 import { mapMutations, mapGetters } from 'vuex';
 import ProductsCard from './ProductsCard.vue';
-import FilterByGenres from './FilterByGenres.vue';
+import FilterByGenres from './Filtration/FilterByGenres.vue';
 
 export default {
   components: {

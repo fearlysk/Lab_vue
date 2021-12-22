@@ -110,11 +110,12 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import { mapState } from 'vuex';
 import axios from 'axios';
-import Input from '../../elements/Input.vue';
-import AlertMessage from '../../elements/AlertMessage.vue';
+import IProduct from '../../interfaces/productInterface';
+import Input from '../UI/Input.vue';
+import AlertMessage from '../UI/AlertMessage.vue';
 import ADMIN from '../../constants/admin';
 
 export default {
@@ -125,14 +126,14 @@ export default {
   },
   data() {
     return {
-      product: {},
+      product: {} as IProduct,
       dataLoadingError: false,
       dataLoadingSuccess: false
     }
   },
   computed: {
     ...mapState({
-      loggedUser: (state) => state.user.loggedUser  
+      loggedUser: (state: any) => state.user.loggedUser  
     })
   },
   mounted() {
