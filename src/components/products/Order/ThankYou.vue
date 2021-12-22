@@ -4,11 +4,11 @@
   </div>
   <div v-else class="greet">
   <h2 class="greet-headline">Thank you for order!</h2>
-  <p class="order-code">Your order code: <span class="order-code__id">{{order.id}}</span></p>
   <div class="order">
+    <p class="order-code">Your order code: <span class="order-code__id">{{order.id}}</span></p>
     <h2>Total: {{order.total}}</h2>
     <ul class="order-items__list">
-      <li v-for="item in order.ordereditems" :key="item.id" class="order-item">
+      <li v-for="item in order.orderedItems" :key="item.id" class="order-item">
         <p>Title: {{item.title}}</p>
         <p>Price: {{item.price}}</p>
         <p>Quantity: {{item.quantity}}</p>
@@ -34,8 +34,8 @@ export default {
       loggedUser: (state) => state.user.loggedUser
     }),
     isValidUser() {
-      return this.loggedUser.firstname.toLowerCase() === this.order.firstname.toLowerCase()
-      && this.loggedUser.lastname.toLowerCase() === this.order.lastname.toLowerCase()
+      return this.loggedUser.firstName.toLowerCase() === this.order.firstName.toLowerCase()
+      && this.loggedUser.lastName.toLowerCase() === this.order.lastName.toLowerCase()
       && this.loggedUser.id === this.order.userId
     }
   },
@@ -65,6 +65,7 @@ export default {
 }
 .order-code {
   text-align: center;
+  margin-bottom: 25px;
 }
 .order-code__id {
   border-bottom: 2px solid green;

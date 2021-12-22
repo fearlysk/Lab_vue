@@ -14,6 +14,7 @@
 
 <script>
 import { mapState } from 'vuex'
+import ADMIN from '../../constants/admin';
 
 export default {
   name: 'Admin',
@@ -27,10 +28,10 @@ export default {
   },
   methods: {
     checkRole() {
-      if (this.loggedUser.role !== 'admin') {
+      if (this.loggedUser === null || this.loggedUser.role !== ADMIN) {
         this.$router.push('/');
       }
-    }
+    },
   }
 }
 </script>

@@ -1,14 +1,15 @@
 <template>
- <div>
-  <input :type="inputType" 
-  :value="modelValue"
-  @input="$emit('update:modelValue', $event.target.value)"
-  @change="$emit('update:modelValue', $event.target.value)"
-  :checked="value === modelValue"
-  class="user-input"
-  v-maska="mask"
-  />
- </div>
+  <div>
+    <input :type="inputType" 
+     :value="modelValue"
+     @input="$emit('update:modelValue', $event.target.value)"
+     @change="$emit('update:modelValue', $event.target.value)"
+     :checked="value === modelValue"
+     class="user-input"
+     v-maska="mask"
+     required="required"
+    />
+  </div>
 </template>
 
 <script>
@@ -33,6 +34,10 @@ export default {
     mask: {
       type: String,
       default: null
+    },
+    required: {
+      type: Boolean,
+      default: false
     }
   }
 }

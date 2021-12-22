@@ -1,39 +1,41 @@
 <template>
-<alertMessage 
+<AlertMessage 
  v-if="productRemovedTooltip"
  :headline="'Success'"
  :message="'Product removed successfully!'"
+ :isError="false"
  >
 <button @click="hideProductRemovedTooltip" class="alert-message__accept">
   <p class="alert-message__accept-text">Accept</p>
 </button>
-</alertMessage>
-<alertMessage 
+</AlertMessage>
+<AlertMessage 
  v-if="errorModal"
  :headline="'Error'"
  :message="'An error occured!'"
+ :isError="true"
  >
 <button @click="hideErrorModal" class="alert-message__accept">
   <p class="alert-message__accept-text">Accept</p>
 </button>
-</alertMessage>
-  <div class="wrapper">
+</AlertMessage>
+  <div class="products">
     <h1 class="products-headline">Products List</h1>
     <div class="products__list">
         <div class="products__list">
           <div v-for="product in products" :key="product.id" class="products__list-item">
-            <img class="product__item-img" :src="product.image" alt="Image Not Found" />
+            <img class="product-item__img" :src="product.image" alt="Image Not Found" />
             <h3 class="product-item">Title: {{product.title}}</h3>
             <h3 class="product-item">Price: {{product.price}}</h3>
             <h3 class="product-item">Genre: {{product.genre}}</h3>
             <h3 class="product-item">Description: {{product.description}}</h3>
             <div class="product-item__actions">
-            <div>
-              <router-link 
-              :to="{ name: 'AdminProductsEdit', params: { id: product.id }}">
-              <button class="action-btn">Edit product</button>
-              </router-link>
-            </div>
+              <div>
+                <router-link 
+                :to="{ name: 'AdminProductsEdit', params: { id: product.id }}">
+                <button class="action-btn">Edit product</button>
+                </router-link>
+              </div>
             <div>
             <button @click="removeProduct(product.id)" 
             class="action-btn">Remove product</button>
@@ -59,12 +61,13 @@
 <script>
 import axios from 'axios';
 import { mapState } from 'vuex';
-import alertMessage from '../../elements/alertMessage.vue';
+import AlertMessage from '../UI/AlertMessage.vue';
+import ADMIN from '../../constants/admin';
 
 export default {
   name: 'AdminProducts',
   components: {
-    alertMessage
+    AlertMessage
   },
   data() {
     return {
@@ -87,7 +90,7 @@ export default {
   },
   methods: {
     checkRole() {
-      if (this.loggedUser.role !== 'admin') {
+      if (this.loggedUser === null || this.loggedUser.role !== ADMIN) {
         this.$router.push('/');
       }
     },
@@ -118,6 +121,9 @@ export default {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1199px;
 }
 .products__list-item {
   margin: 25px 5px;
@@ -125,9 +131,9 @@ export default {
   max-width: 30%;
   padding: 10px;
 }
-.product__item-img {
-  max-width: 300px;
-  max-height: 250px;
+.product-item__img {
+  width: 60%;
+  height: auto;
   border-radius: 5px;
   margin-left: 30%;
 }

@@ -41,7 +41,7 @@
 
 <script>
 import { mapState } from 'vuex';
-import Input from '../elements/Input.vue'
+import Input from '../components/UI/Input.vue';
 
 export default {
   name: 'Home',
@@ -100,51 +100,51 @@ export default {
   flex: 1;
   width: 60%;
   margin: 0 auto;
-}
-.recentlyadded__headline {
+  &__headline {
   text-align: center;
   border-bottom: 1px solid white;
   padding-bottom: 6px;
-}
-.recentlyadded__item {
+  }
+  &__item {
   border: 1px solid lawngreen;
   padding: 5px;
   margin-top: 25px;
   background-color: black;
   border-radius: 7px;
-  box-shadow: 0px 0px 18px 1px rgba(16, 122, 24, 0.75);
+  box-shadow: 0px 0px 18px 1px rgba(127, 140, 128, 0.75);
   display: flex;
   flex-direction: row;
-}
-.recentlyadded__item-image {
+  }
+  &__item-image {
   width: 100px;
   height: 100px;
   border-radius: 7px;
-}
-.recentlyadded__item-content {
+  }
+  &__item-content {
   margin: 10px 15px;
-}
-.recentlyadded__item-link {
+  }
+  &__item-link {
   text-decoration: none;
   color: white;
   border: 1px solid white;
   border-radius: 5px;
   padding: 5px 10px;
   transition: 0.3s;
-}
-.recentlyadded__item-link:hover {
+  }
+  &__item-link:hover {
   color: lawngreen;
   border: 1px solid lawngreen;
   transition: 0.3s;
+  }
 }
 .search__item-wrapper {
   border: 1px solid lawngreen;
   padding: 5px;
-}
-.search__item {
+  &__item {
   border: 1px solid white;
   border-radius: 6px;
   padding: 5px 10px;
+  }
 }
 .link-wrapper {
   margin-top: 10px;

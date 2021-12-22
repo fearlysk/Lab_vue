@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import ProductsList from '../components/products/ProductsList.vue';
+import ProductsList from '../components/Products/ProductsList.vue';
 
 export default {
   name: 'About',
@@ -19,7 +19,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../styles.scss";
 .wrapper {
   background: url("https://wallpaperaccess.com/full/1188236.jpg");
   height: 100%;

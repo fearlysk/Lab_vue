@@ -1,7 +1,9 @@
 <template>
 <div class="options__select">
-  <p class="options__title" @click="areOptionsVisible = !areOptionsVisible">{{selected}}</p>
-  <div class="options" v-if="areOptionsVisible">
+  <p class="options__title">
+    <button class="options__title-btn" @click="toggleOptionsVisibility">{{selected}}</button>
+  </p>
+  <div v-if="areOptionsVisible" class="options">
     <li
     v-for="option in options"
     :key="option.id"
@@ -35,6 +37,9 @@ export default {
     }
   },
   methods: {
+    toggleOptionsVisibility() {
+      this.areOptionsVisible = !this.areOptionsVisible;
+    },
     selectOption(option) {
       this.$emit('select', option); 
       this.areOptionsVisible = false;
@@ -53,6 +58,9 @@ export default {
   margin: 6px auto;
   border: 1px solid white;
   max-width: 75%;
+}
+.options__title-btn {
+  width: 100%;
 }
 .options {
   border: 1px solid #FFFFFF;

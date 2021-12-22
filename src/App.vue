@@ -14,9 +14,8 @@
 
 <script>
 import { mapActions } from 'vuex';
-import Header from './components/header/Header.vue';
-import Footer from './components/footer/Footer.vue';
-import saveDataToStore from './services/persist';
+import Header from './components/Header/Header.vue';
+import Footer from './components/Footer/Footer.vue';
 
 export default {
   name: 'App',
@@ -25,7 +24,6 @@ export default {
     Footer
   },
   mounted() {
-    saveDataToStore();
     this.fetchProducts();
     this.fetchUsers();
   },
@@ -39,15 +37,16 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../public/styles.scss';
-@import '../colors.scss';
-@import '../fonts.scss';
 * {
   margin: 0;
   padding: 0;
 }
+.app__wrapper {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
 .app__content {
-  min-height: calc(100vh - 120px);
   background: url("https://wallpaperaccess.com/full/1188236.jpg");
 }
 </style>

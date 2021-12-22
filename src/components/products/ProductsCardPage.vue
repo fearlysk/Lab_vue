@@ -1,18 +1,8 @@
 <template>
-  <teleport to="#modals-portal">
-    <Login v-if="showLogModal" @close="closeModal" />
-    <Registration v-if="showRegModal" @close="closeModal" />
-  </teleport>
-  <div class='user-auth' v-if="showAuth">
-    <h2>To order, please sign in or register:</h2>
-     <div class="auth__nav-item">
-       <button class="auth__nav-item--btn" @click="showLoginModal">Sign In</button>
-     </div>
-     <div class="auth__nav-item">
-       <button class="auth__nav-item--btn" @click="showRegistrationModal">Sign Up</button>
-     </div>
+  <RequireAuth v-if="this.showModal" @close="closeModal" />
+  <div v-if="this.$store.state.showAlert" class="alert-modal">
+    <Alert @close="closeAlert" :message="alertMessage" />
   </div>
- 
   <div class="product__page-wrapper">
     <div class="product__page-title">
        <h1 class="product__page-title--headline">Game: {{ product[id].title }}</h1>
@@ -25,7 +15,9 @@
       <h3>Description: {{ product[id].description }}</h3>
       <div class="product__page-description--cart">
         <button @click="goToCart" class="cart-btn">Go to cart</button>
-        <button @click="addToCart(this.product[id])" class="cart-btn">Add to cart</button>
+        <button @click="addToCart(this.product[id])"
+        class="cart-btn">
+        Add to cart: {{this.itemQuantity}}</button>
         <button @click="removeFromCart(this.product[id])" class="cart-btn">Remove from cart</button>
       </div>
     </div>
@@ -34,22 +26,23 @@
 
 <script>
 import { mapState } from 'vuex';
-import * as userInfo from '../../constants/user';
-import Login from '../users/Login.vue';
-import Registration from '../users/Registration.vue';
+import RequireAuth from '../Modals/RequireAuth.vue';
+import Alert from '../UI/Alert.vue';
 
 export default {
   name: 'ProductsCardPage',
   components: {
-    Login, 
-    Registration
+    RequireAuth,
+    Alert
   },
   data() {
     return {
       product: {},
       showRegModal: false,
       showLogModal: false,
-      showAuth: false
+      showModal: false,
+      alertMessage: null,
+      itemQuantity: 0
     }
   },
   props: {
@@ -57,45 +50,50 @@ export default {
   },
   computed: {
     ...mapState({
-      cartItems: (state) => state.cartItems
+      cartItems: (state) => state.cartItems,
+      loggedUser: (state) => state.user.loggedUser
     }),
   },
-  mounted() {
-    fetch('http://localhost:3000/products')
+  async mounted() {
+    await fetch('http://localhost:3000/products')
       .then((res) => res.json())
       .then((data) => { this.product = data })
       .catch((err) => console.log(err.message))
+    await this.getItemQuantity(this.product[this.id])
   },
   methods: {
-    showLoginModal() {
-      if (!this.showLogModal) {
-        this.showLogModal = !this.showLogModal;
-        this.showAuth = !this.showAuth;
-      }
-    },
-    showRegistrationModal() {
-      if (!this.showRegModal) {
-        this.showRegModal = !this.showRegModal;
-        this.showAuth = !this.showAuth;
+    getItemQuantity(item) {
+      if (this.$store.state.userAuth.isUserLoggedIn) {
+        item = { ...item };
+        const temp = this.cartItems.some((i) => i.id === item.id);
+        if (temp) {
+          const itemIndex = this.cartItems.findIndex((el) => el.id === item.id);
+          this.itemQuantity = this.cartItems[itemIndex].quantity;
+        }
       }
     },
     goToCart() {
       this.$router.push('/cart');
     },
     addToCart(item) {
-      if (localStorage.getItem(userInfo) === null) {
-        this.showAuth = true;
+      if (!this.$store.state.userAuth.isUserLoggedIn) {
+        this.showModal = true;
       }
-      if (localStorage.getItem(userInfo) !== null) {
+      if (this.$store.state.userAuth.isUserLoggedIn) {
         item = { ...item, quantity: 1 };
         const temp = this.cartItems.some((i) => i.id === item.id);
         if (temp) {
           const itemIndex = this.cartItems.findIndex((el) => el.id === item.id);
           this.cartItems[itemIndex].quantity += 1;
+          this.itemQuantity = this.cartItems[itemIndex].quantity;
         } else {
           this.cartItems.push(item);
+          this.itemQuantity = 1;
         }
         this.$store.state.cartItemCount += 1;
+        this.alertMessage = 'Added to cart!';
+        this.$store.state.showAlert = true;
+        setTimeout(() => this.$store.dispatch('hideAlert'), 1500);
       }
     },
     removeFromCart(item) {
@@ -104,34 +102,45 @@ export default {
         const itemIndex = this.cartItems.findIndex((el) => el.id === item.id);
         if (this.cartItems[itemIndex].quantity) {
           this.cartItems[itemIndex].quantity -= 1;
+          this.itemQuantity = this.cartItems[itemIndex].quantity;
           this.$store.state.cartItemCount -= 1;
+          this.alertMessage = 'Removed from cart!';
+          this.$store.state.showAlert = true;
+          setTimeout(() => this.$store.dispatch('hideAlert'), 1500);
         }
         if (!this.cartItems[itemIndex].quantity) {
           this.cartItems.splice(itemIndex, 1);
+          this.cartItems = null;
         }
       }
     },
     closeModal() {
       if (this.showLogModal) {
-        this.showLogModal = !this.showLogModal;
+        this.showLogModal = false;
       }
       if (this.showRegModal) {
-        this.showRegModal = !this.showRegModal;
+        this.showRegModal = false;
       }
+      if (this.showModal) {
+        this.showModal = false;
+      }
+    },
+    closeAlert() {
+      this.$store.state.showAlert = false;
     }
   }
 }
 </script>
 
-<style lang="scss">
-.user-auth {
-  z-index: 3;
+<style lang="scss" scoped>
+.alert-modal {
   position: fixed;
-  top: 25%;
-  left: 40%;
-  max-width: 70%;
-  background: black;
-  border: 1px solid green;
+  top: 10%;
+  left: 0;
+  z-index: 6;
+  background-color: rgba(0, 128, 0, 0.75);
+  width: 100%;
+  height: auto;
   padding: 10px;
 }
 .product__page-wrapper {

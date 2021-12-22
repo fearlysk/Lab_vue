@@ -1,4 +1,6 @@
 <template>
+<teleport to="#loader-portal">
+<div class="wrapper">
   <div class="loader-box">
     <div class="lds-roller">
       <div></div>
@@ -11,6 +13,8 @@
       <div></div>
     </div>
   </div>
+</div>
+</teleport>
 </template>
 
 <script>
@@ -20,14 +24,19 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.loader-box {
+.wrapper {
   position: fixed;
-  top: 40%;
-  left: 45%;
+  width: 120px;
+  height: 120px;
+  z-index: 10;
+  left: 0;
+  right: 0;
+  margin: 10% auto;
+}
+.loader-box {
   background-color: rgb(97, 186, 8);
   padding: 20px;
   border-radius: 9px;
-  z-index: 10;
 }
 .lds-roller {
   display: inline-block;

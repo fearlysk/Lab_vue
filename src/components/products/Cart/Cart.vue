@@ -1,23 +1,29 @@
 <template>
   <div class="cart__wrapper">
-    <div class="cart" v-if="totalPrice">
-      <h1 class="cart-headline">Cart</h1>
+    <div v-if="totalPrice" class="cart">
+      <h1 class="cart__headline">Cart</h1>
       <h2>Summary: </h2>
       <Summary 
        :totalPrice="totalPrice"
        />
-         <ul class="cart-items">
+         <ul class="cart__items">
            <li 
              v-for="item in searchHandler" 
              :key="item.id">
              <div class="order-item">
-               <div class="order-item--title">
-                <h3 class="item-title">{{item.title}}</h3>
+               <div class="order-item__title">
+                <h3 class="item-title">
+                  <router-link
+                   class="item-title__link"
+                  :to="`/products/${item.id}`">
+                  {{item.title}}
+                  </router-link>
+                </h3>
                </div>
-               <div class="order-item--price">
+               <div class="order-item__price">
                 <h3>Price: {{item.price}}</h3>
                </div>
-               <div class="order-item--quantity">
+               <div class="order-item__quantity">
                 <button class="quantity-btn" @click="addToCart(item)">+</button>
                 <h3>Qty: {{item.quantity}}</h3>
                 <button class="quantity-btn" @click="removeFromCart(item)">-</button>
@@ -39,9 +45,9 @@
 
 <script>
 import { mapState } from 'vuex';
-import Summary from './Summary.vue';
+import Summary from '../Order/Summary.vue';
 import CartEmpty from './CartEmpty.vue';
-import Input from '../../elements/Input.vue'
+import Input from '../../UI/Input.vue';
 
 export default {
   name: 'Cart',
@@ -75,8 +81,8 @@ export default {
   methods: {
     addToCart(item) {
       item = { ...item, quantity: 1 };
-      const temp = this.cartItems.some((i) => i.id === item.id);
-      if (temp) {
+      const isItemsInCart = this.cartItems.some((i) => i.id === item.id);
+      if (isItemsInCart) {
         const itemIndex = this.cartItems.findIndex((el) => el.id === item.id);
         this.cartItems[itemIndex].quantity += 1;
       } else {
@@ -85,8 +91,8 @@ export default {
       this.$store.state.cartItemCount += 1;
     },
     removeFromCart(item) {
-      const temp = this.cartItems.some((i) => i.id === item.id);
-      if (temp) {
+      const isItemsInCart = this.cartItems.some((i) => i.id === item.id);
+      if (isItemsInCart) {
         const itemIndex = this.cartItems.findIndex((el) => el.id === item.id);
         if (this.cartItems[itemIndex].quantity) {
           this.cartItems[itemIndex].quantity -= 1;
@@ -102,15 +108,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.cart-headline {
+@import '../../../assets/styles/colors.scss';
+
+.cart__headline {
   text-align: center;
 }
 .cart {
-  border: 1px solid green;
+  border: 1px solid $lightgreen;
   max-width: 60%;
   margin: 0 auto;
 }
-.cart-items {
+.cart__items {
   list-style-type: none;
 }
 .order-item {
@@ -122,10 +130,10 @@ export default {
   border-bottom: 1px solid green;
   padding: 10px 0;
 }
-.order-item--title {
+.order-item__title {
   width: 33.3%
 }
-.order-item--quantity {
+.order-item__quantity {
   display: flex;
   flex-direction: row;
 }
@@ -138,5 +146,8 @@ export default {
 }
 .item-title {
   margin: 0 5px;
+}
+.item-title__link {
+  color: white;
 }
 </style>

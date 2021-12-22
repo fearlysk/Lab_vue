@@ -1,10 +1,10 @@
 <template>
-    <div class="wrapper">
-      <div class="products__filtration">
-        <h2 class="products__filtration-headline">Sort</h2>
-        <div class="products__filtration-section">
-         <h3 class="products__filtration-section--headline">Category:</h3>
-         <div class="products__filtration-section--filter">
+  <div class="wrapper">
+    <div class="products__filtration">
+      <h2 class="products__filtration-headline">Sort</h2>
+      <div class="products__filtration-section">
+       <h3 class="products__filtration-section--headline">Category:</h3>
+       <div class="products__filtration-section--filter">
          <ul>
          <filter-by-genres 
           :options="categories"
@@ -12,91 +12,91 @@
           :selected="selected"
          />
          </ul>
-         </div>
-         </div>
-         <div class="products__filtration-section">
-         <h3 class="products__filtration-section--headline">Price:</h3>
-         <div class="products__filtration-section--filter">
-          <div class="range-slider">
-            <input 
-             class="range-slider--item"
-             type="range" 
-             min="0" max="60" 
-             step="10"
-             v-model.number="minPrice"
-             @change="setRangeSlider"
-            >
-            <input 
-             class="range-slider--item"
-             type="range" 
-             min="0" 
-             max="60" 
-             step="10"
-             v-model.number="maxPrice"
-             @change="setRangeSlider"
-            >
-          </div>
-          <div class="range-values">
-            <p>Min:{{minPrice}}</p>
-            <p>Max:{{maxPrice}}</p>
-          </div>
-         </div>
-         </div>
-        <div class="products__filtration-section">
-         <h3 class="products__filtration-section--headline">Rating:</h3>
-        <div class="products__filtration-section--filter">
-          <div class="range-slider">
-            <input 
-             class="range-slider--item"
-             type="range" 
-             min="0"
-             max="5" 
-             step="1"
-             v-model.number="minRating"
-             @change="setRangeSliderRating"
-            >
-            <input 
-             class="range-slider--item"
-             type="range" 
-             min="0" 
-             max="5" 
-             step="1"
-             v-model.number="maxRating"
-             @change="setRangeSliderRating"
-            >
-          </div>
-          <div class="range-values">
-            <p>Min:{{minRating}}</p>
-            <p>Max:{{maxRating}}</p>
-         </div>
+       </div>
+       </div>
+       <div class="products__filtration-section">
+       <h3 class="products__filtration-section--headline">Price:</h3>
+       <div class="products__filtration-section--filter">
+       <div class="range-slider">
+          <input 
+           class="range-slider--item"
+           type="range" 
+           min="0" max="60" 
+           step="10"
+           v-model.number="minPrice"
+           @change="setRangeSlider"
+          >
+          <input 
+           class="range-slider--item"
+           type="range" 
+           min="0" 
+           max="60" 
+           step="10"
+           v-model.number="maxPrice"
+           @change="setRangeSlider"
+          >
         </div>
-      </div>
-        <div class="products__filtration-section">
-         <h3 class="products__filtration-section--headline">Sort by creation date:</h3>
-         <div class="products__filtration-section--filter">
-           <div class="sortByDate-btn--wrapper">
-             <button class="sortByDate-btn" @click="sortByNewest">Sort by newest</button>
-            </div>
-           <div class="sortByDate-btn--wrapper">
-             <button class="sortByDate-btn" @click="sortByOldest">Sort by oldest</button>
-            </div>
-         </div>
-         </div>
-      </div>
-      <div class="products__list-wrapper">
-        <h2 class="products__list-headline">Products</h2>
-      <div class="products__list">
-         <products-card v-for="product in filteredProducts" :key="product.id"
-         :product="product" />
+        <div class="range-values">
+          <p>Min:{{minPrice}}</p>
+          <p>Max:{{maxPrice}}</p>
+        </div>
+       </div> 
+       </div>
+      <div class="products__filtration-section">
+       <h3 class="products__filtration-section--headline">Rating:</h3>
+      <div class="products__filtration-section--filter">
+        <div class="range-slider">
+          <input 
+           class="range-slider--item"
+           type="range" 
+           min="0"
+           max="5" 
+           step="1"
+           v-model.number="minRating"
+           @change="setRangeSliderRating"
+          >
+          <input 
+           class="range-slider--item"
+           type="range" 
+           min="0" 
+           max="5" 
+           step="1"
+           v-model.number="maxRating"
+           @change="setRangeSliderRating"
+          >
+        </div>
+        <div class="range-values">
+          <p>Min:{{minRating}}</p>
+          <p>Max:{{maxRating}}</p>
+       </div>
       </div>
     </div>
+      <div class="products__filtration-section">
+       <h3 class="products__filtration-section--headline">Sort by creation date:</h3>
+       <div class="products__filtration-section--filter">
+         <div class="sortByDate-btn--wrapper">
+           <button class="sortByDate-btn" @click="sortByNewest">Sort by newest</button>
+          </div>
+         <div class="sortByDate-btn--wrapper">
+           <button class="sortByDate-btn" @click="sortByOldest">Sort by oldest</button>
+          </div>
+       </div>
+       </div>
     </div>
+    <div class="products__list-wrapper">
+      <h2 class="products__list-headline">Products</h2>
+    <div class="products__list">
+       <products-card v-for="product in filteredProducts" :key="product.id"
+       :product="product" />
+    </div>
+  </div>
+</div>
 </template>
 
 <script>
 import { mapMutations, mapGetters } from 'vuex';
 import ProductsCard from './ProductsCard.vue';
-import FilterByGenres from './FilterByGenres.vue';
+import FilterByGenres from './Filtration/FilterByGenres.vue';
 
 export default {
   components: {
@@ -119,11 +119,7 @@ export default {
       categories: 'productCategories'
     }),
     filteredProducts() {
-      if (this.sortedProducts.length) {
-        return this.sortedProducts;
-      } else {
-        return this.products;
-      }
+      return this.sortedProducts.length ? this.sortedProducts : this.products;
     }
   },
   methods: {
@@ -161,19 +157,17 @@ export default {
       this.sortByCategories();
     },
     sortByCategories(category) {
-      const vm = this;
       this.sortedProducts = this.products;
-      this.showLoadingSpinner(true);
       setTimeout(() => this.showLoadingSpinner(false), 500);
       this.sortedProducts = this.sortedProducts.filter((item) => {
-        return item.price >= vm.minPrice && item.price <= vm.maxPrice;
+        return item.price >= this.minPrice && item.price <= this.maxPrice;
       });
       this.sortedProducts = this.sortedProducts.filter((item) => {
-        return item.rating >= vm.minRating && item.rating <= vm.maxRating;  
+        return item.rating >= this.minRating && item.rating <= this.maxRating;  
       });
       if (category) {
         this.sortedProducts = this.sortedProducts.filter((item) => {
-          vm.selected = category.genre;
+          this.selected = category.genre;
           return item.genre === category.genre;
         })
       }
@@ -251,6 +245,6 @@ export default {
   flex-direction: row;
   justify-content: flex-start;
   flex-wrap: wrap;
-  padding: 25px 0 75px 0;
+  padding: 0 0 25px 0;
 }
 </style>

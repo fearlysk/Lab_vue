@@ -7,16 +7,6 @@ import catchedErrors from './modules/catchedErrors';
 import IUser from '../interfaces/userInterface';
 
 const store = createStore({
-  plugins: [
-    createPersistedState({
-      key: 'stateKey',
-      paths: ['user', 'catchedWarns', 'catchedErrors'],
-      getState(key, storage) {
-        console.log('Key: ', key)
-        console.log('Storage: ', storage)
-      }
-    })
-  ],
   modules: {
     user,
     catchedWarns,
@@ -32,10 +22,10 @@ const store = createStore({
     ],
     users: [],
     userRegData: {} as IUser,
-    loggedUser: {},
     showLoading: false,
     cartItems: [],
-    cartItemCount: 0
+    cartItemCount: 0,
+    showAlert: false
   },
   mutations: {
     showLoadingSpinner(state, payload) {
@@ -54,6 +44,9 @@ const store = createStore({
         .then((res) => res.json())
         .then((data) => { this.state.users = data })
         .catch((err) => console.log(err.message))
+    },
+    hideAlert() {
+      this.state.showAlert = false;
     }
   },
   getters: {
@@ -63,6 +56,9 @@ const store = createStore({
     productCategories(state) {
       return state.productCategories;
     }
-  }
+  },
+  plugins: [
+    createPersistedState()
+  ],
 });
 export default store;
